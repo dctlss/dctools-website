@@ -40,7 +40,7 @@ const TOOLS_REGISTRY = [
   },
   {
     id: 'advanced-text-editor',
-    title: 'Pro Text Editor',
+    title: 'Advanced Text Editor',
     description: 'Format text with Discord markdown, blockquotes, spoiler tags, codeblocks, and smallcaps.',
     icon: 'fa-solid fa-font',
     path: './tools/advanced-text-editor.html'

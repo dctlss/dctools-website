@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4336383801682420"
+       crossorigin="anonymous"></script>
+
   <!-- Core SEO Meta Tags -->
   <title>Advanced Text Editor For Discord - DCTools.org</title>
   <meta name="description" content="Type formatted text visually with interactive toggles or copy clean Discord Markdown in real time easily." />
@@ -11,6 +15,9 @@
   <meta name="author" content="DCTools.org" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://dctools.org/tools/advanced-text-editor.html" />
+
+  <!-- Favicon matching header logo styling -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2228%22 fill=%22%235865F2%22/><path d=%22M71.5 28.5a12.5 12.5 0 0 0-17.7 0L42 40.3l-13.8-13.8a6 6 0 0 0-8.5 0L16 29.5a6 6 0 0 0 0 8.5l13.8 13.8-11.8 11.8a12.5 12.5 0 1 0 17.7 17.7l11.8-11.8 13.8 13.8a6 6 0 0 0 8.5 0l3.7-3.7a6 6 0 0 0 0-8.5L59.7 58l11.8-11.8a12.5 12.5 0 0 0 0-17.7z%22 fill=%22white%22/></svg>">
 
   <!-- Theme & Mobile Integration -->
   <meta name="theme-color" content="#18191c" />
@@ -287,6 +294,7 @@
           <span class="text-[11px] text-discord-textMuted bg-discord-input px-2.5 py-1 rounded-lg border border-white/5">
             Click spoilers to reveal
           </span>
+
         </div>
 
         <!-- Simulated Discord Chat Container -->
@@ -329,6 +337,9 @@
       <div class="flex items-center gap-2">
         <span class="font-bold text-white text-base">DCTools.org</span>
         <span>• Free Web Utilities</span>
+      </div>
+      <div>
+        <span>Non-Profit & Zero Data Collected</span>
       </div>
       <div>
         © 2026 DCTools.org. Not affiliated with Discord Inc.
@@ -375,6 +386,11 @@
         }
         document.body.removeChild(textarea);
       }
+    }
+
+    function copyMarkdownText() {
+      const markdown = convertDOMToMarkdown(editor);
+      copyToClipboard(markdown, 'Copied Discord Markdown!');
     }
 
     const editor = document.getElementById('visual-editor');
@@ -707,37 +723,24 @@
 
       // Nitro Indicator
       const nitroBadge = document.getElementById('nitro-badge');
-      const charCounter = document.getElementById('char-count');
-
-      if (charLength > 2000 && charLength <= 4000) {
-        nitroBadge.classList.remove('hidden');
-        charCounter.className = 'text-amber-400 font-bold';
-      } else if (charLength > 4000) {
-        nitroBadge.classList.remove('hidden');
-        charCounter.className = 'text-discord-red font-bold';
-      } else {
-        nitroBadge.classList.add('hidden');
-        charCounter.className = 'text-white font-bold';
+      if (nitroBadge) {
+        if (charLength > 2000) {
+          nitroBadge.classList.remove('hidden');
+        } else {
+          nitroBadge.classList.add('hidden');
+        }
       }
     }
 
-    function copyMarkdownText() {
-      const markdown = convertDOMToMarkdown(editor);
-      if (!markdown.trim()) return;
-      copyToClipboard(markdown, 'Discord Markdown copied to clipboard!');
-    }
-
-    // Event Listeners
-    editor.addEventListener('keyup', () => { updateToolbarState(); processEditorContent(); });
-    editor.addEventListener('mouseup', () => { updateToolbarState(); });
-    editor.addEventListener('input', () => { processEditorContent(); });
-    document.addEventListener('selectionchange', () => {
-      if (document.activeElement === editor) {
-        updateToolbarState();
-      }
+    editor.addEventListener('input', () => {
+      updateToolbarState();
+      processEditorContent();
     });
 
-    // Initial Setup
+    editor.addEventListener('mouseup', updateToolbarState);
+    editor.addEventListener('keyup', updateToolbarState);
+
+    // Initial call
     processEditorContent();
   </script>
 </body>

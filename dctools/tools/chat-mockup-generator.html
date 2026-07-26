@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4336383801682420"
+       crossorigin="anonymous"></script>
+
   <!-- Core SEO Meta Tags -->
   <title>Chat Mockup Generator For Discord - DCTools.org</title>
   <meta name="description" content="Create realistic, custom Discord chat screenshots and fake conversation images for memes, announcements, and server showcases." />
@@ -11,6 +15,9 @@
   <meta name="author" content="DCTools.org" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://dctools.org/tools/chat-mockup-generator.html" />
+
+  <!-- Favicon matching header logo styling -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2228%22 fill=%22%235865F2%22/><path d=%22M71.5 28.5a12.5 12.5 0 0 0-17.7 0L42 40.3l-13.8-13.8a6 6 0 0 0-8.5 0L16 29.5a6 6 0 0 0 0 8.5l13.8 13.8-11.8 11.8a12.5 12.5 0 1 0 17.7 17.7l11.8-11.8 13.8 13.8a6 6 0 0 0 8.5 0l3.7-3.7a6 6 0 0 0 0-8.5L59.7 58l11.8-11.8a12.5 12.5 0 0 0 0-17.7z%22 fill=%22white%22/></svg>">
 
   <!-- Theme & Mobile Integration -->
   <meta name="theme-color" content="#18191c" />
@@ -46,7 +53,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="../assets/css/custom.css" />
   <!-- html2canvas for Exporting PNG -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   
@@ -64,6 +70,7 @@
               sidebar: '#1E1F22',
               card: '#2B2D31',
               cardHover: '#35373C',
+              hover: '#35373C',
               chatBg: '#313338',
               input: '#1E1F22',
               textMuted: '#949BA4'
@@ -75,6 +82,42 @@
   </script>
 
   <style>
+    /* Strict Base CSS Fallbacks (Prevents Any White Screen Glitch) */
+    html, body {
+      background-color: #111214 !important;
+      color: #ffffff !important;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Custom Spoilers */
+    .discord-spoiler {
+      background-color: #111214;
+      color: transparent;
+      border-radius: 3px;
+      padding: 0 4px;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.2s, color 0.2s;
+    }
+    .discord-spoiler.revealed {
+      background-color: rgba(255, 255, 255, 0.15);
+      color: #dbdee1;
+    }
+    .discord-subtext {
+      font-size: 0.75rem;
+      color: #949ba4;
+      display: inline-block;
+      margin-top: 2px;
+    }
+    .discord-blockquote {
+      border-left: 4px solid #4e5058;
+      padding-left: 12px;
+      margin: 4px 0;
+      color: #dbdee1;
+    }
+
     /* Custom Scrollbar */
     ::-webkit-scrollbar {
       width: 8px;
@@ -180,7 +223,7 @@
             <!-- Message Text -->
             <div>
               <label for="in-content" class="block text-xs font-bold uppercase tracking-wider text-discord-textMuted mb-2">Message Content</label>
-              <textarea id="in-content" rows="3" class="w-full bg-discord-input border border-white/10 rounded-xl p-4 text-sm text-white focus:outline-none focus:border-discord-blurple transition resize-y placeholder:text-discord-textMuted/60" placeholder="Type message here... Support for **bold**, *italic*, and `code`"></textarea>
+              <textarea id="in-content" rows="3" class="w-full bg-discord-input border border-white/10 rounded-xl p-4 text-sm text-white focus:outline-none focus:border-discord-blurple transition resize-y placeholder:text-discord-textMuted/60" placeholder="Type message here... Support for **bold**, *italic*, `code`, ||spoilers||, and > blockquotes"></textarea>
             </div>
 
             <!-- Attachment Image URL -->
@@ -270,6 +313,9 @@
       <div class="flex items-center gap-2">
         <span class="font-bold text-white text-base">DCTools.org</span>
         <span>• Free Web Utilities</span>
+      </div>
+      <div>
+        <span>Non-Profit & Zero Data Collected</span>
       </div>
       <div>
         © 2026 DCTools.org. Not affiliated with Discord Inc.
@@ -362,7 +408,7 @@
               </div>
 
               <!-- Message Body -->
-              <div class="text-sm text-gray-200 leading-relaxed break-words">
+              <div class="text-sm text-gray-200 leading-relaxed break-words space-y-1">
                 ${formattedContent}
               </div>
 
@@ -432,14 +478,39 @@
     function parseMarkdown(str) {
       if (!str) return '';
       let escaped = escapeHtml(str);
-      // Codeblocks
-      escaped = escaped.replace(/`([^`]+)`/g, '<code class="bg-[#1e1f22] text-xs px-1.5 py-0.5 rounded font-mono text-gray-300">$1</code>');
-      // Bold
+
+      const codeBlocks = [];
+
+      // Extract & Protect Multiline Code Blocks
+      escaped = escaped.replace(/```(?:[a-zA-Z0-9]+)?\s*([\s\S]*?)```/g, function(match, code) {
+        const placeholder = `@@@CODEBLOCK_${codeBlocks.length}@@@`;
+        codeBlocks.push(`<pre class="bg-discord-input p-3 rounded-lg border border-white/5 font-mono text-xs text-emerald-400 my-2 overflow-x-auto whitespace-pre-wrap">${code.trim()}</pre>`);
+        return placeholder;
+      });
+
+      // Extract & Protect Inline Code
+      escaped = escaped.replace(/`([^`]+)`/g, function(match, code) {
+        const placeholder = `@@@CODEBLOCK_${codeBlocks.length}@@@`;
+        codeBlocks.push(`<code class="bg-[#1e1f22] text-xs px-1.5 py-0.5 rounded font-mono text-emerald-400 border border-white/5">${code}</code>`);
+        return placeholder;
+      });
+
+      // Spoilers, Subtext, Blockquotes, Bold, Italic, Underline, Strikethrough
+      escaped = escaped.replace(/\|\|([\s\S]*?)\|\|/g, '<span class="discord-spoiler" onclick="this.classList.toggle(\'revealed\')">$1</span>');
+      escaped = escaped.replace(/^-# (.*$)/gim, '<span class="discord-subtext">$1</span>');
+      escaped = escaped.replace(/^&gt; (.*$)/gim, '<div class="discord-blockquote">$1</div>');
       escaped = escaped.replace(/\*\*([^*]+)\*\*/g, '<strong class="font-extrabold text-white">$1</strong>');
-      // Italic
+      escaped = escaped.replace(/__(.*?)__/g, '<u class="underline">$1</u>');
       escaped = escaped.replace(/\*([^*]+)\*/g, '<em class="italic">$1</em>');
-      // Newlines
+      escaped = escaped.replace(/~~(.*?)~~/g, '<del class="line-through text-gray-400">$1</del>');
+      
       escaped = escaped.replace(/\n/g, '<br>');
+
+      // Restore Protected Code Blocks safely
+      codeBlocks.forEach((block, index) => {
+        escaped = escaped.replace(`@@@CODEBLOCK_${index}@@@`, block);
+      });
+
       return escaped;
     }
 
@@ -466,6 +537,7 @@
     function showToast(message) {
       const toast = document.getElementById('toast');
       const toastMsg = document.getElementById('toast-message');
+      if (!toast) return;
       if (toastMsg) toastMsg.innerText = message;
       toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
       toast.classList.add('translate-y-0', 'opacity-100');
