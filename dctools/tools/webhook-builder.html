@@ -5,38 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <!-- Core SEO Meta Tags -->
-  <title>Chat Mockup Generator For Discord - DCTools.org</title>
-  <meta name="description" content="Create realistic, custom Discord chat screenshots and fake conversation images for memes, announcements, and server showcases." />
-  <meta name="keywords" content="discord chat mockup generator, discord screenshot generator, fake discord message generator, discord chat creator, discord screenshot maker, discord generator" />
+  <title>Webhook Editor For Discord - DCTools.org</title>
+  <meta name="description" content="Build, preview, send, and edit custom Discord webhooks and rich embeds in real-time with our free online Discord Webhook Editor." />
+  <meta name="keywords" content="discord webhook builder, discord webhook editor, discord embed generator, discord webhooks, custom discord message, discord tool" />
   <meta name="author" content="DCTools.org" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://dctools.org/tools/chat-mockup-generator.html" />
+  <link rel="canonical" href="https://dctools.org/tools/webhook-builder.html" />
 
   <!-- Theme & Mobile Integration -->
   <meta name="theme-color" content="#18191c" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-  <!-- Open Graph / Social Media Meta Tags -->
+  <!-- Open Graph / Facebook / Discord Embeds -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://dctools.org/tools/chat-mockup-generator.html" />
-  <meta property="og:title" content="Chat Mockup Generator For Discord - DCTools.org" />
-  <meta property="og:description" content="Create realistic, custom Discord chat screenshots and fake conversation images for memes, announcements, and server showcases." />
+  <meta property="og:url" content="https://dctools.org/tools/webhook-builder.html" />
+  <meta property="og:title" content="Webhook Editor For Discord - DCTools.org" />
+  <meta property="og:description" content="Build, preview, send, and edit custom Discord webhooks and rich embeds in real-time with our free online Discord Webhook Editor." />
   <meta property="og:site_name" content="DCTools.org" />
 
   <!-- Twitter Card Data -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Chat Mockup Generator For Discord - DCTools.org" />
-  <meta name="twitter:description" content="Create realistic, custom Discord chat screenshots and fake conversation images for memes, announcements, and server showcases." />
+  <meta name="twitter:title" content="Webhook Editor For Discord - DCTools.org" />
+  <meta name="twitter:description" content="Build, preview, send, and edit custom Discord webhooks and rich embeds in real-time with our free online Discord Webhook Editor." />
 
   <!-- Structured Data (JSON-LD) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "Chat Mockup Generator For Discord",
-    "url": "https://dctools.org/tools/chat-mockup-generator.html",
-    "description": "Create realistic, custom Discord chat screenshots and fake conversation images.",
+    "name": "Webhook Editor For Discord",
+    "url": "https://dctools.org/tools/webhook-builder.html",
+    "description": "Build, preview, send, and edit custom Discord webhooks and rich embeds with ease.",
     "applicationCategory": "DeveloperApplication",
     "operatingSystem": "All"
   }
@@ -47,9 +47,7 @@
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="../assets/css/custom.css" />
-  <!-- html2canvas for Exporting PNG -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  
+
   <script>
     tailwind.config = {
       theme: {
@@ -64,7 +62,6 @@
               sidebar: '#1E1F22',
               card: '#2B2D31',
               cardHover: '#35373C',
-              chatBg: '#313338',
               input: '#1E1F22',
               textMuted: '#949BA4'
             }
@@ -73,24 +70,6 @@
       }
     }
   </script>
-
-  <style>
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #1e1f22;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #2b2d31;
-      border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #35373c;
-    }
-  </style>
 </head>
 <body class="bg-discord-darkest text-white font-sans min-h-full flex flex-col antialiased selection:bg-discord-blurple selection:text-white">
 
@@ -118,151 +97,279 @@
     <!-- Hero Section -->
     <div class="text-center max-w-3xl mx-auto space-y-3">
       <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
-        Chat Mockup Generator <span class="text-discord-blurple">For Discord</span>
+        Webhook Editor <span class="text-discord-blurple">For Discord</span>
       </h1>
       <p class="text-discord-textMuted text-base sm:text-lg leading-relaxed">
-        Create realistic Discord chat screenshots for memes, announcements, bot guides, or server showcases with live preview and PNG export.
+        Create, customize, preview, and dispatch Discord webhooks and rich embeds in real time.
       </p>
     </div>
 
-    <!-- 2-Column Tool Grid -->
+    <!-- Webhook Control Panel (URL & Mode Selector) -->
+    <section class="bg-discord-card border border-white/5 rounded-2xl p-6 shadow-xl space-y-5" aria-label="Webhook Controls">
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 border-b border-white/5 pb-5">
+        <!-- Mode Toggles -->
+        <div class="flex items-center bg-discord-input p-1 rounded-xl border border-white/5 self-start sm:self-auto">
+          <button id="mode-send-btn" onclick="setMode('send')" class="px-4 py-2 rounded-lg text-sm font-bold transition bg-discord-blurple text-white shadow">
+            <i class="fa-solid fa-paper-plane mr-1.5"></i> Send New Message
+          </button>
+          <button id="mode-edit-btn" onclick="setMode('edit')" class="px-4 py-2 rounded-lg text-sm font-bold transition text-discord-textMuted hover:text-white">
+            <i class="fa-solid fa-pen-to-square mr-1.5"></i> Edit Existing Message
+          </button>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="flex items-center gap-2.5">
+          <button onclick="openJsonModal()" class="bg-discord-input hover:bg-white/10 border border-white/5 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition flex items-center gap-2">
+            <i class="fa-solid fa-code text-discord-blurple"></i>
+            <span>JSON Data</span>
+          </button>
+          <button onclick="clearAll()" class="bg-discord-input hover:bg-discord-red/20 border border-white/5 text-discord-textMuted hover:text-discord-red text-sm font-semibold px-4 py-2.5 rounded-xl transition flex items-center gap-2">
+            <i class="fa-solid fa-trash-can"></i>
+            <span>Clear</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Webhook URL & Message ID Inputs -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+        <div id="webhook-url-container" class="md:col-span-12 transition-all duration-200">
+          <label for="webhook-url" class="block text-xs font-bold uppercase tracking-wider text-discord-textMuted mb-2">
+            Discord Webhook URL
+          </label>
+          <input 
+            type="url" 
+            id="webhook-url" 
+            placeholder="https://discord.com/api/webhooks/..." 
+            class="w-full bg-discord-input border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-discord-blurple transition placeholder:text-discord-textMuted/60"
+          />
+        </div>
+
+        <div id="message-id-container" class="hidden md:col-span-12 transition-all duration-200">
+          <label for="message-id" class="block text-xs font-bold uppercase tracking-wider text-discord-textMuted mb-2">
+            Target Message ID
+          </label>
+          <div class="flex gap-2">
+            <input 
+              type="text" 
+              id="message-id" 
+              placeholder="123456789012345678" 
+              class="flex-1 bg-discord-input border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-discord-blurple transition placeholder:text-discord-textMuted/60"
+            />
+            <button onclick="fetchExistingMessage()" class="bg-discord-blurple hover:bg-discord-blurpleHover text-white text-sm font-bold px-5 rounded-xl transition shrink-0 flex items-center gap-2">
+              <i class="fa-solid fa-download"></i>
+              <span>Load Message</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Workspace Grid (Editor + Live Preview) -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-      
-      <!-- Left Controls Panel (7 Cols) -->
+
+      <!-- LEFT COLUMN: Editor Form -->
       <div class="lg:col-span-7 space-y-6">
         
-        <!-- Add Message Form Card -->
-        <div class="bg-discord-card border border-white/5 rounded-2xl p-6 shadow-xl space-y-5">
-          <h2 class="text-xs font-bold uppercase tracking-wider text-discord-textMuted flex items-center gap-2">
-            <i class="fa-solid fa-message text-discord-blurple"></i> Add Chat Message
+        <!-- Bot Profile Overrides -->
+        <div class="bg-discord-card border border-white/5 rounded-2xl p-6 shadow-lg space-y-4">
+          <h2 class="text-sm font-bold uppercase tracking-wider text-discord-textMuted flex items-center gap-2">
+            <i class="fa-solid fa-user-gear text-discord-blurple"></i> Profile Overrides
           </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="bot-username" class="block text-xs text-discord-textMuted mb-1.5 font-medium">Username</label>
+              <input type="text" id="bot-username" oninput="updateProfileState()" placeholder="Custom Webhook Name" class="w-full bg-discord-input border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-discord-blurple transition" />
+            </div>
+            <div>
+              <label for="bot-avatar" class="block text-xs text-discord-textMuted mb-1.5 font-medium">Avatar URL</label>
+              <input type="url" id="bot-avatar" oninput="updateProfileState()" placeholder="https://i.imgur.com/avatar.png" class="w-full bg-discord-input border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-discord-blurple transition" />
+            </div>
+          </div>
+        </div>
 
-          <div class="space-y-4">
-            <!-- User Info -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label for="in-username" class="block text-xs font-bold uppercase tracking-wider text-discord-textMuted mb-2">Username</label>
-                <input id="in-username" type="text" value="Wumpus" class="w-full bg-discord-input border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-discord-blurple transition placeholder:text-discord-textMuted/60">
+        <!-- Text Content -->
+        <div class="bg-discord-card border border-white/5 rounded-2xl p-6 shadow-lg space-y-3">
+          <h2 class="text-sm font-bold uppercase tracking-wider text-discord-textMuted flex items-center gap-2">
+            <i class="fa-solid fa-comment-dots text-discord-blurple"></i> Message Content
+          </h2>
+          <textarea id="msg-content" oninput="updateContentState()" rows="3" placeholder="Type normal text message here (supports Discord markdown & emojis)..." class="w-full bg-discord-input border border-white/10 rounded-xl p-4 text-sm text-white focus:outline-none focus:border-discord-blurple transition resize-y"></textarea>
+        </div>
+
+        <!-- Embeds Editor -->
+        <div class="bg-discord-card border border-white/5 rounded-2xl p-6 shadow-lg space-y-5">
+          <div class="flex items-center justify-between border-b border-white/5 pb-4">
+            <h2 class="text-sm font-bold uppercase tracking-wider text-discord-textMuted flex items-center gap-2">
+              <i class="fa-solid fa-layer-group text-discord-blurple"></i> Embeds
+            </h2>
+            <button onclick="addEmbed()" class="text-sm font-semibold bg-discord-blurple/20 hover:bg-discord-blurple/30 text-discord-blurple px-3.5 py-2 rounded-lg transition flex items-center gap-1.5">
+              <i class="fa-solid fa-plus"></i> Add Embed
+            </button>
+          </div>
+
+          <!-- Embed Tabs Header -->
+          <div id="embed-tabs-header" class="flex items-center gap-2 overflow-x-auto pb-2">
+            <!-- Tabs dynamically rendered -->
+          </div>
+
+          <!-- Active Embed Form -->
+          <div id="embed-form-container" class="space-y-4 pt-2">
+            <div class="flex items-center justify-between">
+              <span id="active-embed-title-label" class="text-sm font-bold text-white">Editing Embed #1</span>
+            </div>
+
+            <!-- Title & Color -->
+            <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
+              <div class="sm:col-span-8">
+                <label for="embed-title" class="block text-xs text-discord-textMuted mb-1 font-medium">Embed Title</label>
+                <input type="text" id="embed-title" oninput="updateActiveEmbedField('title', this.value)" placeholder="Embed Title" class="w-full bg-discord-input border border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-discord-blurple" />
               </div>
-              <div>
-                <label for="in-color" class="block text-xs font-bold uppercase tracking-wider text-discord-textMuted mb-2">Role Color</label>
-                <div class="flex items-center gap-3">
-                  <input id="in-color" type="color" value="#5865F2" class="h-11 w-14 rounded-xl bg-discord-input border border-white/10 cursor-pointer p-1">
-                  <span id="color-hex" class="text-xs font-mono text-discord-textMuted">#5865F2</span>
+              <div class="sm:col-span-4">
+                <label for="embed-color" class="block text-xs text-discord-textMuted mb-1 font-medium">Sidebar Color</label>
+                <div class="flex items-center gap-2">
+                  <input type="color" id="embed-color" value="#5865f2" oninput="document.getElementById('embed-color-hex').value = this.value.toUpperCase(); updateActiveEmbedField('color', this.value);" class="w-10 h-10 rounded-lg bg-transparent border-0 cursor-pointer" />
+                  <input type="text" id="embed-color-hex" value="#5865F2" oninput="syncColorInput(this.value)" class="w-full bg-discord-input border border-white/10 rounded-xl px-3 py-2.5 text-sm text-white font-mono uppercase focus:outline-none focus:border-discord-blurple" />
                 </div>
               </div>
             </div>
 
-            <!-- Avatar & Badges -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label for="in-avatar" class="block text-xs font-bold uppercase tracking-wider text-discord-textMuted mb-2">Avatar Image URL</label>
-                <input id="in-avatar" type="url" value="https://cdn.discordapp.com/embed/avatars/0.png" class="w-full bg-discord-input border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-discord-blurple transition font-mono placeholder:text-discord-textMuted/60">
-              </div>
-              <div>
-                <label for="in-time" class="block text-xs font-bold uppercase tracking-wider text-discord-textMuted mb-2">Timestamp</label>
-                <input id="in-time" type="text" value="Today at 4:20 PM" class="w-full bg-discord-input border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-discord-blurple transition placeholder:text-discord-textMuted/60">
-              </div>
-            </div>
-
-            <!-- Toggles -->
-            <div class="flex items-center gap-6 pt-1">
-              <label class="flex items-center gap-2 cursor-pointer text-discord-textMuted select-none">
-                <input id="in-isbot" type="checkbox" checked class="rounded bg-discord-input border-white/10 text-discord-blurple focus:ring-0">
-                <span class="font-semibold text-xs">Bot Badge</span>
-              </label>
-              <label class="flex items-center gap-2 cursor-pointer text-discord-textMuted select-none">
-                <input id="in-verified" type="checkbox" checked class="rounded bg-discord-input border-white/10 text-discord-blurple focus:ring-0">
-                <span class="font-semibold text-xs">Verified Check</span>
-              </label>
-            </div>
-
-            <!-- Message Text -->
+            <!-- Title URL -->
             <div>
-              <label for="in-content" class="block text-xs font-bold uppercase tracking-wider text-discord-textMuted mb-2">Message Content</label>
-              <textarea id="in-content" rows="3" class="w-full bg-discord-input border border-white/10 rounded-xl p-4 text-sm text-white focus:outline-none focus:border-discord-blurple transition resize-y placeholder:text-discord-textMuted/60" placeholder="Type message here... Support for **bold**, *italic*, and `code`"></textarea>
+              <label for="embed-title-url" class="block text-xs text-discord-textMuted mb-1 font-medium">Title Link URL</label>
+              <input type="url" id="embed-title-url" oninput="updateActiveEmbedField('url', this.value)" placeholder="https://example.com" class="w-full bg-discord-input border border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-discord-blurple" />
             </div>
 
-            <!-- Attachment Image URL -->
+            <!-- Description -->
             <div>
-              <label for="in-attachment" class="block text-xs font-bold uppercase tracking-wider text-discord-textMuted mb-2">Image Attachment URL (Optional)</label>
-              <input id="in-attachment" type="url" placeholder="https://..." class="w-full bg-discord-input border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-discord-blurple transition font-mono placeholder:text-discord-textMuted/60">
+              <label for="embed-desc" class="block text-xs text-discord-textMuted mb-1 font-medium">Description</label>
+              <textarea id="embed-desc" oninput="updateActiveEmbedField('description', this.value)" rows="3" placeholder="Embed Description..." class="w-full bg-discord-input border border-white/10 rounded-xl p-3.5 text-sm text-white focus:outline-none focus:border-discord-blurple resize-y"></textarea>
             </div>
 
-            <button onclick="addMessage()" class="w-full bg-discord-blurple hover:bg-discord-blurpleHover text-white py-3.5 px-6 rounded-xl font-bold text-sm sm:text-base transition flex items-center justify-center gap-2 shadow-xl">
-              <i class="fa-solid fa-plus"></i> Add Message to Chat
-            </button>
-          </div>
-        </div>
+            <!-- Author Block -->
+            <div class="border border-white/5 bg-discord-input/40 p-4 rounded-xl space-y-3">
+              <span class="text-xs font-bold uppercase tracking-wide text-discord-textMuted block">Author Section</span>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <input type="text" id="author-name" oninput="updateActiveEmbedAuthor('name', this.value)" placeholder="Author Name" class="bg-discord-input border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none" />
+                <input type="url" id="author-icon" oninput="updateActiveEmbedAuthor('icon_url', this.value)" placeholder="Author Icon URL" class="bg-discord-input border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none" />
+                <input type="url" id="author-url" oninput="updateActiveEmbedAuthor('url', this.value)" placeholder="Author Link URL" class="bg-discord-input border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none" />
+              </div>
+            </div>
 
-        <!-- Actions Panel Card -->
-        <div class="bg-discord-card border border-white/5 rounded-2xl p-6 shadow-xl space-y-4">
-          <div class="flex items-center justify-between border-b border-white/5 pb-3">
-            <h2 class="text-xs font-bold uppercase tracking-wider text-discord-textMuted flex items-center gap-2">
-              <i class="fa-solid fa-list-check text-discord-blurple"></i> Chat Actions
-            </h2>
-            <button onclick="clearChat()" class="text-xs font-semibold text-discord-red hover:opacity-80 transition flex items-center gap-1.5">
-              <i class="fa-solid fa-trash"></i> Clear All Messages
-            </button>
-          </div>
+            <!-- Media Section -->
+            <div class="border border-white/5 bg-discord-input/40 p-4 rounded-xl space-y-3">
+              <span class="text-xs font-bold uppercase tracking-wide text-discord-textMuted block">Media & Images</span>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <input type="url" id="thumb-url" oninput="updateActiveEmbedMedia('thumbnail', this.value)" placeholder="Thumbnail Image URL (Top Right)" class="bg-discord-input border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none" />
+                <input type="url" id="image-url" oninput="updateActiveEmbedMedia('image', this.value)" placeholder="Main Image URL (Bottom Large)" class="bg-discord-input border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none" />
+              </div>
+            </div>
 
-          <div>
-            <button onclick="exportPNG()" class="w-full bg-discord-green hover:opacity-90 text-white py-3.5 px-6 rounded-xl font-bold text-sm sm:text-base transition flex items-center justify-center gap-2 shadow-xl">
-              <i class="fa-solid fa-download"></i> Download Chat Image (PNG)
-            </button>
+            <!-- Footer Section -->
+            <div class="border border-white/5 bg-discord-input/40 p-4 rounded-xl space-y-3">
+              <span class="text-xs font-bold uppercase tracking-wide text-discord-textMuted block">Footer Section</span>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <input type="text" id="footer-text" oninput="updateActiveEmbedFooter('text', this.value)" placeholder="Footer Text" class="bg-discord-input border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none" />
+                <input type="url" id="footer-icon" oninput="updateActiveEmbedFooter('icon_url', this.value)" placeholder="Footer Icon URL" class="bg-discord-input border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none" />
+              </div>
+              <label class="flex items-center gap-2 pt-1 text-sm text-discord-textMuted cursor-pointer select-none">
+                <input type="checkbox" id="include-timestamp" onchange="updateActiveEmbedField('timestamp', this.checked)" class="rounded bg-discord-input border-white/10 text-discord-blurple focus:ring-0">
+                <span>Include Current Timestamp</span>
+              </label>
+            </div>
+
+            <!-- Fields Section -->
+            <div class="space-y-3 pt-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold uppercase text-discord-textMuted">Fields (Max 25)</span>
+                <button onclick="addField()" class="text-sm text-discord-blurple hover:underline font-semibold flex items-center gap-1">
+                  <i class="fa-solid fa-plus text-xs"></i> Add Field
+                </button>
+              </div>
+              <div id="fields-container" class="space-y-3">
+                <!-- Fields rendered dynamically -->
+              </div>
+            </div>
+
           </div>
         </div>
 
       </div>
 
-      <!-- Right Discord Chat Window Preview (5 Cols) -->
-      <div class="lg:col-span-5 space-y-4">
-        <div class="sticky top-24">
-          <label class="block text-xs font-bold uppercase tracking-wider text-discord-textMuted mb-2">Live Discord Preview</label>
+      <!-- RIGHT COLUMN: Live Discord Preview & Primary Dispatch Button -->
+      <div class="lg:col-span-5 space-y-6">
+        <div class="sticky top-24 space-y-4">
           
-          <div class="bg-discord-sidebar border border-white/5 rounded-2xl overflow-hidden shadow-2xl">
-            
-            <!-- Discord Header Bar -->
-            <div class="bg-discord-sidebar border-b border-white/5 px-4 py-3 flex items-center justify-between">
+          <div class="bg-discord-card border border-white/5 rounded-2xl overflow-hidden shadow-2xl">
+            <!-- Discord Window Header Bar -->
+            <div class="bg-[#1e1f22] px-4 py-3 border-b border-white/5 flex items-center justify-between text-xs text-discord-textMuted">
               <div class="flex items-center gap-2">
-                <i class="fa-solid fa-hashtag text-discord-textMuted text-base"></i>
-                <span class="font-bold text-sm text-white">general-chat</span>
-                <span class="text-xs text-discord-textMuted border-l border-white/10 pl-2">Welcome to the server!</span>
+                <i class="fa-solid fa-hashtag text-discord-textMuted"></i>
+                <span class="font-semibold text-white">preview-channel</span>
               </div>
-              <div class="flex items-center gap-3 text-discord-textMuted text-xs">
-                <i class="fa-solid fa-bell hover:text-white transition cursor-pointer"></i>
-                <i class="fa-solid fa-thumbtack hover:text-white transition cursor-pointer"></i>
-                <i class="fa-solid fa-users hover:text-white transition cursor-pointer"></i>
-              </div>
+              <span class="text-[10px] bg-white/5 px-2 py-0.5 rounded text-discord-textMuted">Live Preview</span>
             </div>
 
-            <!-- Chat Canvas Body (Rendered for Screenshot) -->
-            <div id="chat-canvas" class="bg-discord-chatBg p-5 min-h-[450px] space-y-4">
-              <!-- Messages render here -->
-            </div>
+            <!-- Discord Message Body -->
+            <div class="p-4 bg-[#313338] space-y-3 font-sans">
+              
+              <!-- Message Author Header -->
+              <div class="flex items-start gap-3">
+                <img id="prev-bot-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" class="w-10 h-10 rounded-full object-cover shrink-0 mt-0.5" alt="Bot Avatar" />
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-2">
+                    <span id="prev-bot-name" class="font-semibold text-sm text-white truncate">DCTools.org</span>
+                    <span class="bg-discord-blurple text-[10px] font-bold text-white px-1.5 py-0.5 rounded leading-none">BOT</span>
+                    <span class="text-[11px] text-discord-textMuted">Today at 12:00 PM</span>
+                  </div>
 
-            <!-- Discord Input Mockup Bar -->
-            <div class="p-4 bg-discord-chatBg border-t border-white/5">
-              <div class="bg-[#383a40] px-4 py-3 rounded-xl flex items-center justify-between text-discord-textMuted text-xs">
-                <div class="flex items-center gap-3">
-                  <i class="fa-solid fa-circle-plus text-base hover:text-white transition cursor-pointer"></i>
-                  <span>Message #general-chat</span>
+                  <!-- Text Content Preview -->
+                  <div id="preview-msg-text" class="text-sm text-gray-200 mt-1.5 whitespace-pre-wrap leading-relaxed hidden"></div>
+
+                  <!-- Rendered Embeds List -->
+                  <div id="preview-embeds-container" class="mt-2.5 space-y-2.5">
+                    <!-- Dynamic Embed Cards Rendered Here -->
+                  </div>
+
                 </div>
-                <div class="flex items-center gap-3 text-sm">
-                  <i class="fa-solid fa-gift hover:text-white transition cursor-pointer"></i>
-                  <i class="fa-solid fa-note-sticky hover:text-white transition cursor-pointer"></i>
-                  <i class="fa-solid fa-face-smile hover:text-white transition cursor-pointer"></i>
-                </div>
               </div>
-            </div>
 
+            </div>
           </div>
+
+          <!-- Dispatch Action Button -->
+          <button id="primary-action-btn" onclick="executeWebhookAction()" class="w-full bg-discord-blurple hover:bg-discord-blurpleHover text-white font-bold py-3.5 px-6 rounded-xl shadow-xl transition flex items-center justify-center gap-2 text-sm sm:text-base">
+            <i class="fa-solid fa-paper-plane"></i>
+            <span>Send Webhook Message</span>
+          </button>
+
         </div>
       </div>
 
     </div>
 
   </main>
+
+  <!-- JSON Modal -->
+  <div id="json-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-discord-card border border-white/10 rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between border-b border-white/5 pb-3">
+        <h3 class="text-base font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-code text-discord-blurple"></i> JSON Payload (Discohook Compatible)
+        </h3>
+        <button onclick="closeJsonModal()" class="text-discord-textMuted hover:text-white transition">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+      <textarea id="json-input" rows="12" class="w-full bg-discord-input border border-white/10 rounded-xl p-4 font-mono text-xs text-green-400 focus:outline-none resize-y"></textarea>
+      <div class="flex items-center justify-end gap-3 pt-2">
+        <button onclick="copyJsonData()" class="bg-discord-input hover:bg-white/10 border border-white/5 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition">
+          Copy JSON
+        </button>
+        <button onclick="loadJsonData()" class="bg-discord-blurple hover:bg-discord-blurpleHover text-white text-sm font-bold px-4 py-2.5 rounded-xl transition">
+          Apply JSON Payload
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer class="bg-discord-sidebar border-t border-white/5 py-8 w-full mt-auto">
@@ -279,209 +386,595 @@
 
   <!-- Toast Notification Container -->
   <div id="toast" role="status" aria-live="polite" class="fixed bottom-6 right-6 bg-discord-green text-white px-5 py-3.5 rounded-xl shadow-2xl text-base transition duration-300 transform translate-y-20 opacity-0 pointer-events-none flex items-center gap-3 z-50">
-    <i class="fa-solid fa-check" aria-hidden="true"></i> <span id="toast-message">Action successful!</span>
+    <i class="fa-solid fa-check" aria-hidden="true"></i> <span id="toast-message">Copied to clipboard!</span>
   </div>
 
+  <script src="../assets/js/utils.js"></script>
   <script>
-    let messages = [
-      {
-        id: 1,
-        username: 'Clyde Bot',
-        color: '#5865F2',
-        avatar: 'https://cdn.discordapp.com/embed/avatars/0.png',
-        timestamp: 'Today at 10:15 AM',
-        isBot: true,
-        verified: true,
-        content: 'Welcome to **DCTools.org**! Customize messages using the left panel.',
-        attachment: ''
-      },
-      {
-        id: 2,
-        username: 'Wumpus',
-        color: '#23A55A',
-        avatar: 'https://cdn.discordapp.com/embed/avatars/1.png',
-        timestamp: 'Today at 10:16 AM',
-        isBot: false,
-        verified: false,
-        content: 'This chat mockup generator looks super realistic! Perfect for server announcements.',
-        attachment: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=80'
+    // --- STATE MANAGEMENT ---
+    let appState = {
+      mode: 'send', // 'send' or 'edit'
+      username: '',
+      avatar_url: '',
+      content: '',
+      embeds: [
+        {
+          title: '',
+          description: '',
+          url: '',
+          color: '#5865f2',
+          author: { name: '', icon_url: '', url: '' },
+          footer: { text: '', icon_url: '' },
+          timestamp: false,
+          thumbnail: { url: '' },
+          image: { url: '' },
+          fields: []
+        }
+      ]
+    };
+
+    let activeEmbedIndex = 0;
+
+    // Toast Utility Fallback if utils.js isn't loaded
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-message');
+      if (!toast || !toastMsg) return;
+      toastMsg.innerText = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+      }, 3000);
+    }
+
+    function copyToClipboard(text, successMsg = 'Copied to clipboard!') {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(successMsg);
+      }).catch(() => {
+        alert('Failed to copy to clipboard.');
+      });
+    }
+
+    // --- MODE SWITCHER ---
+    function setMode(mode) {
+      appState.mode = mode;
+      const sendBtn = document.getElementById('mode-send-btn');
+      const editBtn = document.getElementById('mode-edit-btn');
+      const msgIdContainer = document.getElementById('message-id-container');
+      const primaryBtn = document.getElementById('primary-action-btn');
+
+      if (mode === 'send') {
+        sendBtn.className = "px-4 py-2 rounded-lg text-sm font-bold transition bg-discord-blurple text-white shadow";
+        editBtn.className = "px-4 py-2 rounded-lg text-sm font-bold transition text-discord-textMuted hover:text-white";
+        msgIdContainer.classList.add('hidden');
+        primaryBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i><span>Send Webhook Message</span>';
+      } else {
+        editBtn.className = "px-4 py-2 rounded-lg text-sm font-bold transition bg-discord-blurple text-white shadow";
+        sendBtn.className = "px-4 py-2 rounded-lg text-sm font-bold transition text-discord-textMuted hover:text-white";
+        msgIdContainer.classList.remove('hidden');
+        primaryBtn.innerHTML = '<i class="fa-solid fa-pen-to-square"></i><span>Update Existing Message</span>';
       }
-    ];
+    }
 
-    // Color hex input binding
-    document.getElementById('in-color').addEventListener('input', (e) => {
-      document.getElementById('color-hex').innerText = e.target.value.toUpperCase();
-    });
+    // --- EMBEDS TAB MANAGEMENT ---
+    function renderEmbedTabs() {
+      const container = document.getElementById('embed-tabs-header');
+      if (!container) return;
 
-    // Auto-check bot badge if verified check is enabled
-    document.getElementById('in-verified').addEventListener('change', (e) => {
-      if (e.target.checked) {
-        document.getElementById('in-isbot').checked = true;
+      container.innerHTML = appState.embeds.map((_, i) => `
+        <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-sm font-medium cursor-pointer transition shrink-0 ${
+          i === activeEmbedIndex 
+            ? 'bg-discord-blurple border-discord-blurple text-white' 
+            : 'bg-discord-input border-white/5 text-discord-textMuted hover:text-white'
+        }" onclick="switchEmbedTab(${i})">
+          <span>Embed #${i + 1}</span>
+          ${appState.embeds.length > 1 ? `
+            <button onclick="event.stopPropagation(); deleteEmbedAtIndex(${i})" class="hover:text-red-300 ml-1">
+              <i class="fa-solid fa-xmark text-xs"></i>
+            </button>
+          ` : ''}
+        </div>
+      `).join('');
+
+      loadActiveEmbedIntoForm();
+    }
+
+    function switchEmbedTab(index) {
+      activeEmbedIndex = index;
+      renderEmbedTabs();
+    }
+
+    function addEmbed() {
+      if (appState.embeds.length >= 10) return alert('Discord allows a maximum of 10 embeds per message.');
+      appState.embeds.push({
+        title: '', description: '', url: '', color: '#5865f2',
+        author: { name: '', icon_url: '', url: '' },
+        footer: { text: '', icon_url: '' },
+        timestamp: false,
+        thumbnail: { url: '' }, image: { url: '' }, fields: []
+      });
+      activeEmbedIndex = appState.embeds.length - 1;
+      renderEmbedTabs();
+      renderPreview();
+    }
+
+    function deleteEmbedAtIndex(index) {
+      if (appState.embeds.length <= 1) return alert('You must keep at least one embed.');
+      appState.embeds.splice(index, 1);
+      if (activeEmbedIndex >= appState.embeds.length) activeEmbedIndex = appState.embeds.length - 1;
+      renderEmbedTabs();
+      renderPreview();
+    }
+
+    // --- FORM POPULATION & EDITING ---
+    function loadActiveEmbedIntoForm() {
+      const emb = appState.embeds[activeEmbedIndex];
+      if (!emb) return;
+
+      document.getElementById('active-embed-title-label').innerText = `Editing Embed #${activeEmbedIndex + 1}`;
+      document.getElementById('embed-title').value = emb.title || '';
+      document.getElementById('embed-title-url').value = emb.url || '';
+      document.getElementById('embed-desc').value = emb.description || '';
+      document.getElementById('embed-color').value = emb.color || '#5865f2';
+      document.getElementById('embed-color-hex').value = (emb.color || '#5865f2').toUpperCase();
+
+      document.getElementById('author-name').value = emb.author?.name || '';
+      document.getElementById('author-icon').value = emb.author?.icon_url || '';
+      document.getElementById('author-url').value = emb.author?.url || '';
+
+      document.getElementById('thumb-url').value = emb.thumbnail?.url || '';
+      document.getElementById('image-url').value = emb.image?.url || '';
+
+      document.getElementById('footer-text').value = emb.footer?.text || '';
+      document.getElementById('footer-icon').value = emb.footer?.icon_url || '';
+      document.getElementById('include-timestamp').checked = !!emb.timestamp;
+
+      renderFieldsEditor();
+    }
+
+    function updateProfileState() {
+      appState.username = document.getElementById('bot-username').value;
+      appState.avatar_url = document.getElementById('bot-avatar').value;
+      renderPreview();
+    }
+
+    function updateContentState() {
+      appState.content = document.getElementById('msg-content').value;
+      renderPreview();
+    }
+
+    function updateActiveEmbedField(key, val) {
+      appState.embeds[activeEmbedIndex][key] = val;
+      renderPreview();
+    }
+
+    function updateActiveEmbedAuthor(key, val) {
+      if (!appState.embeds[activeEmbedIndex].author) appState.embeds[activeEmbedIndex].author = {};
+      appState.embeds[activeEmbedIndex].author[key] = val;
+      renderPreview();
+    }
+
+    function updateActiveEmbedFooter(key, val) {
+      if (!appState.embeds[activeEmbedIndex].footer) appState.embeds[activeEmbedIndex].footer = {};
+      appState.embeds[activeEmbedIndex].footer[key] = val;
+      renderPreview();
+    }
+
+    function updateActiveEmbedMedia(key, val) {
+      if (!appState.embeds[activeEmbedIndex][key]) appState.embeds[activeEmbedIndex][key] = {};
+      appState.embeds[activeEmbedIndex][key].url = val;
+      renderPreview();
+    }
+
+    function syncColorInput(val) {
+      if (/^#[0-9A-F]{6}$/i.test(val)) {
+        document.getElementById('embed-color').value = val;
+        updateActiveEmbedField('color', val);
       }
-    });
+    }
 
-    function renderChat() {
-      const canvas = document.getElementById('chat-canvas');
-      
-      if (messages.length === 0) {
-        canvas.innerHTML = `
-          <div class="text-center py-16 text-discord-textMuted text-xs">
-            Chat is empty! Add a message from the panel on the left.
+    // --- FIELDS MANAGEMENT ---
+    function addField() {
+      const fields = appState.embeds[activeEmbedIndex].fields || [];
+      if (fields.length >= 25) return alert('Discord allows a maximum of 25 fields per embed.');
+      fields.push({ name: '', value: '', inline: false });
+      appState.embeds[activeEmbedIndex].fields = fields;
+      renderFieldsEditor();
+      renderPreview();
+    }
+
+    function removeField(index) {
+      appState.embeds[activeEmbedIndex].fields.splice(index, 1);
+      renderFieldsEditor();
+      renderPreview();
+    }
+
+    function updateField(index, key, val) {
+      appState.embeds[activeEmbedIndex].fields[index][key] = val;
+      renderPreview();
+    }
+
+    function renderFieldsEditor() {
+      const fields = appState.embeds[activeEmbedIndex]?.fields || [];
+      const container = document.getElementById('fields-container');
+      container.innerHTML = fields.map((f, i) => `
+        <div class="bg-discord-input p-4 rounded-xl border border-white/5 space-y-3 relative group">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase text-discord-textMuted">Field #${i + 1}</span>
+            <button onclick="removeField(${i})" class="text-discord-red hover:text-white text-sm transition">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
           </div>
-        `;
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <input type="text" placeholder="Field Name" value="${f.name || ''}" oninput="updateField(${i}, 'name', this.value)" class="bg-discord-card border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none">
+            <input type="text" placeholder="Field Value" value="${f.value || ''}" oninput="updateField(${i}, 'value', this.value)" class="bg-discord-card border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none">
+          </div>
+          <label class="flex items-center gap-2 text-sm text-discord-textMuted select-none cursor-pointer">
+            <input type="checkbox" ${f.inline ? 'checked' : ''} onchange="updateField(${i}, 'inline', this.checked)" class="rounded bg-discord-card border-white/10 text-discord-blurple">
+            <span>Display Inline</span>
+          </label>
+        </div>
+      `).join('');
+    }
+
+    // --- PAYLOAD BUILDER (AUTOMATICALLY STRIPS EMPTY EMBEDS) ---
+    function buildCleanPayload() {
+      const payload = {
+        content: appState.content?.trim() || undefined,
+        username: appState.username?.trim() || undefined,
+        avatar_url: appState.avatar_url?.trim() || undefined,
+        embeds: appState.embeds.map(emb => {
+          const validFields = (emb.fields || []).filter(f => f.name?.trim() && f.value?.trim()).map(f => ({
+            name: f.name.trim(),
+            value: f.value.trim(),
+            inline: !!f.inline
+          }));
+
+          const hasContent = !!(
+            emb.title?.trim() ||
+            emb.description?.trim() ||
+            emb.author?.name?.trim() ||
+            emb.footer?.text?.trim() ||
+            emb.image?.url?.trim() ||
+            emb.thumbnail?.url?.trim() ||
+            validFields.length > 0
+          );
+
+          if (!hasContent) return null;
+
+          const colorInt = emb.color ? parseInt(emb.color.replace('#', ''), 16) : undefined;
+
+          const cleaned = {
+            title: emb.title?.trim() || undefined,
+            description: emb.description?.trim() || undefined,
+            url: emb.url?.trim() || undefined,
+            color: colorInt,
+            author: (emb.author && emb.author.name?.trim()) ? {
+              name: emb.author.name.trim(),
+              icon_url: emb.author.icon_url?.trim() || undefined,
+              url: emb.author.url?.trim() || undefined
+            } : undefined,
+            footer: (emb.footer && emb.footer.text?.trim()) ? {
+              text: emb.footer.text.trim(),
+              icon_url: emb.footer.icon_url?.trim() || undefined
+            } : undefined,
+            timestamp: emb.timestamp ? new Date().toISOString() : undefined,
+            thumbnail: emb.thumbnail?.url?.trim() ? { url: emb.thumbnail.url.trim() } : undefined,
+            image: emb.image?.url?.trim() ? { url: emb.image.url.trim() } : undefined,
+            fields: validFields.length > 0 ? validFields : undefined
+          };
+
+          Object.keys(cleaned).forEach(k => cleaned[k] === undefined && delete cleaned[k]);
+          return cleaned;
+        }).filter(emb => emb !== null)
+      };
+
+      Object.keys(payload).forEach(k => payload[k] === undefined && delete payload[k]);
+      return payload;
+    }
+
+    // --- DISCORD DETAILED ERROR PARSER ---
+    async function parseDiscordErrorResponse(res) {
+      try {
+        const err = await res.json();
+        if (typeof err === 'string') return err;
+        
+        let msg = err.message || `HTTP Error ${res.status}`;
+        
+        if (err.errors) {
+          let details = [];
+          function extractErrors(obj, path = '') {
+            if (obj._errors && Array.isArray(obj._errors)) {
+              obj._errors.forEach(e => details.push(`${path ? path + ': ' : ''}${e.message}`));
+            }
+            for (let k in obj) {
+              if (k !== '_errors' && typeof obj[k] === 'object' && obj[k] !== null) {
+                extractErrors(obj[k], path ? `${path}.${k}` : k);
+              }
+            }
+          }
+          extractErrors(err.errors);
+          if (details.length > 0) {
+            msg += `\n\nDetails:\n• ` + details.join('\n• ');
+          }
+        } else if (err.code) {
+          msg += ` (Error Code: ${err.code})`;
+        }
+        return msg;
+      } catch (e) {
+        return `HTTP ${res.status}: ${res.statusText || 'Unknown Error'}`;
+      }
+    }
+
+    // --- LIVE PREVIEW RENDERER ---
+    function renderPreview() {
+      const payload = buildCleanPayload();
+
+      // Update Profile Preview
+      document.getElementById('prev-bot-name').innerText = appState.username || 'DCTools.org';
+      document.getElementById('prev-bot-avatar').src = appState.avatar_url || 'https://cdn.discordapp.com/embed/avatars/0.png';
+
+      // Update Text Content
+      const msgTextEl = document.getElementById('preview-msg-text');
+      if (appState.content) {
+        msgTextEl.innerText = appState.content;
+        msgTextEl.classList.remove('hidden');
+      } else {
+        msgTextEl.classList.add('hidden');
+      }
+
+      // Render Multi-Embed Preview Cards
+      const container = document.getElementById('preview-embeds-container');
+      if (!payload.embeds || payload.embeds.length === 0) {
+        container.innerHTML = '';
         return;
       }
 
-      canvas.innerHTML = messages.map((msg, index) => {
-        const formattedContent = parseMarkdown(msg.content);
+      container.innerHTML = payload.embeds.map((emb, idx) => {
+        const hexColor = emb.color ? '#' + emb.color.toString(16).padStart(6, '0') : '#5865f2';
+        
         return `
-          <div class="flex items-start gap-3.5 hover:bg-[#2e3035] -mx-3 px-3 py-1.5 rounded transition group relative">
+          <div class="bg-discord-card border-l-4 rounded-r-xl p-4 space-y-3 shadow-md max-w-lg" style="border-left-color: ${hexColor};">
             
-            <!-- Avatar -->
-            <img src="${escapeHtml(msg.avatar)}" alt="Avatar" class="w-10 h-10 rounded-full shrink-0 object-cover mt-0.5" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
-
-            <!-- Message Core -->
-            <div class="flex-grow min-w-0 space-y-1">
-              
-              <!-- Author Header -->
-              <div class="flex items-center gap-1.5 flex-wrap">
-                <span class="font-bold text-sm" style="color: ${msg.color}">${escapeHtml(msg.username)}</span>
-                
-                ${msg.isBot ? `
-                  <span class="bg-discord-blurple text-white text-[9px] font-bold px-1.5 py-[1px] rounded flex items-center gap-1 uppercase tracking-wider leading-none">
-                    ${msg.verified ? `
-                      <svg class="w-2.5 h-2.5 text-white shrink-0" viewBox="0 0 12 9" fill="none">
-                        <path d="M10.6 0.600006L3.8 7.40001L1.4 5.00001L0 6.40001L3.8 10.2L12 2.00001L10.6 0.600006Z" fill="currentColor"/>
-                      </svg>
-                    ` : ''}
-                    <span>APP</span>
-                  </span>
-                ` : ''}
-
-                <span class="text-[11px] text-discord-textMuted ml-1">${escapeHtml(msg.timestamp)}</span>
+            ${emb.author?.name ? `
+              <div class="flex items-center gap-2 text-xs font-semibold text-white">
+                ${emb.author.icon_url ? `<img src="${emb.author.icon_url}" class="w-5 h-5 rounded-full object-cover shrink-0" />` : ''}
+                ${emb.author.url ? `<a href="${emb.author.url}" target="_blank" class="hover:underline">${emb.author.name}</a>` : `<span>${emb.author.name}</span>`}
               </div>
+            ` : ''}
 
-              <!-- Message Body -->
-              <div class="text-sm text-gray-200 leading-relaxed break-words">
-                ${formattedContent}
+            ${emb.title ? `
+              <div>
+                ${emb.url ? `<a href="${emb.url}" target="_blank" class="font-bold text-sm text-white hover:underline">${emb.title}</a>` : `<div class="font-bold text-sm text-white">${emb.title}</div>`}
               </div>
+            ` : ''}
 
-              <!-- Optional Image Attachment -->
-              ${msg.attachment ? `
-                <div class="pt-1 max-w-sm">
-                  <img src="${escapeHtml(msg.attachment)}" class="rounded-lg max-h-60 object-cover border border-white/5 shadow-md" onerror="this.style.display='none'">
-                </div>
-              ` : ''}
-
+            <div class="flex gap-4 items-start justify-between">
+              ${emb.description ? `<div class="text-xs text-gray-300 leading-relaxed whitespace-pre-wrap flex-1">${emb.description}</div>` : ''}
+              ${emb.thumbnail?.url ? `<img src="${emb.thumbnail.url}" class="w-16 h-16 rounded-lg object-cover shrink-0" />` : ''}
             </div>
 
-            <!-- Delete Trigger -->
-            <button onclick="removeMessage(${index})" title="Delete Message" class="opacity-0 group-hover:opacity-100 text-xs text-discord-textMuted hover:text-discord-red transition absolute right-2 top-2">
-              <i class="fa-solid fa-xmark"></i>
-            </button>
+            ${emb.fields && emb.fields.length > 0 ? `
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                ${emb.fields.map(f => `
+                  <div class="${f.inline ? 'col-span-1' : 'col-span-full'}">
+                    <div class="text-xs font-semibold text-white">${f.name}</div>
+                    <div class="text-xs text-gray-300 whitespace-pre-wrap">${f.value}</div>
+                  </div>
+                `).join('')}
+              </div>
+            ` : ''}
+
+            ${emb.image?.url ? `
+              <div class="pt-1">
+                <img src="${emb.image.url}" class="w-full rounded-lg max-h-60 object-cover" />
+              </div>
+            ` : ''}
+
+            ${(emb.footer?.text || emb.timestamp) ? `
+              <div class="flex items-center gap-2 text-[11px] text-discord-textMuted pt-1 border-t border-white/5">
+                ${emb.footer?.icon_url ? `<img src="${emb.footer.icon_url}" class="w-4 h-4 rounded-full object-cover shrink-0" />` : ''}
+                ${emb.footer?.text ? `<span>${emb.footer.text}</span>` : ''}
+                ${(emb.footer?.text && emb.timestamp) ? `<span>•</span>` : ''}
+                ${emb.timestamp ? `<span>Today at 12:00 PM</span>` : ''}
+              </div>
+            ` : ''}
 
           </div>
         `;
       }).join('');
     }
 
-    function addMessage() {
-      const username = document.getElementById('in-username').value.trim() || 'User';
-      const color = document.getElementById('in-color').value;
-      const avatar = document.getElementById('in-avatar').value.trim() || 'https://cdn.discordapp.com/embed/avatars/0.png';
-      const timestamp = document.getElementById('in-time').value.trim() || 'Today at 12:00 PM';
-      const isBot = document.getElementById('in-isbot').checked;
-      const verified = document.getElementById('in-verified').checked;
-      const content = document.getElementById('in-content').value.trim();
-      const attachment = document.getElementById('in-attachment').value.trim();
-
-      if (!content && !attachment) {
-        showToast('Please enter message content or an image URL!');
-        return;
+    // --- DISCORD API NETWORK ACTIONS ---
+    async function executeWebhookAction() {
+      const url = document.getElementById('webhook-url').value.trim();
+      if (!url || !url.startsWith('https://discord.com/api/webhooks/')) {
+        return alert('Please enter a valid Discord Webhook URL.');
       }
 
-      messages.push({
-        id: Date.now(),
-        username,
-        color,
-        avatar,
-        timestamp,
-        isBot: isBot || verified,
-        verified,
-        content,
-        attachment
-      });
+      const payload = buildCleanPayload();
+      if (!payload.content && (!payload.embeds || payload.embeds.length === 0)) {
+        return alert('Please enter normal text content or fill out at least one embed with text or images.');
+      }
 
-      renderChat();
-      document.getElementById('in-content').value = '';
-      document.getElementById('in-attachment').value = '';
-      showToast('Message added!');
+      const primaryBtn = document.getElementById('primary-action-btn');
+      primaryBtn.disabled = true;
+
+      if (appState.mode === 'send') {
+        // Send New Message (POST)
+        primaryBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Sending...';
+        try {
+          const res = await fetch(`${url}?wait=true`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          if (res.ok) {
+            const data = await res.json();
+            showToast(`Message sent! (ID: ${data.id})`);
+          } else {
+            const errorMsg = await parseDiscordErrorResponse(res);
+            alert(`Failed to send webhook:\n${errorMsg}`);
+          }
+        } catch (e) {
+          alert('Error connecting to Discord Webhook. Please check your network or Webhook URL.');
+        }
+      } else {
+        // Edit Existing Message (PATCH)
+        const msgId = document.getElementById('message-id').value.trim();
+        if (!msgId) {
+          primaryBtn.disabled = false;
+          setMode(appState.mode);
+          return alert('Please enter the Target Message ID to edit.');
+        }
+
+        primaryBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Updating...';
+        try {
+          const res = await fetch(`${url}/messages/${msgId}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          if (res.ok) {
+            showToast('Message updated successfully!');
+          } else {
+            const errorMsg = await parseDiscordErrorResponse(res);
+            alert(`Failed to edit message:\n${errorMsg}`);
+          }
+        } catch (e) {
+          alert('Error editing message. Verify the Webhook URL and Message ID.');
+        }
+      }
+
+      primaryBtn.disabled = false;
+      setMode(appState.mode);
     }
 
-    function removeMessage(index) {
-      messages.splice(index, 1);
-      renderChat();
+    async function fetchExistingMessage() {
+      const url = document.getElementById('webhook-url').value.trim();
+      const msgId = document.getElementById('message-id').value.trim();
+
+      if (!url || !msgId) return alert('Enter both the Webhook URL and Message ID to load a message.');
+
+      try {
+        const res = await fetch(`${url}/messages/${msgId}`);
+        if (!res.ok) {
+          const errorMsg = await parseDiscordErrorResponse(res);
+          throw new Error(errorMsg);
+        }
+
+        const data = await res.json();
+        
+        // Populate App State from fetched Discord Message
+        appState.content = data.content || '';
+        document.getElementById('msg-content').value = appState.content;
+
+        if (data.embeds && data.embeds.length > 0) {
+          appState.embeds = data.embeds.map(emb => ({
+            title: emb.title || '',
+            description: emb.description || '',
+            url: emb.url || '',
+            color: emb.color ? `#${emb.color.toString(16).padStart(6, '0')}` : '#5865f2',
+            author: emb.author ? { name: emb.author.name || '', icon_url: emb.author.icon_url || '', url: emb.author.url || '' } : { name: '', icon_url: '', url: '' },
+            footer: emb.footer ? { text: emb.footer.text || '', icon_url: emb.footer.icon_url || '' } : { text: '', icon_url: '' },
+            timestamp: !!emb.timestamp,
+            thumbnail: emb.thumbnail ? { url: emb.thumbnail.url || '' } : { url: '' },
+            image: emb.image ? { url: emb.image.url || '' } : { url: '' },
+            fields: emb.fields ? emb.fields.map(f => ({ name: f.name, value: f.value, inline: !!f.inline })) : []
+          }));
+        }
+
+        activeEmbedIndex = 0;
+        renderEmbedTabs();
+        renderPreview();
+        showToast('Existing message loaded into editor!');
+      } catch (e) {
+        alert('Failed to fetch message:\n' + e.message);
+      }
     }
 
-    function clearChat() {
-      messages = [];
-      renderChat();
-      showToast('Cleared all chat messages');
+    // --- JSON MODAL & DISCOHOOK IMPORT/EXPORT ---
+    function openJsonModal() {
+      const payload = buildCleanPayload();
+      document.getElementById('json-input').value = JSON.stringify(payload, null, 2);
+      document.getElementById('json-modal').classList.remove('hidden');
     }
 
-    function parseMarkdown(str) {
-      if (!str) return '';
-      let escaped = escapeHtml(str);
-      // Codeblocks
-      escaped = escaped.replace(/`([^`]+)`/g, '<code class="bg-[#1e1f22] text-xs px-1.5 py-0.5 rounded font-mono text-gray-300">$1</code>');
-      // Bold
-      escaped = escaped.replace(/\*\*([^*]+)\*\*/g, '<strong class="font-extrabold text-white">$1</strong>');
-      // Italic
-      escaped = escaped.replace(/\*([^*]+)\*/g, '<em class="italic">$1</em>');
-      // Newlines
-      escaped = escaped.replace(/\n/g, '<br>');
-      return escaped;
+    function closeJsonModal() {
+      document.getElementById('json-modal').classList.add('hidden');
     }
 
-    function exportPNG() {
-      const element = document.getElementById('chat-canvas');
-      showToast('Generating PNG image...');
-
-      html2canvas(element, {
-        backgroundColor: '#313338',
-        scale: 2,
-        useCORS: true
-      }).then(canvas => {
-        const link = document.createElement('a');
-        link.download = 'discord-chat-mockup.png';
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-        showToast('Downloaded PNG!');
-      }).catch(err => {
-        console.error(err);
-        showToast('Failed to export. Check image cross-origin permissions.');
-      });
+    function copyJsonData() {
+      const txt = document.getElementById('json-input').value;
+      copyToClipboard(txt, 'JSON payload copied to clipboard!');
+      closeJsonModal();
     }
 
-    function showToast(message) {
-      const toast = document.getElementById('toast');
-      const toastMsg = document.getElementById('toast-message');
-      if (toastMsg) toastMsg.innerText = message;
-      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
-      toast.classList.add('translate-y-0', 'opacity-100');
+    function loadJsonData() {
+      try {
+        const parsed = JSON.parse(document.getElementById('json-input').value);
+        
+        appState.username = parsed.username || '';
+        appState.avatar_url = parsed.avatar_url || '';
+        appState.content = parsed.content || '';
 
-      setTimeout(() => {
-        toast.classList.remove('translate-y-0', 'opacity-100');
-        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
-      }, 3000);
+        document.getElementById('bot-username').value = appState.username;
+        document.getElementById('bot-avatar').value = appState.avatar_url;
+        document.getElementById('msg-content').value = appState.content;
+
+        if (parsed.embeds && parsed.embeds.length > 0) {
+          appState.embeds = parsed.embeds.map(emb => ({
+            title: emb.title || '',
+            description: emb.description || '',
+            url: emb.url || '',
+            color: emb.color ? `#${emb.color.toString(16).padStart(6, '0')}` : '#5865f2',
+            author: emb.author ? { name: emb.author.name || '', icon_url: emb.author.icon_url || '', url: emb.author.url || '' } : { name: '', icon_url: '', url: '' },
+            footer: emb.footer ? { text: emb.footer.text || '', icon_url: emb.footer.icon_url || '' } : { text: '', icon_url: '' },
+            timestamp: !!emb.timestamp,
+            thumbnail: emb.thumbnail ? { url: emb.thumbnail.url || '' } : { url: '' },
+            image: emb.image ? { url: emb.image.url || '' } : { url: '' },
+            fields: emb.fields ? emb.fields.map(f => ({ name: f.name, value: f.value, inline: !!f.inline })) : []
+          }));
+        }
+
+        activeEmbedIndex = 0;
+        renderEmbedTabs();
+        renderPreview();
+        closeJsonModal();
+        showToast('JSON payload applied successfully!');
+      } catch (e) {
+        alert('Invalid JSON structure: ' + e.message);
+      }
     }
 
-    function escapeHtml(str) {
-      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    function clearAll() {
+      if (!confirm('Are you sure you want to clear all contents and embeds?')) return;
+      appState = {
+        mode: appState.mode,
+        username: '',
+        avatar_url: '',
+        content: '',
+        embeds: [{
+          title: '', description: '', url: '', color: '#5865f2',
+          author: { name: '', icon_url: '', url: '' },
+          footer: { text: '', icon_url: '' },
+          timestamp: false,
+          thumbnail: { url: '' }, image: { url: '' }, fields: []
+        }]
+      };
+      document.getElementById('bot-username').value = '';
+      document.getElementById('bot-avatar').value = '';
+      document.getElementById('msg-content').value = '';
+      activeEmbedIndex = 0;
+      renderEmbedTabs();
+      renderPreview();
     }
 
-    // Initialization
-    renderChat();
+    // Initial Initialization
+    renderEmbedTabs();
+    renderPreview();
   </script>
 </body>
 </html>
