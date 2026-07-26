@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-discord-darkest">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Discord Server Inspector - DCTools.org</title>
+  
+  <!-- Core SEO Meta Tags -->
+  <meta name="description" content="Inspect any Discord server's public profile, security settings, creation age, boost tier, active features, and assets using an invite link or vanity URL." />
+  <meta name="keywords" content="discord server inspector, discord server checker, view discord server info, discord invite checker, discord boost tier checker, discord server details" />
+  <meta name="author" content="DCTools.org" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <link rel="canonical" href="https://dctools.org/tools/server-inspector.html" />
+
+  <!-- Theme & Mobile Integration -->
+  <meta name="theme-color" content="#18191c" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://dctools.org/tools/server-inspector.html" />
+  <meta property="og:title" content="Discord Server Inspector - DCTools.org" />
+  <meta property="og:description" content="Inspect any Discord server's public profile, security settings, creation age, boost tier, active features, and assets using an invite link or vanity URL." />
+  <meta property="og:site_name" content="DCTools.org" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card Data -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Discord Server Inspector - DCTools.org" />
+  <meta name="twitter:description" content="Inspect any Discord server's public profile, security settings, creation age, boost tier, active features, and assets using an invite link or vanity URL." />
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Discord Server Inspector",
+    "url": "https://dctools.org/tools/server-inspector.html",
+    "description": "Inspect any Discord server's public profile, security settings, creation age, boost tier, active features, and assets using an invite link or vanity URL.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "All",
+    "browserRequirements": "Requires JavaScript. Requires HTML5.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <!-- FAQ Schema for Rich Snippets -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I inspect a Discord server?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Paste any valid Discord server invite link, vanity URL (e.g. discord.gg/minecraft), or invite code into the input box and click Inspect Server."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What details can I see with the Discord Server Inspector?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can view the server's creation age, member and online counts, boost tier, verification level, active community perks, inviter info, landing channel, and download branding assets like icons and banners."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../assets/css/custom.css" />
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            discord: {
+              blurple: '#5865F2',
+              blurpleHover: '#4752C4',
+              green: '#23A55A',
+              red: '#DA373C',
+              darkest: '#111214',
+              sidebar: '#1E1F22',
+              card: '#2B2D31',
+              hover: '#35373C',
+              input: '#1E1F22',
+              textMuted: '#949BA4'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html, body {
+      background-color: #111214 !important;
+      color: #ffffff !important;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1e1f22;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2b2d31;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #35373c;
+    }
+  </style>
+</head>
+<body class="bg-discord-darkest text-white font-sans min-h-full flex flex-col antialiased selection:bg-discord-blurple selection:text-white">
+
+  <!-- Header Navigation -->
+  <header class="bg-discord-sidebar border-b border-white/5 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="../index.html" class="flex items-center space-x-3.5 group" aria-label="DCTools.org Home">
+        <div class="w-11 h-11 bg-discord-blurple group-hover:bg-discord-blurpleHover rounded-xl flex items-center justify-center text-white text-xl shadow-lg transition duration-200">
+          <i class="fa-solid fa-screwdriver-wrench"></i>
+        </div>
+        <span class="text-2xl font-bold tracking-tight text-white">DCTools.org</span>
+      </a>
+
+      <!-- Navigation Link Back to Home -->
+      <a href="../index.html" class="text-sm font-semibold text-discord-textMuted hover:text-white transition flex items-center gap-2 bg-discord-input px-4 py-2.5 rounded-xl border border-white/5 hover:border-white/10">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>All Tools</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Content Body -->
+  <main class="max-w-7xl mx-auto px-6 py-10 flex-1 w-full space-y-8">
+
+    <!-- Hero Section -->
+    <div class="text-center max-w-2xl mx-auto space-y-3">
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
+        <span class="text-discord-blurple">Discord</span> Server Inspector
+      </h1>
+      <p class="text-discord-textMuted text-base sm:text-lg leading-relaxed">
+        Inspect any Discord server's public profile, security settings, creation age, boost tier, active features, and assets using an invite link or vanity URL.
+      </p>
+    </div>
+
+    <div class="max-w-4xl mx-auto w-full space-y-8">
+      <!-- Input Card -->
+      <div class="bg-discord-card border border-white/5 rounded-2xl p-6 shadow-xl space-y-4">
+        <label class="block text-xs font-semibold text-discord-textMuted uppercase">Server Invite Link, Vanity URL, or Invite Code</label>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <input 
+            type="text" 
+            id="server-input" 
+            placeholder="e.g. discord.gg/minecraft or minecraft" 
+            class="flex-1 bg-discord-input border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-discord-blurple transition font-mono text-sm" 
+            onkeydown="if(event.key === 'Enter') inspectServer()"
+          />
+          <button 
+            onclick="inspectServer()" 
+            id="search-btn"
+            class="bg-discord-blurple hover:bg-discord-blurpleHover text-white px-6 py-3 rounded-xl font-semibold text-sm transition flex items-center justify-center gap-2 shadow-md shrink-0"
+          >
+            <i class="fa-solid fa-magnifying-glass"></i> Inspect Server
+          </button>
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div id="loading-spinner" class="hidden text-center py-12 space-y-3">
+        <i class="fa-solid fa-circle-notch fa-spin text-3xl text-discord-blurple"></i>
+        <p class="text-xs text-discord-textMuted">Querying Discord API for server metadata...</p>
+      </div>
+
+      <!-- Error State -->
+      <div id="error-message" class="hidden bg-discord-red/10 border border-discord-red/30 rounded-xl p-4 text-discord-red text-sm flex items-center gap-3">
+        <i class="fa-solid fa-triangle-exclamation text-lg shrink-0"></i>
+        <span id="error-text">Could not inspect server. Check the link or code and try again.</span>
+      </div>
+
+      <!-- Results Area -->
+      <div id="inspector-result" class="hidden space-y-6">
+
+        <!-- HERO: Server Header & Identity -->
+        <div class="bg-discord-card border border-white/5 rounded-2xl overflow-hidden shadow-2xl relative">
+          <div id="server-header-bg" class="h-48 w-full bg-discord-sidebar bg-cover bg-center relative p-3"></div>
+          
+          <div class="px-6 pb-6 relative">
+            <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between -mt-16 gap-4 mb-4">
+              <!-- Server Icon -->
+              <div class="relative">
+                <img id="server-icon-img" src="" alt="Server Icon" class="w-28 h-28 rounded-2xl border-4 border-discord-card shadow-lg bg-discord-input object-cover" />
+              </div>
+
+              <!-- Member & Online Stats -->
+              <div class="flex flex-wrap gap-2 text-xs">
+                <div class="bg-discord-input px-3 py-2 rounded-xl border border-white/5 text-discord-green font-medium flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-discord-green inline-block shadow-[0_0_8px_#23A55A]"></span>
+                  <span id="online-count">--</span> Online
+                </div>
+                <div class="bg-discord-input px-3 py-2 rounded-xl border border-white/5 text-discord-textMuted font-medium flex items-center gap-2">
+                  <i class="fa-solid fa-users text-xs"></i>
+                  <span id="total-count" class="text-white font-semibold">--</span> Total Members
+                </div>
+              </div>
+            </div>
+
+            <!-- Server Title & About -->
+            <div class="space-y-2">
+              <h2 id="server-name" class="text-2xl font-bold text-white leading-tight flex items-center gap-2">--</h2>
+              <p id="server-description" class="text-sm text-discord-textMuted max-w-3xl leading-relaxed">--</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- METRICS GRID -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+          <!-- Card 1: Server Age & Identity -->
+          <div class="bg-discord-card border border-white/5 rounded-2xl p-5 space-y-3 shadow-xl">
+            <div class="flex items-center gap-2 text-discord-blurple text-xs font-bold uppercase tracking-wider">
+              <i class="fa-solid fa-calendar-day"></i> Server Creation & ID
+            </div>
+            <div class="space-y-2 text-xs">
+              <div class="bg-discord-input p-3 rounded-xl border border-white/5 space-y-1">
+                <span class="text-discord-textMuted block text-[10px] uppercase font-bold tracking-wider">Created On</span>
+                <span id="server-created-date" class="font-semibold text-white">--</span>
+              </div>
+              <div class="bg-discord-input p-3 rounded-xl border border-white/5 space-y-1">
+                <span class="text-discord-textMuted block text-[10px] uppercase font-bold tracking-wider">Server Snowflake ID</span>
+                <span id="server-id-display" class="font-mono text-gray-300 select-all block truncate">--</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Security & Boost Settings -->
+          <div class="bg-discord-card border border-white/5 rounded-2xl p-5 space-y-3 shadow-xl">
+            <div class="flex items-center gap-2 text-discord-blurple text-xs font-bold uppercase tracking-wider">
+              <i class="fa-solid fa-shield-halved"></i> Security & Boost
+            </div>
+            <div class="space-y-2 text-xs">
+              <div class="bg-discord-input p-3 rounded-xl border border-white/5 space-y-1">
+                <span class="text-discord-textMuted block text-[10px] uppercase font-bold tracking-wider">Verification Requirement</span>
+                <span id="verification-level" class="font-semibold text-white">--</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <div class="bg-discord-input p-3 rounded-xl border border-white/5 space-y-1">
+                  <span class="text-discord-textMuted block text-[10px] uppercase font-bold tracking-wider">Boost Tier</span>
+                  <span id="boost-tier" class="font-semibold text-white">--</span>
+                </div>
+                <div class="bg-discord-input p-3 rounded-xl border border-white/5 space-y-1">
+                  <span class="text-discord-textMuted block text-[10px] uppercase font-bold tracking-wider">Content Filter</span>
+                  <span id="nsfw-rating" class="font-semibold text-white">--</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Invite Link & Inviter -->
+          <div class="bg-discord-card border border-white/5 rounded-2xl p-5 space-y-3 shadow-xl">
+            <div class="flex items-center gap-2 text-discord-blurple text-xs font-bold uppercase tracking-wider">
+              <i class="fa-solid fa-link"></i> Entry Point Details
+            </div>
+            <div class="space-y-2 text-xs">
+              <div class="bg-discord-input p-3 rounded-xl border border-white/5 space-y-1">
+                <span class="text-discord-textMuted block text-[10px] uppercase font-bold tracking-wider">Landing Channel</span>
+                <span id="target-channel" class="font-semibold text-white flex items-center gap-1.5 truncate">--</span>
+              </div>
+              <div class="bg-discord-input p-3 rounded-xl border border-white/5 space-y-1">
+                <span class="text-discord-textMuted block text-[10px] uppercase font-bold tracking-wider">Invite Created By</span>
+                <div id="inviter-container" class="font-semibold text-white flex items-center gap-2 mt-0.5 truncate">--</div>
+              </div>
+              <div class="bg-discord-input p-3 rounded-xl border border-white/5 space-y-1">
+                <span class="text-discord-textMuted block text-[10px] uppercase font-bold tracking-wider">Invite Expiration</span>
+                <span id="invite-expiration" class="font-semibold text-white">--</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- FEATURES & PERKS -->
+        <div class="bg-discord-card border border-white/5 rounded-2xl p-5 space-y-3 shadow-xl">
+          <div class="flex items-center gap-2 text-discord-blurple text-xs font-bold uppercase tracking-wider">
+            <i class="fa-solid fa-tags"></i> Active Community Perks & Features
+          </div>
+          <div id="server-features-container" class="flex flex-wrap gap-2 text-xs">
+            <!-- Feature Badges -->
+          </div>
+        </div>
+
+        <!-- MEDIA ASSET DOWNLOADS -->
+        <div class="bg-discord-card border border-white/5 rounded-2xl p-6 space-y-4 shadow-xl">
+          <div class="flex items-center gap-2 text-base font-bold">
+            <i class="fa-solid fa-download text-discord-blurple"></i> Download Server Branding Assets
+          </div>
+          <div id="asset-downloads-container" class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+            <!-- Download Buttons -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SEO Content & Guide Section -->
+    <section class="bg-discord-card border border-white/5 rounded-2xl p-6 sm:p-8 space-y-4 shadow-xl mt-12 max-w-4xl mx-auto w-full">
+      <h2 class="text-xl font-bold text-white flex items-center gap-2.5">
+        <i class="fa-solid fa-circle-info text-discord-blurple"></i> About Discord Server Inspector
+      </h2>
+      <div class="text-discord-textMuted text-sm space-y-3 leading-relaxed">
+        <p>
+          The Discord Server Inspector is a powerful utility tool designed to let you analyze public metadata and statistics of any Discord community before joining. By inputting a simple invite link, vanity URL, or code, you can discover hidden server metrics.
+        </p>
+        <p>
+          Check server creation dates calculated via snowflakes, verify security requirements, analyze boost tiers, and easily download branding assets like server icons, banners, and splashes directly from Discord's CDN.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-discord-sidebar border-t border-white/5 py-8 w-full mt-auto">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-discord-textMuted">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-white text-base">DCTools.org</span>
+        <span>• Free Web Utilities</span>
+      </div>
+      <div>
+        © 2026 DCTools.org. Not affiliated with Discord Inc.
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/utils.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script>
+    // ⚠️ Replace with your actual Cloudflare Worker URL
+    const WORKER_URL = 'https://dctools-api.canadamaikk.workers.dev/';
+
+    function snowflakeToDate(id) {
+      if (!id) return null;
+      try {
+        const epoch = 1420070400000n;
+        const timestamp = (BigInt(id) >> 22n) + epoch;
+        return new Date(Number(timestamp));
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function extractInviteCode(input) {
+      if (!input) return '';
+      input = input.trim();
+      const match = input.match(/(?:discord\.gg\/|discord\.com\/invite\/)([a-zA-Z0-9-]+)/i);
+      if (match && match[1]) return match[1];
+      return input.replace(/^https?:\/\//, '').replace(/^discord\.gg\//, '').replace(/\/$/, '').split('?')[0];
+    }
+
+    function getVerificationBadge(features) {
+      if (!Array.isArray(features)) return '';
+      if (features.includes('PARTNERED')) {
+        return '<i class="fa-solid fa-handshake text-discord-blurple" title="Discord Partnered Server"></i>';
+      }
+      if (features.includes('VERIFIED')) {
+        return '<i class="fa-solid fa-badge-check text-discord-green" title="Verified Server"></i>';
+      }
+      return '';
+    }
+
+    function getVerificationLevelLabel(level) {
+      if (level === undefined || level === null) return 'Unknown';
+      const levels = {
+        0: 'None (Unrestricted)',
+        1: 'Low (Verified Email)',
+        2: 'Medium (Registered >5 min)',
+        3: 'High (Member >10 min)',
+        4: 'Highest (Verified Phone)'
+      };
+      return levels[level] || `Level ${level}`;
+    }
+
+    function getBoostTierLabel(tier) {
+      if (tier === undefined || tier === null) return 'Level 0';
+      const tiers = {
+        0: 'Level 0 (No Boosts)',
+        1: 'Level 1 🚀',
+        2: 'Level 2 🚀🚀',
+        3: 'Level 3 💎'
+      };
+      return tiers[tier] || `Level ${tier}`;
+    }
+
+    function getNsfwRatingLabel(level) {
+      if (level === undefined || level === null) return 'Default';
+      const ratings = {
+        0: 'Default',
+        1: 'Explicit Content',
+        2: 'Safe',
+        3: 'Age Restricted (18+)'
+      };
+      return ratings[level] || 'Default';
+    }
+
+    function getChannelTypeIcon(type) {
+      switch (type) {
+        case 2: return '<i class="fa-solid fa-volume-high text-discord-textMuted"></i>';
+        case 13: return '<i class="fa-solid fa-podcast text-discord-textMuted"></i>';
+        case 15: return '<i class="fa-solid fa-comments text-discord-textMuted"></i>';
+        default: return '<i class="fa-solid fa-hashtag text-discord-textMuted"></i>';
+      }
+    }
+
+    async function inspectServer() {
+      const rawInput = document.getElementById('server-input').value;
+      const code = extractInviteCode(rawInput);
+
+      const spinner = document.getElementById('loading-spinner');
+      const errorBox = document.getElementById('error-message');
+      const resultBox = document.getElementById('inspector-result');
+
+      errorBox.classList.add('hidden');
+      resultBox.classList.add('hidden');
+
+      if (!code) {
+        document.getElementById('error-text').innerText = 'Please enter a valid server invite link, vanity URL, or code.';
+        errorBox.classList.remove('hidden');
+        return;
+      }
+
+      spinner.classList.remove('hidden');
+
+      try {
+        const res = await fetch(`${WORKER_URL}?invite=${encodeURIComponent(code)}`);
+        const data = await res.json();
+
+        if (!res.ok || !data || (!data.guild && !data.channel)) {
+          throw new Error(data.message || 'Server not found or invite code has expired.');
+        }
+
+        displayInspectResults(data);
+      } catch (err) {
+        console.error("Server Inspector Error:", err);
+        document.getElementById('error-text').innerText = err.message || 'Could not retrieve server metadata.';
+        errorBox.classList.remove('hidden');
+      } finally {
+        spinner.classList.add('hidden');
+      }
+    }
+
+    function displayInspectResults(data) {
+      try {
+        const guild = data.guild || {};
+
+        // Identity & Description
+        document.getElementById('server-name').innerHTML = `${guild.name || 'Discord Group / Direct Server'} ${getVerificationBadge(guild.features)}`;
+        document.getElementById('server-description').innerText = guild.description || 'No public description configured for this server.';
+        document.getElementById('server-id-display').innerText = guild.id || 'N/A';
+
+        // Online & Member Counts
+        const onlineCount = data.approximate_presence_count;
+        const totalCount = data.approximate_member_count;
+        document.getElementById('online-count').innerText = typeof onlineCount === 'number' ? onlineCount.toLocaleString() : 'N/A';
+        document.getElementById('total-count').innerText = typeof totalCount === 'number' ? totalCount.toLocaleString() : 'N/A';
+
+        // Server Creation Date & Age
+        if (guild.id) {
+          const createdDate = snowflakeToDate(guild.id);
+          if (createdDate) {
+            const dateStr = createdDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            const yearsOld = ((new Date() - createdDate) / (1000 * 60 * 60 * 24 * 365.25)).toFixed(1);
+            document.getElementById('server-created-date').innerText = `${dateStr} (~${yearsOld} yrs old)`;
+          } else {
+            document.getElementById('server-created-date').innerText = 'Unknown';
+          }
+        } else {
+          document.getElementById('server-created-date').innerText = 'N/A';
+        }
+
+        // Security & Level Settings
+        document.getElementById('verification-level').innerText = getVerificationLevelLabel(guild.verification_level);
+        document.getElementById('boost-tier').innerText = getBoostTierLabel(guild.premium_tier);
+        document.getElementById('nsfw-rating').innerText = getNsfwRatingLabel(guild.nsfw_level);
+
+        // Landing Channel
+        if (data.channel && typeof data.channel === 'object') {
+          document.getElementById('target-channel').innerHTML = `${getChannelTypeIcon(data.channel.type)} ${data.channel.name || 'Unnamed Channel'}`;
+        } else {
+          document.getElementById('target-channel').innerText = 'Default System Channel';
+        }
+
+        // Inviter Info
+        const inviterEl = document.getElementById('inviter-container');
+        if (data.inviter && typeof data.inviter === 'object') {
+          const avatarUrl = data.inviter.avatar 
+            ? `https://cdn.discordapp.com/avatars/${data.inviter.id}/${data.inviter.avatar}.png?size=64` 
+            : 'https://cdn.discordapp.com/embed/avatars/0.png';
+          
+          inviterEl.innerHTML = `
+            <img src="${avatarUrl}" class="w-5 h-5 rounded-full object-cover shrink-0" />
+            <span class="truncate">${data.inviter.global_name || data.inviter.username || 'Unknown User'}</span>
+            <span class="text-discord-textMuted text-[10px] shrink-0">(@${data.inviter.username || 'unknown'})</span>
+          `;
+        } else {
+          inviterEl.innerHTML = `<span class="text-discord-textMuted font-normal">Server Vanity / Permanent Link</span>`;
+        }
+
+        // Link Expiration
+        if (data.expires_at) {
+          const expDate = new Date(data.expires_at);
+          document.getElementById('invite-expiration').innerText = expDate.toLocaleString();
+        } else {
+          document.getElementById('invite-expiration').innerHTML = `<span class="text-discord-green font-semibold">Never Expires</span>`;
+        }
+
+        // Server Icon
+        const iconImg = document.getElementById('server-icon-img');
+        const iconUrl = (guild.id && guild.icon) ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png?size=512` : null;
+        iconImg.src = iconUrl || 'https://cdn.discordapp.com/embed/avatars/0.png';
+
+        // Header Banner / Splash
+        const headerBg = document.getElementById('server-header-bg');
+        const bannerUrl = (guild.id && guild.banner) ? `https://cdn.discordapp.com/banners/${guild.id}/${guild.banner}.png?size=1024` : null;
+        const splashUrl = (guild.id && guild.splash) ? `https://cdn.discordapp.com/splashes/${guild.id}/${guild.splash}.png?size=1024` : null;
+        
+        const headerAsset = bannerUrl || splashUrl;
+        if (headerAsset) {
+          headerBg.style.backgroundImage = `url('${headerAsset}')`;
+        } else {
+          headerBg.style.backgroundImage = 'none';
+          headerBg.style.backgroundColor = '#1E1F22';
+        }
+
+        // Features Badges
+        const featuresContainer = document.getElementById('server-features-container');
+        if (Array.isArray(guild.features) && guild.features.length > 0) {
+          featuresContainer.innerHTML = guild.features.map(f => `
+            <span class="bg-discord-input px-2.5 py-1.5 rounded-lg border border-white/5 text-discord-textMuted font-mono text-[11px]">
+              ${String(f).toLowerCase().replace(/_/g, ' ')}
+            </span>
+          `).join('');
+        } else {
+          featuresContainer.innerHTML = `<span class="text-discord-textMuted text-xs">Standard Community Features</span>`;
+        }
+
+        // Asset Downloads
+        const assetContainer = document.getElementById('asset-downloads-container');
+        let assetButtons = [];
+
+        if (iconUrl) {
+          assetButtons.push(`<a href="${iconUrl}" target="_blank" class="bg-discord-input hover:bg-discord-hover px-4 py-3 rounded-xl border border-white/5 text-white transition flex items-center justify-center gap-2 font-semibold"><i class="fa-solid fa-image text-discord-blurple"></i> Download Icon</a>`);
+        }
+        if (bannerUrl) {
+          assetButtons.push(`<a href="${bannerUrl}" target="_blank" class="bg-discord-input hover:bg-discord-hover px-4 py-3 rounded-xl border border-white/5 text-white transition flex items-center justify-center gap-2 font-semibold"><i class="fa-solid fa-panorama text-discord-blurple"></i> Download Banner</a>`);
+        }
+        if (splashUrl) {
+          assetButtons.push(`<a href="${splashUrl}" target="_blank" class="bg-discord-input hover:bg-discord-hover px-4 py-3 rounded-xl border border-white/5 text-white transition flex items-center justify-center gap-2 font-semibold"><i class="fa-solid fa-photo-film text-discord-blurple"></i> Download Splash</a>`);
+        }
+
+        assetContainer.innerHTML = assetButtons.length > 0 ? assetButtons.join('') : `<span class="text-discord-textMuted text-xs">No downloadable custom branding assets found.</span>`;
+
+        // Reveal Results Box
+        document.getElementById('inspector-result').classList.remove('hidden');
+      } catch (renderError) {
+        console.error("Rendering failed:", renderError);
+      }
+    }
+  </script>
+</body>
+</html>

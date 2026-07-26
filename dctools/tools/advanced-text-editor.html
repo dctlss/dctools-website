@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-discord-darkest">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Core SEO Meta Tags -->
+  <title>Advanced Text Editor For Discord - DCTools.org</title>
+  <meta name="description" content="Type formatted text visually with interactive toggles or copy clean Discord Markdown in real time easily." />
+  <meta name="keywords" content="discord text editor, discord markdown maker, discord bold text, discord spoilers generator, discord pro text editor" />
+  <meta name="author" content="DCTools.org" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://dctools.org/tools/advanced-text-editor.html" />
+
+  <!-- Theme & Mobile Integration -->
+  <meta name="theme-color" content="#18191c" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://dctools.org/tools/advanced-text-editor.html" />
+  <meta property="og:title" content="Advanced Text Editor For Discord - DCTools.org" />
+  <meta property="og:description" content="Type formatted text visually with interactive toggles or copy clean Discord Markdown in real time easily." />
+  <meta property="og:site_name" content="DCTools.org" />
+
+  <!-- Twitter Card Data -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Advanced Text Editor For Discord - DCTools.org" />
+  <meta name="twitter:description" content="Type formatted text visually with interactive toggles or copy clean Discord Markdown in real time easily." />
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Advanced Text Editor For Discord",
+    "url": "https://dctools.org/tools/advanced-text-editor.html",
+    "description": "Type formatted text visually with interactive toggles or copy clean Discord Markdown in real time.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "All"
+  }
+  </script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            discord: {
+              blurple: '#5865F2',
+              blurpleHover: '#4752C4',
+              green: '#23A55A',
+              red: '#DA373C',
+              darkest: '#111214',
+              sidebar: '#1E1F22',
+              card: '#2B2D31',
+              cardHover: '#35373C',
+              hover: '#35373C',
+              chatBg: '#313338',
+              input: '#1E1F22',
+              textMuted: '#949BA4'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Strict Base CSS Fallbacks (Prevents Any White Screen Glitch) */
+    html, body {
+      background-color: #111214 !important;
+      color: #ffffff !important;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ContentEditable Editor Placeholder */
+    #visual-editor:empty:before {
+      content: attr(data-placeholder);
+      color: #949BA4;
+      pointer-events: none;
+      display: block;
+    }
+
+    /* Editor Formatting Nodes */
+    #visual-editor h1 { font-size: 1.5rem; font-weight: 700; color: #ffffff; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 4px; margin: 4px 0; }
+    #visual-editor h2 { font-size: 1.25rem; font-weight: 700; color: #ffffff; margin: 4px 0; }
+    #visual-editor h3 { font-size: 1rem; font-weight: 700; color: #ffffff; margin: 4px 0; }
+    #visual-editor blockquote { border-left: 4px solid #4e5058; padding-left: 10px; margin: 4px 0; color: #dbdee1; }
+    #visual-editor code { background: #1e1f22; padding: 2px 5px; border-radius: 4px; font-family: monospace; font-size: 0.85em; color: #22c55e; }
+    #visual-editor pre { background: #1e1f22; padding: 10px; border-radius: 6px; font-family: monospace; font-size: 0.85em; color: #22c55e; white-space: pre-wrap; margin: 6px 0; }
+
+    /* Custom Spoilers & Subtext Elements */
+    .editor-spoiler, .discord-spoiler {
+      background-color: #111214;
+      color: transparent;
+      border-radius: 3px;
+      padding: 0 4px;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.2s, color 0.2s;
+    }
+    .discord-spoiler.revealed, .editor-spoiler:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+      color: #dbdee1;
+    }
+    .editor-subtext, .discord-subtext {
+      font-size: 0.75rem;
+      color: #949ba4;
+      display: inline-block;
+      margin-top: 2px;
+    }
+    .discord-blockquote {
+      border-left: 4px solid #4e5058;
+      padding-left: 12px;
+      margin: 4px 0;
+      color: #dbdee1;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1e1f22;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2b2d31;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #35373c;
+    }
+  </style>
+</head>
+<body class="bg-discord-darkest text-white font-sans min-h-full flex flex-col antialiased selection:bg-discord-blurple selection:text-white">
+
+  <!-- Header Navigation -->
+  <header class="bg-discord-sidebar border-b border-white/5 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="../index.html" class="flex items-center space-x-3.5 group" aria-label="DCTools.org Home">
+        <div class="w-11 h-11 bg-discord-blurple group-hover:bg-discord-blurpleHover rounded-xl flex items-center justify-center text-white text-xl shadow-lg transition duration-200">
+          <i class="fa-solid fa-screwdriver-wrench"></i>
+        </div>
+        <span class="text-2xl font-bold tracking-tight text-white">DCTools.org</span>
+      </a>
+
+      <!-- Navigation Link Back to Home -->
+      <a href="../index.html" class="text-sm font-semibold text-discord-textMuted hover:text-white transition flex items-center gap-2 bg-discord-input px-4 py-2.5 rounded-xl border border-white/5 hover:border-white/10">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>All Tools</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Content Body -->
+  <main class="max-w-7xl mx-auto px-6 py-10 flex-1 w-full space-y-8">
+
+    <!-- Hero Section -->
+    <div class="text-center max-w-2xl mx-auto space-y-3">
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
+        Advanced Text Editor <span class="text-discord-blurple">For Discord</span>
+      </h1>
+      <p class="text-discord-textMuted text-base sm:text-lg leading-relaxed">
+        Type formatted text visually with interactive toggles or copy clean Discord Markdown in real time.
+      </p>
+    </div>
+
+    <!-- Main Workspace Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+      <!-- LEFT: Visual Editor Column -->
+      <div class="bg-discord-card border border-white/5 rounded-2xl p-6 shadow-xl flex flex-col space-y-4">
+        
+        <!-- Interactive Toolbar -->
+        <div class="flex flex-wrap gap-1.5 p-2 bg-discord-input rounded-xl border border-white/5 select-none">
+          
+          <!-- Standard Inline Formatting -->
+          <button id="btn-bold" onclick="toggleInline('bold')" title="Toggle Bold (Ctrl+B)" class="p-2 text-discord-textMuted hover:bg-discord-hover rounded-lg transition w-8 h-8 flex items-center justify-center">
+            <i class="fa-solid fa-bold text-xs"></i>
+          </button>
+          <button id="btn-italic" onclick="toggleInline('italic')" title="Toggle Italic (Ctrl+I)" class="p-2 text-discord-textMuted hover:bg-discord-hover rounded-lg transition w-8 h-8 flex items-center justify-center">
+            <i class="fa-solid fa-italic text-xs"></i>
+          </button>
+          <button id="btn-underline" onclick="toggleInline('underline')" title="Toggle Underline (Ctrl+U)" class="p-2 text-discord-textMuted hover:bg-discord-hover rounded-lg transition w-8 h-8 flex items-center justify-center">
+            <i class="fa-solid fa-underline text-xs"></i>
+          </button>
+          <button id="btn-strike" onclick="toggleInline('strikethrough')" title="Toggle Strikethrough" class="p-2 text-discord-textMuted hover:bg-discord-hover rounded-lg transition w-8 h-8 flex items-center justify-center">
+            <i class="fa-solid fa-strikethrough text-xs"></i>
+          </button>
+          <button id="btn-spoiler" onclick="toggleCustomSpan('spoiler')" title="Toggle Spoiler (||text||)" class="p-2 text-discord-textMuted hover:bg-discord-hover rounded-lg transition w-8 h-8 flex items-center justify-center">
+            <i class="fa-solid fa-eye-slash text-xs"></i>
+          </button>
+
+          <div class="w-px h-6 bg-white/10 my-auto mx-1"></div>
+
+          <!-- Headers -->
+          <button id="btn-h1" onclick="toggleBlock('h1')" title="Toggle Header 1 (# text)" class="px-2 text-discord-textMuted hover:bg-discord-hover rounded-lg transition text-xs font-bold flex items-center justify-center">
+            H1
+          </button>
+          <button id="btn-h2" onclick="toggleBlock('h2')" title="Toggle Header 2 (## text)" class="px-2 text-discord-textMuted hover:bg-discord-hover rounded-lg transition text-xs font-bold flex items-center justify-center">
+            H2
+          </button>
+          <button id="btn-h3" onclick="toggleBlock('h3')" title="Toggle Header 3 (### text)" class="px-2 text-discord-textMuted hover:bg-discord-hover rounded-lg transition text-xs font-bold flex items-center justify-center">
+            H3
+          </button>
+
+          <div class="w-px h-6 bg-white/10 my-auto mx-1"></div>
+
+          <!-- Structural Controls -->
+          <button id="btn-subtext" onclick="toggleCustomSpan('subtext')" title="Toggle Subtext (-# text)" class="p-2 text-discord-textMuted hover:bg-discord-hover rounded-lg transition w-8 h-8 flex items-center justify-center">
+            <i class="fa-solid fa-font text-xs"></i>
+          </button>
+          <button id="btn-quote" onclick="toggleBlock('blockquote')" title="Toggle Blockquote (> text)" class="p-2 text-discord-textMuted hover:bg-discord-hover rounded-lg transition w-8 h-8 flex items-center justify-center">
+            <i class="fa-solid fa-quote-left text-xs"></i>
+          </button>
+          <button id="btn-code" onclick="toggleBlock('pre')" title="Toggle Code Block (```code```)" class="p-2 text-discord-textMuted hover:bg-discord-hover rounded-lg transition w-8 h-8 flex items-center justify-center">
+            <i class="fa-solid fa-code text-xs"></i>
+          </button>
+          <button onclick="insertTimestamp()" title="Insert Dynamic Timestamp" class="p-2 text-discord-textMuted hover:bg-discord-hover rounded-lg transition w-8 h-8 flex items-center justify-center">
+            <i class="fa-regular fa-clock text-xs"></i>
+          </button>
+
+          <div class="w-px h-6 bg-white/10 my-auto mx-1"></div>
+
+          <!-- Clear Button -->
+          <button onclick="clearEditor()" title="Clear All Text" class="p-2 hover:bg-discord-red/20 text-discord-red rounded-lg transition ml-auto w-8 h-8 flex items-center justify-center">
+            <i class="fa-solid fa-trash-can text-xs"></i>
+          </button>
+        </div>
+
+        <!-- Visual ContentEditable Area -->
+        <div 
+          id="visual-editor" 
+          contenteditable="true" 
+          data-placeholder="Start typing your message here... Click any button (Bold, Spoiler, Header) to toggle formatting on and off cleanly!" 
+          class="w-full min-h-[260px] bg-discord-input border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-discord-blurple transition text-sm leading-relaxed overflow-y-auto"
+        ></div>
+
+        <!-- Raw Markdown Generated Output -->
+        <div class="space-y-1.5">
+          <div class="flex items-center justify-between text-xs text-discord-textMuted">
+            <span class="font-bold uppercase tracking-wider text-[11px]"><i class="fa-solid fa-code text-discord-blurple mr-1"></i> Copyable Discord Markdown:</span>
+            <button onclick="copyMarkdownText()" class="text-discord-blurple hover:underline text-xs flex items-center gap-1">
+              <i class="fa-regular fa-copy"></i> Copy Markdown
+            </button>
+          </div>
+          <pre id="raw-markdown-output" class="bg-discord-sidebar border border-white/5 rounded-xl p-3 text-xs font-mono text-emerald-400 overflow-x-auto whitespace-pre-wrap select-all min-h-[50px] max-h-[120px]"></pre>
+        </div>
+
+        <!-- Character & Word Counters -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2 border-t border-white/5">
+          <div class="flex items-center gap-4 text-xs font-mono">
+            <div>
+              <span class="text-discord-textMuted">Chars:</span> 
+              <span id="char-count" class="text-white font-bold">0</span>
+              <span id="nitro-badge" class="hidden text-[10px] bg-discord-blurple/20 text-discord-blurple px-1.5 py-0.5 rounded font-sans font-semibold ml-1">NITRO</span>
+            </div>
+            <div>
+              <span class="text-discord-textMuted">Words:</span> 
+              <span id="word-count" class="text-white font-bold">0</span>
+            </div>
+          </div>
+
+          <button onclick="copyMarkdownText()" class="w-full sm:w-auto bg-discord-blurple hover:bg-discord-blurpleHover text-white px-5 py-2.5 rounded-xl font-semibold text-xs transition flex items-center justify-center gap-2 shadow-md">
+            <i class="fa-regular fa-copy"></i> Copy Discord Text
+          </button>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: Live Discord Preview Column -->
+      <div class="bg-discord-card border border-white/5 rounded-2xl p-6 shadow-xl flex flex-col space-y-4">
+        <div class="flex items-center justify-between border-b border-white/5 pb-3">
+          <h3 class="font-bold text-xs text-discord-textMuted uppercase tracking-wider flex items-center gap-2">
+            <i class="fa-solid fa-eye text-discord-blurple"></i> Live Discord Message Preview
+          </h3>
+          <span class="text-[11px] text-discord-textMuted bg-discord-input px-2.5 py-1 rounded-lg border border-white/5">
+            Click spoilers to reveal
+          </span>
+        </div>
+
+        <!-- Simulated Discord Chat Container -->
+        <div class="bg-discord-sidebar border border-white/5 rounded-xl p-4 flex-grow min-h-[350px]">
+          <div class="flex items-start gap-4">
+            <!-- Simulated Avatar -->
+            <div class="w-10 h-10 rounded-full bg-discord-blurple flex items-center justify-center text-white font-bold shrink-0 mt-0.5 shadow">
+              <i class="fa-brands fa-discord text-lg"></i>
+            </div>
+
+            <!-- Message Body -->
+            <div class="flex-1 space-y-1 overflow-hidden">
+              <div class="flex items-center gap-2">
+                <span class="font-semibold text-sm text-white hover:underline cursor-pointer">DCTools.org</span>
+                <span class="bg-discord-blurple text-white text-[9px] font-bold px-1 py-0.2 rounded uppercase">BOT</span>
+                <span class="text-[11px] text-discord-textMuted ml-1">Today at 12:00 PM</span>
+              </div>
+
+              <!-- Realtime Rendered Output -->
+              <div id="discord-rendered-output" class="text-sm text-gray-200 leading-relaxed break-words space-y-1">
+                <p class="text-discord-textMuted italic text-xs">Your message preview will render here in real-time...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-discord-input/50 p-3 rounded-xl border border-white/5 text-xs text-discord-textMuted leading-relaxed">
+          <i class="fa-solid fa-circle-check text-discord-green mr-1"></i>
+          <strong>Flawless Controls:</strong> Toggle formatting on and off cleanly, view real-time Discord preview, and copy formatted markdown with one click.
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-discord-sidebar border-t border-white/5 py-8 w-full mt-auto">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-discord-textMuted">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-white text-base">DCTools.org</span>
+        <span>• Free Web Utilities</span>
+      </div>
+      <div>
+        © 2026 DCTools.org. Not affiliated with Discord Inc.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div id="toast" role="status" aria-live="polite" class="fixed bottom-6 right-6 bg-discord-green text-white px-5 py-3.5 rounded-xl shadow-2xl text-base transition duration-300 transform translate-y-20 opacity-0 pointer-events-none flex items-center gap-3 z-50">
+    <i class="fa-solid fa-check" aria-hidden="true"></i> <span id="toast-message">Copied to clipboard!</span>
+  </div>
+
+  <script>
+    // Safe Copy to Clipboard & Toast Helper
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-message');
+      if (!toast) return;
+      if (toastMsg) toastMsg.innerText = message;
+      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+      }, 3000);
+    }
+
+    function copyToClipboard(text, successMsg = 'Copied to clipboard!') {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => showToast(successMsg));
+      } else {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          showToast(successMsg);
+        } catch (err) {
+          console.error('Copy failed:', err);
+        }
+        document.body.removeChild(textarea);
+      }
+    }
+
+    const editor = document.getElementById('visual-editor');
+    const rawOutput = document.getElementById('raw-markdown-output');
+    const preview = document.getElementById('discord-rendered-output');
+
+    // Toggle Basic Inline Styles
+    function toggleInline(command) {
+      editor.focus();
+      const sel = window.getSelection();
+      if (!sel.rangeCount) return;
+
+      const range = sel.getRangeAt(0);
+      const execCmd = command === 'strikethrough' ? 'strikeThrough' : command;
+      const isStateActive = document.queryCommandState(execCmd);
+
+      if (isStateActive && range.collapsed) {
+        let node = sel.anchorNode;
+        if (node.nodeType === 3) node = node.parentNode;
+        const formatTag = node.closest('b, strong, i, em, u, s, strike, del');
+
+        if (formatTag) {
+          const space = document.createTextNode('\u200B');
+          if (formatTag.nextSibling) {
+            formatTag.parentNode.insertBefore(space, formatTag.nextSibling);
+          } else {
+            formatTag.parentNode.appendChild(space);
+          }
+          const newRange = document.createRange();
+          newRange.setStartAfter(space);
+          newRange.setEndAfter(space);
+          sel.removeAllRanges();
+          sel.addRange(newRange);
+          updateToolbarState();
+          processEditorContent();
+          return;
+        }
+      }
+
+      document.execCommand(execCmd, false, null);
+      updateToolbarState();
+      processEditorContent();
+    }
+
+    // Toggle Custom Spans (Spoilers & Subtext)
+    function toggleCustomSpan(type) {
+      editor.focus();
+      const sel = window.getSelection();
+      if (!sel.rangeCount) return;
+
+      const range = sel.getRangeAt(0);
+      let node = sel.anchorNode;
+      if (node.nodeType === 3) node = node.parentNode;
+
+      const activeSpan = node ? node.closest(`[data-type="${type}"]`) : null;
+
+      if (activeSpan) {
+        if (range.collapsed) {
+          const space = document.createTextNode('\u200B');
+          if (activeSpan.nextSibling) {
+            activeSpan.parentNode.insertBefore(space, activeSpan.nextSibling);
+          } else {
+            activeSpan.parentNode.appendChild(space);
+          }
+          const newRange = document.createRange();
+          newRange.setStartAfter(space);
+          newRange.setEndAfter(space);
+          sel.removeAllRanges();
+          sel.addRange(newRange);
+        } else {
+          const contents = range.extractContents();
+          range.insertNode(contents);
+          if (!activeSpan.textContent.replace(/\u200B/g, '').trim()) {
+            activeSpan.remove();
+          }
+        }
+      } else {
+        if (range.collapsed) {
+          const span = document.createElement('span');
+          span.className = type === 'spoiler' ? 'editor-spoiler' : 'editor-subtext';
+          span.dataset.type = type;
+          const zeroWidth = document.createTextNode('\u200B');
+          span.appendChild(zeroWidth);
+
+          range.insertNode(span);
+
+          const newRange = document.createRange();
+          newRange.setStart(zeroWidth, 1);
+          newRange.setEnd(zeroWidth, 1);
+          sel.removeAllRanges();
+          sel.addRange(newRange);
+        } else {
+          const span = document.createElement('span');
+          span.className = type === 'spoiler' ? 'editor-spoiler' : 'editor-subtext';
+          span.dataset.type = type;
+          try {
+            range.surroundContents(span);
+          } catch (e) {
+            const fragment = range.extractContents();
+            span.appendChild(fragment);
+            range.insertNode(span);
+          }
+        }
+      }
+
+      updateToolbarState();
+      processEditorContent();
+    }
+
+    // Robust Toggle for Block Styles (Headers, Blockquotes, Code Block)
+    function toggleBlock(tag) {
+      editor.focus();
+      const sel = window.getSelection();
+      if (!sel.rangeCount) return;
+
+      let node = sel.anchorNode;
+      if (node.nodeType === 3) node = node.parentNode;
+
+      const targetTag = tag.toUpperCase();
+      const parentBlock = node ? node.closest('h1, h2, h3, blockquote, pre') : null;
+
+      if (parentBlock && parentBlock.tagName === targetTag) {
+        const div = document.createElement('div');
+        div.innerHTML = parentBlock.innerHTML || '<br>';
+        parentBlock.parentNode.replaceChild(div, parentBlock);
+
+        const range = document.createRange();
+        range.selectNodeContents(div);
+        range.collapse(false);
+        sel.removeAllRanges();
+        sel.addRange(range);
+      } else if (parentBlock) {
+        const newBlock = document.createElement(tag);
+        newBlock.innerHTML = parentBlock.innerHTML || '<br>';
+        parentBlock.parentNode.replaceChild(newBlock, parentBlock);
+
+        const range = document.createRange();
+        range.selectNodeContents(newBlock);
+        range.collapse(false);
+        sel.removeAllRanges();
+        sel.addRange(range);
+      } else {
+        document.execCommand('formatBlock', false, `<${tag}>`);
+      }
+
+      updateToolbarState();
+      processEditorContent();
+    }
+
+    function insertTimestamp() {
+      editor.focus();
+      const unixNow = Math.floor(Date.now() / 1000);
+      const span = document.createElement('span');
+      span.className = 'bg-discord-input text-discord-blurple px-1.5 py-0.5 rounded text-xs border border-white/10 font-mono';
+      span.dataset.timestamp = unixNow;
+      span.textContent = `<t:${unixNow}:F>`;
+
+      const sel = window.getSelection();
+      if (sel.rangeCount) {
+        const range = sel.getRangeAt(0);
+        range.insertNode(span);
+        range.setStartAfter(span);
+        range.setEndAfter(span);
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+      processEditorContent();
+    }
+
+    function clearEditor() {
+      editor.innerHTML = '';
+      processEditorContent();
+      updateToolbarState();
+      editor.focus();
+    }
+
+    // Update Toolbar Highlight States
+    function updateToolbarState() {
+      toggleBtnState('btn-bold', document.queryCommandState('bold'));
+      toggleBtnState('btn-italic', document.queryCommandState('italic'));
+      toggleBtnState('btn-underline', document.queryCommandState('underline'));
+      toggleBtnState('btn-strike', document.queryCommandState('strikeThrough'));
+
+      const sel = window.getSelection();
+      if (!sel.rangeCount) return;
+      let node = sel.anchorNode;
+      if (!node) return;
+      if (node.nodeType === 3) node = node.parentNode;
+
+      if (!node || !editor.contains(node)) return;
+
+      const parentBlock = node.closest('h1, h2, h3, blockquote, pre');
+      const blockTag = parentBlock ? parentBlock.tagName.toLowerCase() : '';
+
+      toggleBtnState('btn-h1', blockTag === 'h1');
+      toggleBtnState('btn-h2', blockTag === 'h2');
+      toggleBtnState('btn-h3', blockTag === 'h3');
+      toggleBtnState('btn-quote', blockTag === 'blockquote');
+      toggleBtnState('btn-code', blockTag === 'pre');
+
+      toggleBtnState('btn-spoiler', !!node.closest('[data-type="spoiler"]'));
+      toggleBtnState('btn-subtext', !!node.closest('[data-type="subtext"]'));
+    }
+
+    function toggleBtnState(id, isActive) {
+      const btn = document.getElementById(id);
+      if (!btn) return;
+      if (isActive) {
+        btn.classList.add('bg-discord-blurple', 'text-white');
+        btn.classList.remove('text-discord-textMuted');
+      } else {
+        btn.classList.remove('bg-discord-blurple', 'text-white');
+        btn.classList.add('text-discord-textMuted');
+      }
+    }
+
+    // DOM to Markdown Converter
+    function convertDOMToMarkdown(node) {
+      let markdown = '';
+      for (let child of node.childNodes) {
+        if (child.nodeType === Node.TEXT_NODE) {
+          markdown += child.nodeValue;
+        } else if (child.nodeType === Node.ELEMENT_NODE) {
+          const tag = child.tagName.toLowerCase();
+
+          const isBold = tag === 'b' || tag === 'strong' || child.style.fontWeight === 'bold';
+          const isItalic = tag === 'i' || tag === 'em' || child.style.fontStyle === 'italic';
+          const isUnderline = tag === 'u' || child.style.textDecoration.includes('underline');
+          const isStrike = tag === 's' || tag === 'strike' || tag === 'del' || child.style.textDecoration.includes('line-through');
+
+          let inner = convertDOMToMarkdown(child);
+
+          if (child.dataset && child.dataset.timestamp) {
+            markdown += `<t:${child.dataset.timestamp}:F>`;
+          } else if (child.dataset && child.dataset.type === 'spoiler') {
+            markdown += `||${inner}||`;
+          } else if (child.dataset && child.dataset.type === 'subtext') {
+            markdown += `\n-# ${inner}\n`;
+          } else if (tag === 'h1') {
+            markdown += `\n# ${inner}\n`;
+          } else if (tag === 'h2') {
+            markdown += `\n## ${inner}\n`;
+          } else if (tag === 'h3') {
+            markdown += `\n### ${inner}\n`;
+          } else if (tag === 'blockquote') {
+            markdown += `\n> ${inner}\n`;
+          } else if (tag === 'pre') {
+            markdown += `\n\`\`\`\n${inner.trim()}\n\`\`\`\n`;
+          } else if (tag === 'code') {
+            markdown += `\`${inner}\``;
+          } else if (tag === 'div' || tag === 'p') {
+            markdown += `\n${inner}`;
+          } else if (tag === 'br') {
+            markdown += '\n';
+          } else {
+            if (isBold) inner = `**${inner}**`;
+            if (isItalic) inner = `*${inner}*`;
+            if (isUnderline) inner = `__${inner}__`;
+            if (isStrike) inner = `~~${inner}~~`;
+            markdown += inner;
+          }
+        }
+      }
+      return markdown.replace(/\u200B/g, '').replace(/\n\n+/g, '\n').trim();
+    }
+
+    // Protected Markdown Preview Parser (Fixed Regex Collisions)
+    function parseDiscordMarkdown(raw) {
+      if (!raw.trim()) {
+        return '<p class="text-discord-textMuted italic text-xs">Your message preview will render here in real-time...</p>';
+      }
+
+      let html = raw;
+      html = html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+      const codeBlocks = [];
+
+      // Extract & Protect Multiline Code Blocks using Safe Symbol Token @@@
+      html = html.replace(/```(?:[a-zA-Z0-9]+)?\s*([\s\S]*?)```/g, function(match, code) {
+        const placeholder = `@@@CODEBLOCK_${codeBlocks.length}@@@`;
+        codeBlocks.push(`<pre class="bg-discord-input p-3 rounded-lg border border-white/5 font-mono text-xs text-emerald-400 my-2 overflow-x-auto whitespace-pre-wrap">${code.trim()}</pre>`);
+        return placeholder;
+      });
+
+      // Extract & Protect Inline Code using Safe Symbol Token @@@
+      html = html.replace(/`([^`]+)`/g, function(match, code) {
+        const placeholder = `@@@CODEBLOCK_${codeBlocks.length}@@@`;
+        codeBlocks.push(`<code class="bg-discord-input px-1.5 py-0.5 rounded font-mono text-xs text-emerald-400 border border-white/5">${code}</code>`);
+        return placeholder;
+      });
+
+      // Standard Markdown Syntax
+      html = html.replace(/\|\|([\s\S]*?)\|\|/g, '<span class="discord-spoiler" onclick="this.classList.toggle(\'revealed\')">$1</span>');
+      html = html.replace(/^# (.*$)/gim, '<h1 class="text-xl font-bold text-white border-b border-white/10 pb-1 my-1">$1</h1>');
+      html = html.replace(/^## (.*$)/gim, '<h2 class="text-lg font-bold text-white my-1">$1</h2>');
+      html = html.replace(/^### (.*$)/gim, '<h3 class="text-base font-bold text-white my-1">$1</h3>');
+      html = html.replace(/^-# (.*$)/gim, '<span class="discord-subtext">$1</span>');
+      html = html.replace(/^&gt; (.*$)/gim, '<div class="discord-blockquote">$1</div>');
+      html = html.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-white">$1</strong>');
+      html = html.replace(/__(.*?)__/g, '<u class="underline">$1</u>');
+      html = html.replace(/\*(.*?)\*/g, '<em class="italic">$1</em>');
+      html = html.replace(/~~(.*?)~~/g, '<del class="line-through text-gray-400">$1</del>');
+      
+      html = html.replace(/&lt;t:(\d+)(?::([a-zA-R]))?&gt;/g, function(match, ts) {
+        const date = new Date(parseInt(ts) * 1000);
+        return `<span class="bg-discord-input px-1.5 py-0.5 rounded text-discord-blurple font-medium text-xs border border-white/5"><i class="fa-regular fa-clock mr-1"></i>${date.toLocaleString()}</span>`;
+      });
+
+      html = html.replace(/\n/g, '<br>');
+
+      // Restore Protected Code Blocks safely
+      codeBlocks.forEach((block, index) => {
+        html = html.replace(`@@@CODEBLOCK_${index}@@@`, block);
+      });
+
+      return html;
+    }
+
+    function processEditorContent() {
+      const markdown = convertDOMToMarkdown(editor);
+      rawOutput.textContent = markdown || '/* Markdown will generate here... */';
+      preview.innerHTML = parseDiscordMarkdown(markdown);
+
+      // Counters
+      const charLength = markdown.length;
+      document.getElementById('char-count').innerText = charLength.toLocaleString();
+
+      const words = markdown.trim() ? markdown.trim().split(/\s+/).length : 0;
+      document.getElementById('word-count').innerText = words.toLocaleString();
+
+      // Nitro Indicator
+      const nitroBadge = document.getElementById('nitro-badge');
+      const charCounter = document.getElementById('char-count');
+
+      if (charLength > 2000 && charLength <= 4000) {
+        nitroBadge.classList.remove('hidden');
+        charCounter.className = 'text-amber-400 font-bold';
+      } else if (charLength > 4000) {
+        nitroBadge.classList.remove('hidden');
+        charCounter.className = 'text-discord-red font-bold';
+      } else {
+        nitroBadge.classList.add('hidden');
+        charCounter.className = 'text-white font-bold';
+      }
+    }
+
+    function copyMarkdownText() {
+      const markdown = convertDOMToMarkdown(editor);
+      if (!markdown.trim()) return;
+      copyToClipboard(markdown, 'Discord Markdown copied to clipboard!');
+    }
+
+    // Event Listeners
+    editor.addEventListener('keyup', () => { updateToolbarState(); processEditorContent(); });
+    editor.addEventListener('mouseup', () => { updateToolbarState(); });
+    editor.addEventListener('input', () => { processEditorContent(); });
+    document.addEventListener('selectionchange', () => {
+      if (document.activeElement === editor) {
+        updateToolbarState();
+      }
+    });
+
+    // Initial Setup
+    processEditorContent();
+  </script>
+</body>
+</html>

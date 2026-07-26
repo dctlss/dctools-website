@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-discord-darkest">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Core SEO Meta Tags -->
+  <title>Server Icon & Asset Downloader For Discord - DCTools.org</title>
+  <meta name="description" content="Download high-resolution Discord server icons, banners, invite splashes, and live member statistics using any Discord server invite link or vanity code instantly for free." />
+  <meta name="keywords" content="discord server icon downloader, download discord server icon, discord server banner downloader, discord server splash grabber, discord pfp downloader, discord server assets, discord invite checker" />
+  <meta name="author" content="DCTools.org" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <link rel="canonical" href="https://dctools.org/tools/server-icon-downloader.html" />
+
+  <!-- Theme & Mobile Integration -->
+  <meta name="theme-color" content="#18191c" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://dctools.org/tools/server-icon-downloader.html" />
+  <meta property="og:title" content="Server Icon & Asset Downloader For Discord - DCTools.org" />
+  <meta property="og:description" content="Download high-resolution Discord server icons, banners, invite splashes, and member statistics using any Discord server invite link or code." />
+  <meta property="og:site_name" content="DCTools.org" />
+  <meta property="og:image" content="https://dctools.org/assets/images/og-server-icon-downloader.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Discord Server Icon and Asset Downloader Preview - DCTools.org" />
+
+  <!-- Twitter Card Data -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@DCToolsOrg" />
+  <meta name="twitter:title" content="Server Icon & Asset Downloader For Discord - DCTools.org" />
+  <meta name="twitter:description" content="Download high-resolution Discord server icons, banners, invite splashes, and member statistics using any Discord server invite link or code." />
+  <meta name="twitter:image" content="https://dctools.org/assets/images/og-server-icon-downloader.png" />
+
+  <!-- Structured Data (JSON-LD) - WebApplication & BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "@id": "https://dctools.org/tools/server-icon-downloader.html#webapp",
+        "name": "Server Icon & Asset Downloader For Discord",
+        "url": "https://dctools.org/tools/server-icon-downloader.html",
+        "description": "Download high-resolution Discord server icons, banners, invite splashes, and live member statistics using any Discord server invite link or vanity code.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "All",
+        "browserRequirements": "Requires JavaScript. Requires a modern web browser.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "author": {
+          "@type": "Organization",
+          "name": "DCTools.org",
+          "url": "https://dctools.org"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://dctools.org/index.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Server Icon Downloader",
+            "item": "https://dctools.org/tools/server-icon-downloader.html"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../assets/css/custom.css" />
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            discord: {
+              blurple: '#5865F2',
+              blurpleHover: '#4752C4',
+              green: '#23A55A',
+              red: '#DA373C',
+              darkest: '#111214',
+              sidebar: '#1E1F22',
+              card: '#2B2D31',
+              cardHover: '#35373C',
+              chatBg: '#313338',
+              input: '#1E1F22',
+              textMuted: '#949BA4'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1e1f22;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2b2d31;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #35373c;
+    }
+  </style>
+</head>
+<body class="bg-discord-darkest text-white font-sans min-h-full flex flex-col antialiased selection:bg-discord-blurple selection:text-white">
+
+  <!-- Header Navigation -->
+  <header class="bg-discord-sidebar border-b border-white/5 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="../index.html" class="flex items-center space-x-3.5 group" aria-label="DCTools.org Home">
+        <div class="w-11 h-11 bg-discord-blurple group-hover:bg-discord-blurpleHover rounded-xl flex items-center justify-center text-white text-xl shadow-lg transition duration-200">
+          <i class="fa-solid fa-screwdriver-wrench"></i>
+        </div>
+        <span class="text-2xl font-bold tracking-tight text-white">DCTools.org</span>
+      </a>
+
+      <!-- Navigation Link Back to Home -->
+      <a href="../index.html" class="text-sm font-semibold text-discord-textMuted hover:text-white transition flex items-center gap-2 bg-discord-input px-4 py-2.5 rounded-xl border border-white/5 hover:border-white/10">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>All Tools</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Content Body -->
+  <main class="max-w-7xl mx-auto px-6 py-10 flex-1 w-full space-y-8">
+
+    <!-- Hero Section -->
+    <div class="text-center max-w-3xl mx-auto space-y-3">
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
+        Server Icon & Asset Downloader <span class="text-discord-blurple">For Discord</span>
+      </h1>
+      <p class="text-discord-textMuted text-base sm:text-lg leading-relaxed">
+        Enter any Discord Server Invite Link or vanity code to view and download high-resolution server icons, banners, splashes, and live member stats.
+      </p>
+    </div>
+
+    <!-- 2-Column Tool Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      
+      <!-- Left Controls Panel (5 Cols) -->
+      <div class="lg:col-span-5 space-y-6">
+        
+        <!-- Input Form Card -->
+        <div class="bg-discord-card border border-white/5 rounded-2xl p-6 shadow-xl space-y-5">
+          <h2 class="text-xs font-bold uppercase tracking-wider text-discord-textMuted flex items-center gap-2">
+            <i class="fa-solid fa-magnifying-glass text-discord-blurple"></i> Lookup Server
+          </h2>
+
+          <div class="space-y-4">
+            <div>
+              <label for="invite-input" class="block text-xs font-bold uppercase tracking-wider text-discord-textMuted mb-2">
+                Discord Invite Link or Vanity Code
+              </label>
+              <input 
+                type="text" 
+                id="invite-input" 
+                placeholder="e.g. https://discord.gg/minecraft or minecraft" 
+                class="w-full bg-discord-input border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-discord-blurple transition font-mono placeholder:text-discord-textMuted/60"
+                onkeydown="if(event.key === 'Enter') loadServerData()"
+              />
+            </div>
+
+            <button 
+              onclick="loadServerData()" 
+              id="search-btn"
+              class="w-full bg-discord-blurple hover:bg-discord-blurpleHover text-white py-3.5 px-6 rounded-xl font-bold text-sm sm:text-base transition flex items-center justify-center gap-2 shadow-xl"
+            >
+              <i class="fa-solid fa-server"></i> Find Server Assets
+            </button>
+          </div>
+
+          <!-- Accepted Links Guide Toggle -->
+          <details class="text-xs text-discord-textMuted pt-2 border-t border-white/5">
+            <summary class="cursor-pointer hover:text-white transition select-none flex items-center gap-1.5 font-semibold">
+              <i class="fa-solid fa-circle-info text-discord-blurple"></i> What link formats work?
+            </summary>
+            <div class="mt-3 pl-3 border-l-2 border-discord-blurple/50 space-y-1.5 text-discord-textMuted leading-relaxed">
+              <p>You can paste full invite URLs like <strong>https://discord.gg/sc3p7k</strong> or <strong>https://discord.com/invite/code</strong>.</p>
+              <p>Raw vanity invite codes like <strong>minecraft</strong> or <strong>valheim</strong> also work directly.</p>
+            </div>
+          </details>
+        </div>
+
+        <!-- Loading State Card -->
+        <div id="loading-spinner" class="hidden bg-discord-card border border-white/5 rounded-2xl p-8 text-center space-y-3 shadow-xl">
+          <i class="fa-solid fa-circle-notch fa-spin text-4xl text-discord-blurple"></i>
+          <p class="text-xs font-semibold text-discord-textMuted uppercase tracking-wider">Fetching server assets from Discord...</p>
+        </div>
+
+        <!-- Error Notice State -->
+        <div id="error-message" class="hidden bg-discord-red/10 border border-discord-red/30 rounded-2xl p-5 text-discord-red text-sm flex items-start gap-3 shadow-xl">
+          <i class="fa-solid fa-triangle-exclamation text-lg shrink-0 mt-0.5"></i>
+          <span id="error-text" class="leading-relaxed">Invalid or expired server invite link.</span>
+        </div>
+
+      </div>
+
+      <!-- Right Result Preview Panel (7 Cols) -->
+      <div class="lg:col-span-7 space-y-6">
+        
+        <!-- Empty Placeholder Card -->
+        <div id="server-placeholder" class="bg-discord-card border border-white/5 rounded-2xl p-12 text-center text-discord-textMuted space-y-3 shadow-xl">
+          <div class="w-16 h-16 bg-discord-input rounded-2xl flex items-center justify-center mx-auto text-discord-textMuted text-2xl">
+            <i class="fa-solid fa-server"></i>
+          </div>
+          <h3 class="text-base font-bold text-white">No Server Loaded</h3>
+          <p class="text-xs text-discord-textMuted max-w-sm mx-auto">
+            Enter a Discord invite link or vanity code on the left and click "Find Server Assets" to view and download icons, banners, and splashes.
+          </p>
+        </div>
+
+        <!-- Server Result Container -->
+        <div id="server-result" class="hidden space-y-6">
+
+          <!-- Server Overview Card -->
+          <div class="bg-discord-card border border-white/5 rounded-2xl overflow-hidden shadow-2xl relative">
+            
+            <!-- Banner / Splash Header -->
+            <div id="server-banner-bg" class="h-36 w-full bg-discord-sidebar bg-cover bg-center relative p-3 flex justify-end items-start"></div>
+            
+            <div class="px-6 pb-6 relative">
+              <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between -mt-14 gap-4 mb-4">
+                <!-- Server Icon Preview -->
+                <div class="relative">
+                  <img id="server-icon-img" src="" alt="Discord Server Icon Preview and Asset Downloader" class="w-28 h-28 rounded-2xl border-4 border-discord-card shadow-xl bg-discord-input object-cover" />
+                </div>
+
+                <!-- Member Stats Badges -->
+                <div class="flex flex-wrap gap-2 text-xs">
+                  <div id="online-count-badge" class="bg-discord-input px-3.5 py-2 rounded-xl border border-white/5 text-discord-green font-semibold flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-discord-green inline-block"></span>
+                    <span id="online-count">0</span> Online
+                  </div>
+                  <div class="bg-discord-input px-3.5 py-2 rounded-xl border border-white/5 text-discord-textMuted font-semibold flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-discord-textMuted inline-block"></span>
+                    <span id="total-count" class="text-white">0</span> Members
+                  </div>
+                </div>
+              </div>
+
+              <!-- Server Name & Description -->
+              <div class="space-y-1">
+                <h2 id="server-name" class="text-2xl font-bold text-white leading-tight">--</h2>
+                <p id="server-description" class="text-sm text-discord-textMuted leading-relaxed max-w-xl">--</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Assets Download Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- Server Icon Download Options Card -->
+            <div class="bg-discord-card border border-white/5 rounded-2xl p-6 space-y-5 shadow-xl">
+              <h3 class="text-xs font-bold uppercase tracking-wider text-discord-textMuted flex items-center gap-2">
+                <i class="fa-solid fa-image text-discord-blurple"></i> Server Icon Downloads
+              </h3>
+
+              <div id="icon-controls" class="space-y-4">
+                <div>
+                  <label for="icon-size" class="block text-xs font-bold uppercase tracking-wider text-discord-textMuted mb-2">
+                    Select Resolution
+                  </label>
+                  <select id="icon-size" onchange="updateIconUrls()" class="w-full bg-discord-input border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-discord-blurple transition">
+                    <option value="128">128 x 128 px</option>
+                    <option value="256">256 x 256 px</option>
+                    <option value="512" selected>512 x 512 px (Standard)</option>
+                    <option value="1024">1024 x 1024 px</option>
+                    <option value="2048">2048 x 2048 px</option>
+                    <option value="4096">4096 x 4096 px (Ultra HD)</option>
+                  </select>
+                </div>
+
+                <!-- Format Download Buttons -->
+                <div class="grid grid-cols-3 gap-2.5" id="icon-format-buttons">
+                  <!-- Dynamically populated buttons -->
+                </div>
+
+                <!-- Copy Icon Link -->
+                <button onclick="copyIconUrl()" class="w-full bg-discord-input hover:border-white/20 border border-white/10 text-discord-textMuted hover:text-white py-3 px-4 rounded-xl text-xs font-semibold transition flex items-center justify-center gap-2">
+                  <i class="fa-regular fa-copy"></i> Copy Direct Icon URL
+                </button>
+              </div>
+            </div>
+
+            <!-- Banner & Splash Assets Options Card -->
+            <div class="bg-discord-card border border-white/5 rounded-2xl p-6 space-y-5 shadow-xl">
+              <h3 class="text-xs font-bold uppercase tracking-wider text-discord-textMuted flex items-center gap-2">
+                <i class="fa-solid fa-panorama text-discord-blurple"></i> Banner & Background Assets
+              </h3>
+
+              <div id="banner-assets-container" class="space-y-3">
+                <!-- Dynamically populated banner/splash download buttons -->
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-discord-sidebar border-t border-white/5 py-8 w-full mt-auto">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-discord-textMuted">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-white text-base">DCTools.org</span>
+        <span>• Free Web Utilities</span>
+      </div>
+      <div>
+        © 2026 DCTools.org. Not affiliated with Discord Inc.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div id="toast" role="status" aria-live="polite" class="fixed bottom-6 right-6 bg-discord-green text-white px-5 py-3.5 rounded-xl shadow-2xl text-base transition duration-300 transform translate-y-20 opacity-0 pointer-events-none flex items-center gap-3 z-50">
+    <i class="fa-solid fa-check" aria-hidden="true"></i> <span id="toast-message">Action successful!</span>
+  </div>
+
+  <script>
+    const WORKER_URL = 'https://dctools-api.canadamaikk.workers.dev/';
+    let currentGuild = null;
+
+    // Pull out raw invite code from any input format
+    function extractInviteCode(input) {
+      if (!input) return '';
+      input = input.trim();
+      const match = input.match(/(?:discord\.gg\/|discord\.com\/invite\/)([a-zA-Z0-9-]+)/i);
+      if (match && match[1]) return match[1];
+      return input.replace(/^https?:\/\//, '').replace(/^discord\.gg\//, '').replace(/\/$/, '').split('?')[0];
+    }
+
+    async function loadServerData() {
+      const rawInput = document.getElementById('invite-input').value;
+      const code = extractInviteCode(rawInput);
+
+      const spinner = document.getElementById('loading-spinner');
+      const errorBox = document.getElementById('error-message');
+      const resultBox = document.getElementById('server-result');
+      const placeholderBox = document.getElementById('server-placeholder');
+
+      errorBox.classList.add('hidden');
+      resultBox.classList.add('hidden');
+
+      if (!code) {
+        document.getElementById('error-text').innerText = 'Please enter a valid Discord Server Invite Link or code.';
+        errorBox.classList.remove('hidden');
+        placeholderBox.classList.remove('hidden');
+        return;
+      }
+
+      placeholderBox.classList.add('hidden');
+      spinner.classList.remove('hidden');
+
+      try {
+        const res = await fetch(`${WORKER_URL}?invite=${encodeURIComponent(code)}`);
+        const data = await res.json();
+
+        if (!res.ok || !data.guild) {
+          throw new Error(data.message || 'Server not found or invite expired.');
+        }
+
+        currentGuild = data.guild;
+        displayServerData(data);
+      } catch (err) {
+        document.getElementById('error-text').innerText = err.message || 'Could not retrieve server information.';
+        errorBox.classList.remove('hidden');
+        placeholderBox.classList.remove('hidden');
+      } finally {
+        spinner.classList.add('hidden');
+      }
+    }
+
+    function displayServerData(data) {
+      const guild = data.guild;
+
+      document.getElementById('server-name').innerText = guild.name;
+      document.getElementById('server-description').innerText = guild.description || 'No public description set for this server.';
+      
+      document.getElementById('online-count').innerText = (data.approximate_presence_count || 0).toLocaleString();
+      document.getElementById('total-count').innerText = (data.approximate_member_count || 0).toLocaleString();
+
+      // Render Server Icon
+      updateIconUrls();
+
+      // Render Banner / Splash Background Header
+      const bannerBg = document.getElementById('server-banner-bg');
+      const assetsContainer = document.getElementById('banner-assets-container');
+
+      let bannerUrl = null;
+      let assetButtonsHtml = '';
+
+      if (guild.banner) {
+        bannerUrl = `https://cdn.discordapp.com/banners/${guild.id}/${guild.banner}.png?size=1024`;
+        assetButtonsHtml += `
+          <div class="p-3.5 bg-discord-input rounded-xl border border-white/5 space-y-2">
+            <span class="text-xs font-bold text-white block uppercase tracking-wider">Server Banner</span>
+            <div class="grid grid-cols-2 gap-2">
+              <a href="https://cdn.discordapp.com/banners/${guild.id}/${guild.banner}.png?size=2048" target="_blank" download class="bg-discord-blurple hover:bg-discord-blurpleHover text-white px-3 py-2 rounded-xl text-xs font-bold text-center transition">PNG (HD)</a>
+              <a href="https://cdn.discordapp.com/banners/${guild.id}/${guild.banner}.webp?size=2048" target="_blank" download class="bg-discord-input hover:border-white/20 border border-white/10 text-white px-3 py-2 rounded-xl text-xs font-bold text-center transition">WEBP</a>
+            </div>
+          </div>
+        `;
+      }
+
+      if (guild.splash) {
+        if (!bannerUrl) bannerUrl = `https://cdn.discordapp.com/splashes/${guild.id}/${guild.splash}.png?size=1024`;
+        assetButtonsHtml += `
+          <div class="p-3.5 bg-discord-input rounded-xl border border-white/5 space-y-2">
+            <span class="text-xs font-bold text-white block uppercase tracking-wider">Invite Splash Background</span>
+            <div class="grid grid-cols-2 gap-2">
+              <a href="https://cdn.discordapp.com/splashes/${guild.id}/${guild.splash}.png?size=2048" target="_blank" download class="bg-discord-blurple hover:bg-discord-blurpleHover text-white px-3 py-2 rounded-xl text-xs font-bold text-center transition">PNG (HD)</a>
+              <a href="https://cdn.discordapp.com/splashes/${guild.id}/${guild.splash}.webp?size=2048" target="_blank" download class="bg-discord-input hover:border-white/20 border border-white/10 text-white px-3 py-2 rounded-xl text-xs font-bold text-center transition">WEBP</a>
+            </div>
+          </div>
+        `;
+      }
+
+      if (bannerUrl) {
+        bannerBg.style.backgroundImage = `url('${bannerUrl}')`;
+      } else {
+        bannerBg.style.backgroundImage = 'none';
+        bannerBg.style.backgroundColor = '#1E1F22';
+      }
+
+      if (!assetButtonsHtml) {
+        assetsContainer.innerHTML = '<p class="text-xs text-discord-textMuted py-2">This server has no custom banner or splash background set.</p>';
+      } else {
+        assetsContainer.innerHTML = assetButtonsHtml;
+      }
+
+      document.getElementById('server-result').classList.remove('hidden');
+    }
+
+    function updateIconUrls() {
+      if (!currentGuild) return;
+      const size = document.getElementById('icon-size').value;
+      const iconImg = document.getElementById('server-icon-img');
+      const formatBtns = document.getElementById('icon-format-buttons');
+
+      if (!currentGuild.icon) {
+        iconImg.src = 'https://cdn.discordapp.com/embed/avatars/0.png';
+        formatBtns.innerHTML = '<p class="col-span-3 text-xs text-discord-textMuted py-2">This server uses a default icon.</p>';
+        return;
+      }
+
+      const baseUrl = `https://cdn.discordapp.com/icons/${currentGuild.id}/${currentGuild.icon}`;
+      iconImg.src = `${baseUrl}.png?size=${size}`;
+
+      formatBtns.innerHTML = `
+        <a href="${baseUrl}.png?size=${size}" target="_blank" download class="bg-discord-blurple hover:bg-discord-blurpleHover text-white px-3 py-2.5 rounded-xl text-xs font-bold transition text-center">PNG</a>
+        <a href="${baseUrl}.webp?size=${size}" target="_blank" download class="bg-discord-input hover:border-white/20 border border-white/10 text-white px-3 py-2.5 rounded-xl text-xs font-bold transition text-center">WEBP</a>
+        <a href="${baseUrl}.jpg?size=${size}" target="_blank" download class="bg-discord-input hover:border-white/20 border border-white/10 text-white px-3 py-2.5 rounded-xl text-xs font-bold transition text-center">JPG</a>
+      `;
+    }
+
+    function copyIconUrl() {
+      const iconImg = document.getElementById('server-icon-img');
+      if (iconImg && iconImg.src) {
+        navigator.clipboard.writeText(iconImg.src).then(() => {
+          showToast('Server Icon URL copied to clipboard!');
+        }).catch(() => {
+          showToast('Failed to copy URL');
+        });
+      }
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-message');
+      if (toastMsg) toastMsg.innerText = message;
+      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+      }, 3000);
+    }
+  </script>
+</body>
+</html>

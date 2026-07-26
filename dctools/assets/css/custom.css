@@ -1,0 +1,28 @@
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #1e1f22;
+}
+::-webkit-scrollbar-thumb {
+  background: #2b2d31;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #35373c;
+}
+
+/* Ensure smooth card transitions */
+.tool-card {
+  will-change: transform, border-color;
+}
+
+/* Line clamping for tool card descriptions */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

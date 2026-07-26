@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-discord-darkest">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Core SEO Meta Tags -->
+  <title>Chat Mockup Generator For Discord - DCTools.org</title>
+  <meta name="description" content="Create realistic, custom Discord chat screenshots and fake conversation images for memes, announcements, and server showcases." />
+  <meta name="keywords" content="discord chat mockup generator, discord screenshot generator, fake discord message generator, discord chat creator, discord screenshot maker, discord generator" />
+  <meta name="author" content="DCTools.org" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://dctools.org/tools/chat-mockup-generator.html" />
+
+  <!-- Theme & Mobile Integration -->
+  <meta name="theme-color" content="#18191c" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://dctools.org/tools/chat-mockup-generator.html" />
+  <meta property="og:title" content="Chat Mockup Generator For Discord - DCTools.org" />
+  <meta property="og:description" content="Create realistic, custom Discord chat screenshots and fake conversation images for memes, announcements, and server showcases." />
+  <meta property="og:site_name" content="DCTools.org" />
+
+  <!-- Twitter Card Data -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Chat Mockup Generator For Discord - DCTools.org" />
+  <meta name="twitter:description" content="Create realistic, custom Discord chat screenshots and fake conversation images for memes, announcements, and server showcases." />
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Chat Mockup Generator For Discord",
+    "url": "https://dctools.org/tools/chat-mockup-generator.html",
+    "description": "Create realistic, custom Discord chat screenshots and fake conversation images.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "All"
+  }
+  </script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../assets/css/custom.css" />
+  <!-- html2canvas for Exporting PNG -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            discord: {
+              blurple: '#5865F2',
+              blurpleHover: '#4752C4',
+              green: '#23A55A',
+              red: '#DA373C',
+              darkest: '#111214',
+              sidebar: '#1E1F22',
+              card: '#2B2D31',
+              cardHover: '#35373C',
+              chatBg: '#313338',
+              input: '#1E1F22',
+              textMuted: '#949BA4'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1e1f22;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2b2d31;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #35373c;
+    }
+  </style>
+</head>
+<body class="bg-discord-darkest text-white font-sans min-h-full flex flex-col antialiased selection:bg-discord-blurple selection:text-white">
+
+  <!-- Header Navigation -->
+  <header class="bg-discord-sidebar border-b border-white/5 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="../index.html" class="flex items-center space-x-3.5 group" aria-label="DCTools.org Home">
+        <div class="w-11 h-11 bg-discord-blurple group-hover:bg-discord-blurpleHover rounded-xl flex items-center justify-center text-white text-xl shadow-lg transition duration-200">
+          <i class="fa-solid fa-screwdriver-wrench"></i>
+        </div>
+        <span class="text-2xl font-bold tracking-tight text-white">DCTools.org</span>
+      </a>
+
+      <!-- Navigation Link Back to Home -->
+      <a href="../index.html" class="text-sm font-semibold text-discord-textMuted hover:text-white transition flex items-center gap-2 bg-discord-input px-4 py-2.5 rounded-xl border border-white/5 hover:border-white/10">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>All Tools</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Content Body -->
+  <main class="max-w-7xl mx-auto px-6 py-10 flex-1 w-full space-y-8">
+
+    <!-- Hero Section -->
+    <div class="text-center max-w-3xl mx-auto space-y-3">
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
+        Chat Mockup Generator <span class="text-discord-blurple">For Discord</span>
+      </h1>
+      <p class="text-discord-textMuted text-base sm:text-lg leading-relaxed">
+        Create realistic Discord chat screenshots for memes, announcements, bot guides, or server showcases with live preview and PNG export.
+      </p>
+    </div>
+
+    <!-- 2-Column Tool Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      
+      <!-- Left Controls Panel (7 Cols) -->
+      <div class="lg:col-span-7 space-y-6">
+        
+        <!-- Add Message Form Card -->
+        <div class="bg-discord-card border border-white/5 rounded-2xl p-6 shadow-xl space-y-5">
+          <h2 class="text-xs font-bold uppercase tracking-wider text-discord-textMuted flex items-center gap-2">
+            <i class="fa-solid fa-message text-discord-blurple"></i> Add Chat Message
+          </h2>
+
+          <div class="space-y-4">
+            <!-- User Info -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="in-username" class="block text-xs font-bold uppercase tracking-wider text-discord-textMuted mb-2">Username</label>
+                <input id="in-username" type="text" value="Wumpus" class="w-full bg-discord-input border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-discord-blurple transition placeholder:text-discord-textMuted/60">
+              </div>
+              <div>
+                <label for="in-color" class="block text-xs font-bold uppercase tracking-wider text-discord-textMuted mb-2">Role Color</label>
+                <div class="flex items-center gap-3">
+                  <input id="in-color" type="color" value="#5865F2" class="h-11 w-14 rounded-xl bg-discord-input border border-white/10 cursor-pointer p-1">
+                  <span id="color-hex" class="text-xs font-mono text-discord-textMuted">#5865F2</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Avatar & Badges -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="in-avatar" class="block text-xs font-bold uppercase tracking-wider text-discord-textMuted mb-2">Avatar Image URL</label>
+                <input id="in-avatar" type="url" value="https://cdn.discordapp.com/embed/avatars/0.png" class="w-full bg-discord-input border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-discord-blurple transition font-mono placeholder:text-discord-textMuted/60">
+              </div>
+              <div>
+                <label for="in-time" class="block text-xs font-bold uppercase tracking-wider text-discord-textMuted mb-2">Timestamp</label>
+                <input id="in-time" type="text" value="Today at 4:20 PM" class="w-full bg-discord-input border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-discord-blurple transition placeholder:text-discord-textMuted/60">
+              </div>
+            </div>
+
+            <!-- Toggles -->
+            <div class="flex items-center gap-6 pt-1">
+              <label class="flex items-center gap-2 cursor-pointer text-discord-textMuted select-none">
+                <input id="in-isbot" type="checkbox" checked class="rounded bg-discord-input border-white/10 text-discord-blurple focus:ring-0">
+                <span class="font-semibold text-xs">Bot Badge</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer text-discord-textMuted select-none">
+                <input id="in-verified" type="checkbox" checked class="rounded bg-discord-input border-white/10 text-discord-blurple focus:ring-0">
+                <span class="font-semibold text-xs">Verified Check</span>
+              </label>
+            </div>
+
+            <!-- Message Text -->
+            <div>
+              <label for="in-content" class="block text-xs font-bold uppercase tracking-wider text-discord-textMuted mb-2">Message Content</label>
+              <textarea id="in-content" rows="3" class="w-full bg-discord-input border border-white/10 rounded-xl p-4 text-sm text-white focus:outline-none focus:border-discord-blurple transition resize-y placeholder:text-discord-textMuted/60" placeholder="Type message here... Support for **bold**, *italic*, and `code`"></textarea>
+            </div>
+
+            <!-- Attachment Image URL -->
+            <div>
+              <label for="in-attachment" class="block text-xs font-bold uppercase tracking-wider text-discord-textMuted mb-2">Image Attachment URL (Optional)</label>
+              <input id="in-attachment" type="url" placeholder="https://..." class="w-full bg-discord-input border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-discord-blurple transition font-mono placeholder:text-discord-textMuted/60">
+            </div>
+
+            <button onclick="addMessage()" class="w-full bg-discord-blurple hover:bg-discord-blurpleHover text-white py-3.5 px-6 rounded-xl font-bold text-sm sm:text-base transition flex items-center justify-center gap-2 shadow-xl">
+              <i class="fa-solid fa-plus"></i> Add Message to Chat
+            </button>
+          </div>
+        </div>
+
+        <!-- Actions Panel Card -->
+        <div class="bg-discord-card border border-white/5 rounded-2xl p-6 shadow-xl space-y-4">
+          <div class="flex items-center justify-between border-b border-white/5 pb-3">
+            <h2 class="text-xs font-bold uppercase tracking-wider text-discord-textMuted flex items-center gap-2">
+              <i class="fa-solid fa-list-check text-discord-blurple"></i> Chat Actions
+            </h2>
+            <button onclick="clearChat()" class="text-xs font-semibold text-discord-red hover:opacity-80 transition flex items-center gap-1.5">
+              <i class="fa-solid fa-trash"></i> Clear All Messages
+            </button>
+          </div>
+
+          <div>
+            <button onclick="exportPNG()" class="w-full bg-discord-green hover:opacity-90 text-white py-3.5 px-6 rounded-xl font-bold text-sm sm:text-base transition flex items-center justify-center gap-2 shadow-xl">
+              <i class="fa-solid fa-download"></i> Download Chat Image (PNG)
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Discord Chat Window Preview (5 Cols) -->
+      <div class="lg:col-span-5 space-y-4">
+        <div class="sticky top-24">
+          <label class="block text-xs font-bold uppercase tracking-wider text-discord-textMuted mb-2">Live Discord Preview</label>
+          
+          <div class="bg-discord-sidebar border border-white/5 rounded-2xl overflow-hidden shadow-2xl">
+            
+            <!-- Discord Header Bar -->
+            <div class="bg-discord-sidebar border-b border-white/5 px-4 py-3 flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <i class="fa-solid fa-hashtag text-discord-textMuted text-base"></i>
+                <span class="font-bold text-sm text-white">general-chat</span>
+                <span class="text-xs text-discord-textMuted border-l border-white/10 pl-2">Welcome to the server!</span>
+              </div>
+              <div class="flex items-center gap-3 text-discord-textMuted text-xs">
+                <i class="fa-solid fa-bell hover:text-white transition cursor-pointer"></i>
+                <i class="fa-solid fa-thumbtack hover:text-white transition cursor-pointer"></i>
+                <i class="fa-solid fa-users hover:text-white transition cursor-pointer"></i>
+              </div>
+            </div>
+
+            <!-- Chat Canvas Body (Rendered for Screenshot) -->
+            <div id="chat-canvas" class="bg-discord-chatBg p-5 min-h-[450px] space-y-4">
+              <!-- Messages render here -->
+            </div>
+
+            <!-- Discord Input Mockup Bar -->
+            <div class="p-4 bg-discord-chatBg border-t border-white/5">
+              <div class="bg-[#383a40] px-4 py-3 rounded-xl flex items-center justify-between text-discord-textMuted text-xs">
+                <div class="flex items-center gap-3">
+                  <i class="fa-solid fa-circle-plus text-base hover:text-white transition cursor-pointer"></i>
+                  <span>Message #general-chat</span>
+                </div>
+                <div class="flex items-center gap-3 text-sm">
+                  <i class="fa-solid fa-gift hover:text-white transition cursor-pointer"></i>
+                  <i class="fa-solid fa-note-sticky hover:text-white transition cursor-pointer"></i>
+                  <i class="fa-solid fa-face-smile hover:text-white transition cursor-pointer"></i>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-discord-sidebar border-t border-white/5 py-8 w-full mt-auto">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-discord-textMuted">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-white text-base">DCTools.org</span>
+        <span>• Free Web Utilities</span>
+      </div>
+      <div>
+        © 2026 DCTools.org. Not affiliated with Discord Inc.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div id="toast" role="status" aria-live="polite" class="fixed bottom-6 right-6 bg-discord-green text-white px-5 py-3.5 rounded-xl shadow-2xl text-base transition duration-300 transform translate-y-20 opacity-0 pointer-events-none flex items-center gap-3 z-50">
+    <i class="fa-solid fa-check" aria-hidden="true"></i> <span id="toast-message">Action successful!</span>
+  </div>
+
+  <script>
+    let messages = [
+      {
+        id: 1,
+        username: 'Clyde Bot',
+        color: '#5865F2',
+        avatar: 'https://cdn.discordapp.com/embed/avatars/0.png',
+        timestamp: 'Today at 10:15 AM',
+        isBot: true,
+        verified: true,
+        content: 'Welcome to **DCTools.org**! Customize messages using the left panel.',
+        attachment: ''
+      },
+      {
+        id: 2,
+        username: 'Wumpus',
+        color: '#23A55A',
+        avatar: 'https://cdn.discordapp.com/embed/avatars/1.png',
+        timestamp: 'Today at 10:16 AM',
+        isBot: false,
+        verified: false,
+        content: 'This chat mockup generator looks super realistic! Perfect for server announcements.',
+        attachment: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=80'
+      }
+    ];
+
+    // Color hex input binding
+    document.getElementById('in-color').addEventListener('input', (e) => {
+      document.getElementById('color-hex').innerText = e.target.value.toUpperCase();
+    });
+
+    // Auto-check bot badge if verified check is enabled
+    document.getElementById('in-verified').addEventListener('change', (e) => {
+      if (e.target.checked) {
+        document.getElementById('in-isbot').checked = true;
+      }
+    });
+
+    function renderChat() {
+      const canvas = document.getElementById('chat-canvas');
+      
+      if (messages.length === 0) {
+        canvas.innerHTML = `
+          <div class="text-center py-16 text-discord-textMuted text-xs">
+            Chat is empty! Add a message from the panel on the left.
+          </div>
+        `;
+        return;
+      }
+
+      canvas.innerHTML = messages.map((msg, index) => {
+        const formattedContent = parseMarkdown(msg.content);
+        return `
+          <div class="flex items-start gap-3.5 hover:bg-[#2e3035] -mx-3 px-3 py-1.5 rounded transition group relative">
+            
+            <!-- Avatar -->
+            <img src="${escapeHtml(msg.avatar)}" alt="Avatar" class="w-10 h-10 rounded-full shrink-0 object-cover mt-0.5" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+
+            <!-- Message Core -->
+            <div class="flex-grow min-w-0 space-y-1">
+              
+              <!-- Author Header -->
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="font-bold text-sm" style="color: ${msg.color}">${escapeHtml(msg.username)}</span>
+                
+                ${msg.isBot ? `
+                  <span class="bg-discord-blurple text-white text-[9px] font-bold px-1.5 py-[1px] rounded flex items-center gap-1 uppercase tracking-wider leading-none">
+                    ${msg.verified ? `
+                      <svg class="w-2.5 h-2.5 text-white shrink-0" viewBox="0 0 12 9" fill="none">
+                        <path d="M10.6 0.600006L3.8 7.40001L1.4 5.00001L0 6.40001L3.8 10.2L12 2.00001L10.6 0.600006Z" fill="currentColor"/>
+                      </svg>
+                    ` : ''}
+                    <span>APP</span>
+                  </span>
+                ` : ''}
+
+                <span class="text-[11px] text-discord-textMuted ml-1">${escapeHtml(msg.timestamp)}</span>
+              </div>
+
+              <!-- Message Body -->
+              <div class="text-sm text-gray-200 leading-relaxed break-words">
+                ${formattedContent}
+              </div>
+
+              <!-- Optional Image Attachment -->
+              ${msg.attachment ? `
+                <div class="pt-1 max-w-sm">
+                  <img src="${escapeHtml(msg.attachment)}" class="rounded-lg max-h-60 object-cover border border-white/5 shadow-md" onerror="this.style.display='none'">
+                </div>
+              ` : ''}
+
+            </div>
+
+            <!-- Delete Trigger -->
+            <button onclick="removeMessage(${index})" title="Delete Message" class="opacity-0 group-hover:opacity-100 text-xs text-discord-textMuted hover:text-discord-red transition absolute right-2 top-2">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+
+          </div>
+        `;
+      }).join('');
+    }
+
+    function addMessage() {
+      const username = document.getElementById('in-username').value.trim() || 'User';
+      const color = document.getElementById('in-color').value;
+      const avatar = document.getElementById('in-avatar').value.trim() || 'https://cdn.discordapp.com/embed/avatars/0.png';
+      const timestamp = document.getElementById('in-time').value.trim() || 'Today at 12:00 PM';
+      const isBot = document.getElementById('in-isbot').checked;
+      const verified = document.getElementById('in-verified').checked;
+      const content = document.getElementById('in-content').value.trim();
+      const attachment = document.getElementById('in-attachment').value.trim();
+
+      if (!content && !attachment) {
+        showToast('Please enter message content or an image URL!');
+        return;
+      }
+
+      messages.push({
+        id: Date.now(),
+        username,
+        color,
+        avatar,
+        timestamp,
+        isBot: isBot || verified,
+        verified,
+        content,
+        attachment
+      });
+
+      renderChat();
+      document.getElementById('in-content').value = '';
+      document.getElementById('in-attachment').value = '';
+      showToast('Message added!');
+    }
+
+    function removeMessage(index) {
+      messages.splice(index, 1);
+      renderChat();
+    }
+
+    function clearChat() {
+      messages = [];
+      renderChat();
+      showToast('Cleared all chat messages');
+    }
+
+    function parseMarkdown(str) {
+      if (!str) return '';
+      let escaped = escapeHtml(str);
+      // Codeblocks
+      escaped = escaped.replace(/`([^`]+)`/g, '<code class="bg-[#1e1f22] text-xs px-1.5 py-0.5 rounded font-mono text-gray-300">$1</code>');
+      // Bold
+      escaped = escaped.replace(/\*\*([^*]+)\*\*/g, '<strong class="font-extrabold text-white">$1</strong>');
+      // Italic
+      escaped = escaped.replace(/\*([^*]+)\*/g, '<em class="italic">$1</em>');
+      // Newlines
+      escaped = escaped.replace(/\n/g, '<br>');
+      return escaped;
+    }
+
+    function exportPNG() {
+      const element = document.getElementById('chat-canvas');
+      showToast('Generating PNG image...');
+
+      html2canvas(element, {
+        backgroundColor: '#313338',
+        scale: 2,
+        useCORS: true
+      }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'discord-chat-mockup.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        showToast('Downloaded PNG!');
+      }).catch(err => {
+        console.error(err);
+        showToast('Failed to export. Check image cross-origin permissions.');
+      });
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-message');
+      if (toastMsg) toastMsg.innerText = message;
+      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+      }, 3000);
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    }
+
+    // Initialization
+    renderChat();
+  </script>
+</body>
+</html>

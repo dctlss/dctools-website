@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-discord-darkest">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Core SEO Meta Tags -->
+  <title>DCTools.org - Free Discord Utilities</title>
+  <meta name="description" content="A collection of free, fast web utilities and generators designed for everyone." />
+  <meta name="keywords" content="discord tools, discord webhook builder, discord timestamp generator, discord pfp downloader, discord chat mockup, discord markdown editor" />
+  <meta name="author" content="DCTools.org" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://dctools.org/" />
+
+  <!-- Theme & Mobile Integration -->
+  <meta name="theme-color" content="#18191c" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <!-- Open Graph / Facebook / Discord Embeds -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://dctools.org/" />
+  <meta property="og:title" content="DCTools.org - Free Discord Utilities" />
+  <meta property="og:description" content="A collection of free, fast web utilities and generators designed for everyone." />
+  <meta property="og:site_name" content="DCTools.org" />
+
+  <!-- Twitter Card Data -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="DCTools.org - Free Discord Utilities" />
+  <meta name="twitter:description" content="A collection of free, fast web utilities and generators designed for everyone." />
+
+  <!-- Structured Data (JSON-LD for Rich Search Results) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "DCTools.org",
+    "url": "https://dctools.org/",
+    "description": "A collection of free, fast web utilities and generators designed for everyone.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://dctools.org/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="./assets/css/custom.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            discord: {
+              blurple: '#5865F2',
+              blurpleHover: '#4752C4',
+              green: '#23A55A',
+              darkest: '#111214',
+              sidebar: '#1E1F22',
+              card: '#2B2D31',
+              cardHover: '#35373C',
+              input: '#1E1F22',
+              textMuted: '#949BA4'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-discord-darkest text-white font-sans min-h-full flex flex-col antialiased selection:bg-discord-blurple selection:text-white">
+
+  <!-- Header Navigation -->
+  <header class="bg-discord-sidebar border-b border-white/5 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="./index.html" class="flex items-center space-x-3.5 group" aria-label="DCTools.org Home">
+        <div class="w-11 h-11 bg-discord-blurple group-hover:bg-discord-blurpleHover rounded-xl flex items-center justify-center text-white text-xl shadow-lg transition duration-200">
+          <i class="fa-solid fa-screwdriver-wrench"></i>
+        </div>
+        <span class="text-2xl font-bold tracking-tight text-white">DCTools.org</span>
+      </a>
+
+      <!-- Desktop Search Bar -->
+      <div class="relative w-96 hidden sm:block">
+        <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-discord-textMuted text-sm" aria-hidden="true"></i>
+        <input 
+          type="search" 
+          id="search-input" 
+          placeholder="Search tools..." 
+          aria-label="Search tools"
+          class="w-full bg-discord-input text-sm text-white pl-11 pr-4 py-3 rounded-xl border border-white/5 focus:outline-none focus:border-discord-blurple transition placeholder:text-discord-textMuted"
+        />
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Body -->
+  <main class="max-w-7xl mx-auto px-6 py-12 flex-1 w-full space-y-10">
+
+    <!-- Hero Section -->
+    <div class="text-center max-w-3xl mx-auto space-y-4">
+      <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight">
+        Free <span class="text-discord-blurple">Discord</span> Utilities
+      </h1>
+      <p class="text-discord-textMuted text-base sm:text-lg leading-relaxed">
+        A collection of free, fast web utilities and generators designed for everyone.
+      </p>
+
+      <!-- Mobile Search Bar -->
+      <div class="relative w-full sm:hidden pt-3">
+        <i class="fa-solid fa-magnifying-glass absolute left-4 top-6 text-discord-textMuted text-sm" aria-hidden="true"></i>
+        <input 
+          type="search" 
+          id="mobile-search-input" 
+          placeholder="Search tools..." 
+          aria-label="Search tools mobile"
+          class="w-full bg-discord-input text-sm text-white pl-11 pr-4 py-3.5 rounded-xl border border-white/5 focus:outline-none focus:border-discord-blurple transition placeholder:text-discord-textMuted"
+        />
+      </div>
+    </div>
+
+    <!-- Active Tool Grid Container -->
+    <section aria-label="Available Tools">
+      <div id="tools-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pt-4">
+        <!-- Rendered dynamically by main.js -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-discord-sidebar border-t border-white/5 py-8 w-full mt-auto">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-discord-textMuted">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-white text-base">DCTools.org</span>
+        <span>• Free Web Utilities</span>
+      </div>
+      <div>
+        <span>Non-Profit & Zero Data Collected</span>
+      </div>
+      <div>
+        © 2026 DCTools.org. Not affiliated with Discord Inc.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div id="toast" role="status" aria-live="polite" class="fixed bottom-6 right-6 bg-discord-green text-white px-5 py-3.5 rounded-xl shadow-2xl text-base transition duration-300 transform translate-y-20 opacity-0 pointer-events-none flex items-center gap-3 z-50">
+    <i class="fa-solid fa-check" aria-hidden="true"></i> <span id="toast-message">Copied to clipboard!</span>
+  </div>
+
+  <script src="./assets/js/utils.js"></script>
+  <script src="./assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-discord-darkest">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Core SEO Meta Tags -->
+  <title>Discord User Inspector - DCTools.org</title>
+  <meta name="description" content="Inspect any Discord user or bot profile to analyze creation timestamps, badges, custom banners, avatars, and raw API metadata instantly." />
+  <meta name="keywords" content="discord user inspector, discord account creation date checker, discord snowflake id parser, inspect discord profile, discord badge checker, find discord user id" />
+  <meta name="author" content="DCTools.org" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <link rel="canonical" href="https://dctools.org/tools/user-inspector.html" />
+
+  <!-- Theme & Mobile Integration -->
+  <meta name="theme-color" content="#18191c" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://dctools.org/tools/user-inspector.html" />
+  <meta property="og:title" content="Discord User Inspector - DCTools.org" />
+  <meta property="og:description" content="Inspect any Discord user or bot profile to analyze creation timestamps, badges, custom banners, avatars, and raw API metadata instantly." />
+  <meta property="og:site_name" content="DCTools.org" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card Data -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Discord User Inspector - DCTools.org" />
+  <meta name="twitter:description" content="Inspect any Discord user or bot profile to analyze creation timestamps, badges, custom banners, avatars, and raw API metadata instantly." />
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Discord User Inspector",
+    "url": "https://dctools.org/tools/user-inspector.html",
+    "description": "Inspect any Discord user or bot profile to analyze creation timestamps, badges, custom banners, avatars, and raw API metadata.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "All",
+    "browserRequirements": "Requires JavaScript. Requires HTML5.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <!-- FAQ Schema for Rich Snippets -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I find a Discord User ID?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Enable Developer Mode in Discord under User Settings > Advanced, then right-click any user's profile and click 'Copy User ID'."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is a Discord account creation date calculated?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Discord uses Snowflake IDs. By extracting the timestamp bits from the numeric user ID and adding Discord's epoch (1420070400000ms), we can calculate the exact date and time the account was created."
+        }
+      }
+    ]
+  }
+  </script>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../assets/css/custom.css" />
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            discord: {
+              blurple: '#5865F2',
+              blurpleHover: '#4752C4',
+              green: '#23A55A',
+              red: '#DA373C',
+              darkest: '#111214',
+              sidebar: '#1E1F22',
+              card: '#2B2D31',
+              hover: '#35373C',
+              input: '#1E1F22',
+              textMuted: '#949BA4'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html, body {
+      background-color: #111214 !important;
+      color: #ffffff !important;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1e1f22;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2b2d31;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #35373c;
+    }
+  </style>
+</head>
+<body class="bg-discord-darkest text-white font-sans min-h-full flex flex-col antialiased selection:bg-discord-blurple selection:text-white">
+
+  <!-- Header Navigation -->
+  <header class="bg-discord-sidebar border-b border-white/5 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="../index.html" class="flex items-center space-x-3.5 group" aria-label="DCTools.org Home">
+        <div class="w-11 h-11 bg-discord-blurple group-hover:bg-discord-blurpleHover rounded-xl flex items-center justify-center text-white text-xl shadow-lg transition duration-200" aria-hidden="true">
+          <i class="fa-solid fa-screwdriver-wrench"></i>
+        </div>
+        <span class="text-2xl font-bold tracking-tight text-white">DCTools.org</span>
+      </a>
+
+      <!-- Navigation Link Back to Home -->
+      <a href="../index.html" class="text-sm font-semibold text-discord-textMuted hover:text-white transition flex items-center gap-2 bg-discord-input px-4 py-2.5 rounded-xl border border-white/5 hover:border-white/10">
+        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+        <span>All Tools</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Content Body -->
+  <main class="max-w-7xl mx-auto px-6 py-10 flex-1 w-full space-y-8">
+
+    <!-- Hero Section -->
+    <div class="text-center max-w-2xl mx-auto space-y-3">
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
+        <span class="text-discord-blurple">Discord</span> User Inspector
+      </h1>
+      <p class="text-discord-textMuted text-base sm:text-lg leading-relaxed">
+        Inspect any Discord user or bot profile to analyze creation timestamps, badges, custom banners, avatars, and raw API metadata.
+      </p>
+    </div>
+
+    <div class="max-w-3xl mx-auto w-full space-y-8">
+      <!-- Input Card -->
+      <div class="bg-discord-card border border-white/5 rounded-2xl p-6 shadow-xl space-y-4">
+        <label for="user-id-input" class="block text-xs font-semibold text-discord-textMuted uppercase">Discord User ID (Snowflake)</label>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <input 
+            type="text" 
+            id="user-id-input" 
+            placeholder="e.g. 111867160207572992" 
+            class="flex-1 bg-discord-input border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-discord-blurple transition font-mono text-sm" 
+            onkeydown="if(event.key === 'Enter') fetchUserProfile()"
+          />
+          <button 
+            onclick="fetchUserProfile()" 
+            id="search-btn"
+            class="bg-discord-blurple hover:bg-discord-blurpleHover text-white px-6 py-3 rounded-xl font-semibold text-sm transition flex items-center justify-center gap-2 shadow-md shrink-0"
+          >
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Inspect User
+          </button>
+        </div>
+
+        <!-- Developer Mode Help Toggle -->
+        <details class="text-xs text-discord-textMuted pt-2">
+          <summary class="cursor-pointer hover:text-white transition select-none flex items-center gap-1">
+            <i class="fa-solid fa-circle-info text-discord-blurple" aria-hidden="true"></i> How do I find someone's User ID?
+          </summary>
+          <p class="mt-2 pl-4 border-l-2 border-discord-blurple/50 leading-relaxed">
+            1. In Discord, go to <strong>User Settings &gt; Advanced</strong> and enable <strong>Developer Mode</strong>.<br>
+            2. Right-click any user's profile picture or username in chat or a server member list.<br>
+            3. Click <strong>"Copy User ID"</strong> and paste it above.
+          </p>
+        </details>
+      </div>
+
+      <!-- Loading State -->
+      <div id="loading-spinner" class="hidden text-center py-12 space-y-3">
+        <i class="fa-solid fa-circle-notch fa-spin text-3xl text-discord-blurple" aria-hidden="true"></i>
+        <p class="text-xs text-discord-textMuted">Inspecting Discord User ID...</p>
+      </div>
+
+      <!-- Error State -->
+      <div id="error-message" class="hidden bg-discord-red/10 border border-discord-red/30 rounded-xl p-4 text-discord-red text-sm flex items-center gap-3">
+        <i class="fa-solid fa-triangle-exclamation text-lg shrink-0" aria-hidden="true"></i>
+        <span id="error-text">Invalid User ID. Please enter a valid 17 to 20-digit numeric ID.</span>
+      </div>
+
+      <!-- Profile Display Area -->
+      <div id="profile-result" class="hidden space-y-6">
+
+        <!-- Main Profile Card -->
+        <div class="bg-discord-card border border-white/5 rounded-2xl overflow-hidden shadow-2xl relative">
+          <!-- Profile Banner -->
+          <div id="profile-banner-bg" class="h-36 w-full bg-discord-sidebar bg-cover bg-center relative p-3 flex justify-end items-start transition-all duration-300">
+            <div id="banner-open-badge"></div>
+          </div>
+          
+          <div class="px-6 pb-6 relative">
+            <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between -mt-16 gap-4 mb-4">
+              <!-- Avatar -->
+              <div class="relative">
+                <img id="user-avatar-img" src="" alt="User Avatar" class="w-28 h-28 rounded-full border-4 border-discord-card shadow-lg bg-discord-input object-cover" />
+              </div>
+
+              <!-- Badges -->
+              <div id="user-badges" class="flex flex-wrap gap-1.5 bg-discord-input px-3 py-2 rounded-xl border border-white/5 min-h-[38px] items-center">
+                <span class="text-xs text-discord-textMuted">No badges</span>
+              </div>
+            </div>
+
+            <!-- Names & Account Type -->
+            <div class="space-y-1">
+              <div class="flex items-center gap-2 flex-wrap">
+                <h2 id="global-name" class="text-2xl font-bold text-white leading-tight">--</h2>
+                <span id="bot-badge" class="hidden bg-discord-blurple text-white text-[10px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wider">
+                  <i class="fa-solid fa-robot mr-1" aria-hidden="true"></i> BOT
+                </span>
+              </div>
+              <p id="username-tag" class="text-sm font-mono text-discord-textMuted">@--</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Account Metadata Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          
+          <!-- Account Creation & ID -->
+          <div class="bg-discord-card border border-white/5 rounded-2xl p-5 space-y-3 shadow-xl">
+            <h3 class="font-bold text-sm text-discord-textMuted uppercase tracking-wider flex items-center gap-2">
+              <i class="fa-solid fa-clock text-discord-blurple" aria-hidden="true"></i> Account Info
+            </h3>
+            
+            <div class="space-y-2 text-xs">
+              <div class="bg-discord-input p-3 rounded-xl border border-white/5 flex justify-between items-center">
+                <span class="text-discord-textMuted">User ID:</span>
+                <button onclick="copyUserId()" class="font-mono text-white hover:text-discord-blurple transition flex items-center gap-1.5">
+                  <span id="meta-user-id">--</span>
+                  <i class="fa-regular fa-copy text-[10px]" aria-hidden="true"></i>
+                </button>
+              </div>
+
+              <div class="bg-discord-input p-3 rounded-xl border border-white/5 flex justify-between items-center">
+                <span class="text-discord-textMuted">Created On:</span>
+                <span id="meta-created-date" class="text-white font-medium">--</span>
+              </div>
+
+              <div class="bg-discord-input p-3 rounded-xl border border-white/5 flex justify-between items-center">
+                <span class="text-discord-textMuted">Account Age:</span>
+                <span id="meta-account-age" class="text-discord-green font-medium">--</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Customizations & Accent -->
+          <div class="bg-discord-card border border-white/5 rounded-2xl p-5 space-y-3 shadow-xl">
+            <h3 class="font-bold text-sm text-discord-textMuted uppercase tracking-wider flex items-center gap-2">
+              <i class="fa-solid fa-palette text-discord-blurple" aria-hidden="true"></i> Design Assets
+            </h3>
+            
+            <div class="space-y-2 text-xs">
+              <div class="bg-discord-input p-3 rounded-xl border border-white/5 flex justify-between items-center">
+                <span class="text-discord-textMuted">Accent Color:</span>
+                <div class="flex items-center gap-2">
+                  <div id="accent-preview-box" class="w-4 h-4 rounded border border-white/20 bg-discord-sidebar"></div>
+                  <span id="meta-accent-color" class="font-mono text-white">None</span>
+                </div>
+              </div>
+
+              <div class="bg-discord-input p-3 rounded-xl border border-white/5 flex justify-between items-center">
+                <span class="text-discord-textMuted">Custom Banner:</span>
+                <span id="meta-has-banner" class="text-white font-medium">No</span>
+              </div>
+
+              <div class="bg-discord-input p-3 rounded-xl border border-white/5 flex justify-between items-center">
+                <span class="text-discord-textMuted">Avatar Type:</span>
+                <span id="meta-avatar-type" class="text-white font-medium">Default</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Quick Action Downloads -->
+        <div class="bg-discord-card border border-white/5 rounded-2xl p-6 space-y-4 shadow-xl">
+          <h3 class="font-bold text-base flex items-center gap-2">
+            <i class="fa-solid fa-download text-discord-blurple" aria-hidden="true"></i> Profile Downloads
+          </h3>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="asset-download-buttons">
+            <!-- Dynamically inserted -->
+          </div>
+        </div>
+
+        <!-- Developer Raw JSON Inspector -->
+        <details class="bg-discord-card border border-white/5 rounded-2xl p-4 shadow-xl group">
+          <summary class="cursor-pointer font-bold text-xs uppercase tracking-wider text-discord-textMuted hover:text-white transition flex items-center justify-between select-none">
+            <span class="flex items-center gap-2">
+              <i class="fa-solid fa-code text-discord-blurple" aria-hidden="true"></i> Raw API JSON Response
+            </span>
+            <i class="fa-solid fa-chevron-down group-open:rotate-180 transition-transform" aria-hidden="true"></i>
+          </summary>
+          <div class="mt-4 space-y-2">
+            <div class="flex justify-end">
+              <button onclick="copyRawJson()" class="bg-discord-input hover:bg-discord-hover text-xs text-discord-textMuted hover:text-white px-3 py-1.5 rounded-lg border border-white/5 transition flex items-center gap-1.5">
+                <i class="fa-regular fa-copy" aria-hidden="true"></i> Copy JSON
+              </button>
+            </div>
+            <pre id="raw-json-output" class="bg-discord-input border border-white/5 rounded-xl p-4 text-xs font-mono text-emerald-400 overflow-x-auto max-h-80 select-all"></pre>
+          </div>
+        </details>
+
+      </div>
+    </div>
+
+    <!-- SEO Content & Guide Section -->
+    <section class="bg-discord-card border border-white/5 rounded-2xl p-6 sm:p-8 space-y-4 shadow-xl mt-12 max-w-3xl mx-auto w-full">
+      <h2 class="text-xl font-bold text-white flex items-center gap-2.5">
+        <i class="fa-solid fa-circle-info text-discord-blurple" aria-hidden="true"></i> About Discord Profile Inspection
+      </h2>
+      <div class="text-discord-textMuted text-sm space-y-3 leading-relaxed">
+        <p>
+          Every Discord account and bot is tied to a unique numeric identifier known as a Snowflake ID. By parsing these IDs, developer tools can accurately extract creation timestamps, analyze user badges, and inspect profile branding elements like custom banners, avatar formats, and accent colors.
+        </p>
+        <p>
+          This utility provides a seamless way to check account ages and look up public profile properties without needing complex API queries or developer bots.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-discord-sidebar border-t border-white/5 py-8 w-full mt-auto">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-discord-textMuted">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-white text-base">DCTools.org</span>
+        <span>• Free Web Utilities</span>
+      </div>
+      <div>
+        © 2026 DCTools.org. Not affiliated with Discord Inc.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div id="toast" role="status" aria-live="polite" class="fixed bottom-6 right-6 bg-discord-green text-white px-5 py-3.5 rounded-xl shadow-2xl text-base transition duration-300 transform translate-y-20 opacity-0 pointer-events-none flex items-center gap-3 z-50">
+    <i class="fa-solid fa-check" aria-hidden="true"></i> <span id="toast-message">Copied to clipboard!</span>
+  </div>
+
+  <script src="../assets/js/utils.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script>
+    // ⚠️ Points to your live Cloudflare Worker
+    const WORKER_URL = 'https://dctools-api.canadamaikk.workers.dev/';
+
+    let currentProfile = null;
+
+    // Discord Public Flags bitfield dictionary
+    const BADGE_MAP = [
+      { flag: 1 << 0, name: 'Discord Staff', icon: 'fa-solid fa-shield-halved text-indigo-400' },
+      { flag: 1 << 1, name: 'Partnered Server Owner', icon: 'fa-solid fa-handshake text-blue-400' },
+      { flag: 1 << 2, name: 'HypeSquad Events', icon: 'fa-solid fa-calendar-star text-amber-400' },
+      { flag: 1 << 3, name: 'Bug Hunter Level 1', icon: 'fa-solid fa-bug text-emerald-400' },
+      { flag: 1 << 6, name: 'HypeSquad Bravery', icon: 'fa-solid fa-shield-cat text-purple-400' },
+      { flag: 1 << 7, name: 'HypeSquad Brilliance', icon: 'fa-solid fa-gem text-rose-400' },
+      { flag: 1 << 8, name: 'HypeSquad Balance', icon: 'fa-solid fa-scale-balanced text-cyan-400' },
+      { flag: 1 << 9, name: 'Early Supporter', icon: 'fa-solid fa-piggy-bank text-pink-400' },
+      { flag: 1 << 14, name: 'Bug Hunter Level 2', icon: 'fa-solid fa-bug text-yellow-400' },
+      { flag: 1 << 17, name: 'Early Verified Bot Developer', icon: 'fa-solid fa-code text-sky-400' },
+      { flag: 1 << 18, name: 'Moderator Programs Alumni', icon: 'fa-solid fa-graduation-cap text-teal-400' },
+      { flag: 1 << 22, name: 'Active Developer', icon: 'fa-solid fa-terminal text-green-400' }
+    ];
+
+    // Decode creation timestamp from Snowflake
+    function getCreationDateFromSnowflake(id) {
+      const DISCORD_EPOCH = 1420070400000n;
+      try {
+        const timestamp = Number((BigInt(id) >> 22n) + DISCORD_EPOCH);
+        const date = new Date(timestamp);
+        return {
+          dateString: date.toLocaleDateString([], { year: 'numeric', month: 'long', day: 'numeric' }),
+          ageString: calculateAge(date)
+        };
+      } catch (e) {
+        return { dateString: 'Unknown', ageString: 'Unknown' };
+      }
+    }
+
+    function calculateAge(createdDate) {
+      const diffMs = Date.now() - createdDate.getTime();
+      const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+      if (days < 30) return `${days} days old`;
+      const months = Math.floor(days / 30.4375);
+      if (months < 12) return `${months} month${months > 1 ? 's' : ''} old`;
+      const years = (days / 365.25).toFixed(1);
+      return `${years} years old`;
+    }
+
+    async function fetchUserProfile() {
+      const input = document.getElementById('user-id-input').value.trim();
+      const spinner = document.getElementById('loading-spinner');
+      const errorBox = document.getElementById('error-message');
+      const resultBox = document.getElementById('profile-result');
+
+      errorBox.classList.add('hidden');
+      resultBox.classList.add('hidden');
+
+      if (!/^\d{17,20}$/.test(input)) {
+        document.getElementById('error-text').innerText = 'Invalid User ID format. Please enter a valid 17-20 digit numeric Snowflake ID.';
+        errorBox.classList.remove('hidden');
+        return;
+      }
+
+      spinner.classList.remove('hidden');
+
+      try {
+        const res = await fetch(`${WORKER_URL}?id=${input}`);
+        const data = await res.json();
+
+        if (!res.ok || data.error || data.message) {
+          throw new Error(data.error || data.message || 'User not found on Discord.');
+        }
+
+        currentProfile = data;
+        displayProfileData(data);
+      } catch (err) {
+        document.getElementById('error-text').innerText = err.message || 'Could not retrieve user data. Please check the ID.';
+        errorBox.classList.remove('hidden');
+      } finally {
+        spinner.classList.add('hidden');
+      }
+    }
+
+    function displayProfileData(user) {
+      // Names & Bot tag
+      document.getElementById('global-name').innerText = user.global_name || user.username;
+      document.getElementById('username-tag').innerText = `@${user.username}`;
+      
+      const botBadge = document.getElementById('bot-badge');
+      if (user.bot) {
+        botBadge.classList.remove('hidden');
+      } else {
+        botBadge.classList.add('hidden');
+      }
+
+      // Creation Metadata
+      const timeData = getCreationDateFromSnowflake(user.id);
+      document.getElementById('meta-user-id').innerText = user.id;
+      document.getElementById('meta-created-date').innerText = timeData.dateString;
+      document.getElementById('meta-account-age').innerText = timeData.ageString;
+
+      // Badges Parsing
+      const badgesContainer = document.getElementById('user-badges');
+      const flags = user.public_flags || user.flags || 0;
+      const userBadges = BADGE_MAP.filter(b => (flags & b.flag) === b.flag);
+
+      if (userBadges.length > 0) {
+        badgesContainer.innerHTML = userBadges.map(b => `
+          <div class="flex items-center gap-1.5 bg-discord-card px-2.5 py-1 rounded-lg border border-white/5 text-[11px] font-medium" title="${b.name}">
+            <i class="${b.icon}" aria-hidden="true"></i>
+            <span>${b.name}</span>
+          </div>
+        `).join('');
+      } else {
+        badgesContainer.innerHTML = `<span class="text-xs text-discord-textMuted px-1">No Public Badges</span>`;
+      }
+
+      // Avatar Setup
+      const avatarImg = document.getElementById('user-avatar-img');
+      let avatarUrl = '';
+      if (user.avatar) {
+        const isAnim = user.avatar.startsWith('a_');
+        avatarUrl = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${isAnim ? 'gif' : 'png'}?size=1024`;
+        document.getElementById('meta-avatar-type').innerText = isAnim ? 'Animated (GIF)' : 'Static (PNG)';
+      } else {
+        const defaultIndex = (BigInt(user.id) >> 22n) % 6n;
+        avatarUrl = `https://cdn.discordapp.com/embed/avatars/${defaultIndex}.png`;
+        document.getElementById('meta-avatar-type').innerText = 'Default Avatar';
+      }
+      avatarImg.src = avatarUrl;
+
+      // Banner Setup & Accent Color
+      const bannerBg = document.getElementById('profile-banner-bg');
+      const badgeContainer = document.getElementById('banner-open-badge');
+      const accentBox = document.getElementById('accent-preview-box');
+      const accentText = document.getElementById('meta-accent-color');
+      const hasBannerText = document.getElementById('meta-has-banner');
+
+      if (user.banner) {
+        const isAnim = user.banner.startsWith('a_');
+        const ext = isAnim ? 'gif' : 'png';
+        const bannerUrl = `https://cdn.discordapp.com/banners/${user.id}/${user.banner}.${ext}?size=1024`;
+        
+        bannerBg.style.backgroundImage = `url('${bannerUrl}')`;
+        bannerBg.style.backgroundColor = 'transparent';
+        badgeContainer.innerHTML = `
+          <a href="${bannerUrl}" target="_blank" class="bg-black/60 hover:bg-black/80 text-white text-[11px] px-2.5 py-1 rounded-lg backdrop-blur-md border border-white/10 transition flex items-center gap-1.5 shadow">
+            <i class="fa-solid fa-up-right-from-square text-[10px]" aria-hidden="true"></i> Open Banner
+          </a>
+        `;
+        hasBannerText.innerText = isAnim ? 'Yes (Animated GIF)' : 'Yes (Static Custom)';
+      } else if (user.accent_color) {
+        const hexColor = `#${user.accent_color.toString(16).padStart(6, '0')}`;
+        bannerBg.style.backgroundImage = 'none';
+        bannerBg.style.backgroundColor = hexColor;
+        badgeContainer.innerHTML = '';
+        hasBannerText.innerText = 'Color Accent Only';
+      } else {
+        bannerBg.style.backgroundImage = 'none';
+        bannerBg.style.backgroundColor = '#1E1F22';
+        badgeContainer.innerHTML = '';
+        hasBannerText.innerText = 'No';
+      }
+
+      if (user.accent_color) {
+        const hexColor = `#${user.accent_color.toString(16).padStart(6, '0')}`;
+        accentBox.style.backgroundColor = hexColor;
+        accentText.innerText = hexColor.toUpperCase();
+      } else {
+        accentBox.style.backgroundColor = 'transparent';
+        accentText.innerText = 'None';
+      }
+
+      // Download Buttons
+      const downloadContainer = document.getElementById('asset-download-buttons');
+      let downloadHTML = `
+        <a href="${avatarUrl}" target="_blank" download class="bg-discord-blurple hover:bg-discord-blurpleHover text-white px-4 py-2.5 rounded-xl text-xs font-semibold transition text-center flex items-center justify-center gap-2">
+          <i class="fa-solid fa-user" aria-hidden="true"></i> Download Avatar
+        </a>
+      `;
+
+      if (user.banner) {
+        const isAnim = user.banner.startsWith('a_');
+        const ext = isAnim ? 'gif' : 'png';
+        const bannerDownloadUrl = `https://cdn.discordapp.com/banners/${user.id}/${user.banner}.${ext}?size=2048`;
+        downloadHTML += `
+          <a href="${bannerDownloadUrl}" target="_blank" download class="bg-discord-input hover:bg-discord-hover border border-white/10 text-white px-4 py-2.5 rounded-xl text-xs font-semibold transition text-center flex items-center justify-center gap-2">
+            <i class="fa-solid fa-image" aria-hidden="true"></i> Download Banner
+          </a>
+        `;
+      }
+
+      downloadContainer.innerHTML = downloadHTML;
+
+      // Raw JSON Viewer
+      document.getElementById('raw-json-output').textContent = JSON.stringify(user, null, 2);
+
+      // Reveal Results
+      document.getElementById('profile-result').classList.remove('hidden');
+    }
+
+    function copyUserId() {
+      if (currentProfile && currentProfile.id) {
+        copyToClipboard(currentProfile.id, 'User ID copied to clipboard!');
+      }
+    }
+
+    function copyRawJson() {
+      if (currentProfile) {
+        copyToClipboard(JSON.stringify(currentProfile, null, 2), 'Raw JSON copied to clipboard!');
+      }
+    }
+  </script>
+</body>
+</html>

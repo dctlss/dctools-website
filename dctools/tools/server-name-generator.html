@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-discord-darkest">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Core SEO Meta Tags -->
+  <title>Server Name Generator For Discord - DCTools.org</title>
+  <meta name="description" content="Generate cool, aesthetic, and unique server names for your Discord community instantly. Customize by themes, styles, and copy names with one click." />
+  <meta name="keywords" content="discord server name generator, aesthetic discord server names, cool discord community names, discord server text styles, server name ideas" />
+  <meta name="author" content="DCTools.org" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <link rel="canonical" href="https://dctools.org/tools/server-name-generator.html" />
+
+  <!-- Theme & Mobile Integration -->
+  <meta name="theme-color" content="#18191c" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://dctools.org/tools/server-name-generator.html" />
+  <meta property="og:title" content="Server Name Generator For Discord - DCTools.org" />
+  <meta property="og:description" content="Generate cool, aesthetic, and unique server names for your Discord community instantly. Customize by themes, styles, and copy names with one click." />
+  <meta property="og:site_name" content="DCTools.org" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card Data -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Server Name Generator For Discord - DCTools.org" />
+  <meta name="twitter:description" content="Generate cool, aesthetic, and unique server names for your Discord community instantly. Customize by themes, styles, and copy names with one click." />
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Server Name Generator For Discord",
+    "url": "https://dctools.org/tools/server-name-generator.html",
+    "description": "Generate cool, aesthetic, and unique server names for your Discord community instantly. Customize by themes, styles, and copy names with one click.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "All",
+    "browserRequirements": "Requires JavaScript. Requires HTML5.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <!-- FAQ Schema for Rich Snippets -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I use generated names for my Discord server?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Simply click on any generated server name card or copy button to instantly copy it to your clipboard. Then, open your Discord server settings, paste the name into the server name field, and save changes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I combine different styles and themes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! You can select multiple theme categories simultaneously (such as Gaming and Anime or Chill and Aesthetic) and apply various Unicode text formatting styles like Japanese brackets, star borders, and vaporwave spacing."
+        }
+      }
+    ]
+  }
+  </script>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../assets/css/custom.css" />
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            discord: {
+              blurple: '#5865F2',
+              blurpleHover: '#4752C4',
+              green: '#23A55A',
+              red: '#DA373C',
+              darkest: '#111214',
+              sidebar: '#1E1F22',
+              card: '#2B2D31',
+              hover: '#35373C',
+              input: '#1E1F22',
+              textMuted: '#949BA4'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html, body {
+      background-color: #111214 !important;
+      color: #ffffff !important;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1e1f22;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2b2d31;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #35373c;
+    }
+  </style>
+</head>
+<body class="bg-discord-darkest text-white font-sans min-h-full flex flex-col antialiased selection:bg-discord-blurple selection:text-white">
+
+  <!-- Header Navigation -->
+  <header class="bg-discord-sidebar border-b border-white/5 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="../index.html" class="flex items-center space-x-3.5 group" aria-label="DCTools.org Home">
+        <div class="w-11 h-11 bg-discord-blurple group-hover:bg-discord-blurpleHover rounded-xl flex items-center justify-center text-white text-xl shadow-lg transition duration-200" aria-hidden="true">
+          <i class="fa-solid fa-screwdriver-wrench"></i>
+        </div>
+        <span class="text-2xl font-bold tracking-tight text-white">DCTools.org</span>
+      </a>
+
+      <!-- Navigation Link Back to Home -->
+      <a href="../index.html" class="text-sm font-semibold text-discord-textMuted hover:text-white transition flex items-center gap-2 bg-discord-input px-4 py-2.5 rounded-xl border border-white/5 hover:border-white/10">
+        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+        <span>All Tools</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Content Body -->
+  <main class="max-w-7xl mx-auto px-6 py-10 flex-1 w-full space-y-8">
+
+    <!-- Hero Section -->
+    <div class="text-center max-w-2xl mx-auto space-y-3">
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
+        Server Name Generator For <span class="text-discord-blurple">Discord</span>
+      </h1>
+      <p class="text-discord-textMuted text-base sm:text-lg leading-relaxed">
+        Select your server themes and aesthetic style to instantly generate unique, catchy names for your community.
+      </p>
+    </div>
+
+    <!-- Generator Controls Box -->
+    <div class="max-w-4xl mx-auto w-full space-y-8">
+      <div class="bg-discord-card border border-white/5 rounded-2xl p-6 shadow-xl space-y-6">
+        
+        <!-- 1. Theme Tags Selection -->
+        <div>
+          <label class="block text-xs font-semibold text-discord-textMuted uppercase mb-3 flex items-center gap-2">
+            <i class="fa-solid fa-tags text-discord-blurple" aria-hidden="true"></i> Select Themes / Categories <span class="text-gray-500 font-normal">(Pick 1 or more)</span>
+          </label>
+          <div id="tag-container" class="flex flex-wrap gap-2">
+            <!-- Tags injected via JS -->
+          </div>
+        </div>
+
+        <!-- 2. Aesthetic Style Selector -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-white/5">
+          <div>
+            <label for="style-select" class="block text-xs font-semibold text-discord-textMuted uppercase mb-2">
+              <i class="fa-solid fa-icons text-discord-blurple" aria-hidden="true"></i> Text Formatting Style
+            </label>
+            <select id="style-select" onchange="generateNames()" class="w-full bg-discord-input border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-discord-blurple transition">
+              <option value="clean">Clean & Plain (e.g. Pixel Lounge)</option>
+              <option value="aesthetic">Aesthetic Symbols (e.g. ✦ Pixel Lounge ✦)</option>
+              <option value="stars">Starry Borders (e.g. ★彡 Pixel Lounge 彡★)</option>
+              <option value="sparkles">Sparkles & Magic (e.g. ✧･ﾟ Pixel Lounge ﾟ･✧)</option>
+              <option value="japanese_brackets">Japanese Brackets (e.g. 『 Pixel Lounge 』)</option>
+              <option value="heart">Cute Hearts (e.g. ♡ Pixel Lounge ♡)</option>
+              <option value="spaced">Spaced Out / Vaporwave (e.g. P I X E L  L O U N G E)</option>
+              <option value="bracket">Bracketed (e.g. [ Pixel Lounge ])</option>
+              <option value="minimalist">Minimalist Lowercase (e.g. pixel.lounge)</option>
+              <option value="japanese">Asian / Sakura (e.g. ┊ Pixel Lounge 🌸)</option>
+              <option value="cyber">Cyber / Dev (e.g. // PIXEL_LOUNGE)</option>
+              <option value="pipe">Vertical Pipe (e.g. │ Pixel Lounge)</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="count-select" class="block text-xs font-semibold text-discord-textMuted uppercase mb-2">
+              <i class="fa-solid fa-list-ol text-discord-blurple" aria-hidden="true"></i> Names per Batch
+            </label>
+            <select id="count-select" onchange="generateNames()" class="w-full bg-discord-input border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-discord-blurple transition">
+              <option value="12">12 Names</option>
+              <option value="20" selected>20 Names</option>
+              <option value="32">32 Names</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Generate Button -->
+        <div class="pt-2">
+          <button onclick="generateNames()" class="w-full bg-discord-blurple hover:bg-discord-blurpleHover text-white py-3.5 rounded-xl font-semibold text-sm transition flex items-center justify-center gap-2 shadow-lg hover:shadow-discord-blurple/25">
+            <i class="fa-solid fa-rotate text-base" aria-hidden="true"></i> Generate Server Names
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Generated Names Grid -->
+      <div class="space-y-4 max-w-5xl mx-auto">
+        <div class="flex items-center justify-between border-b border-white/5 pb-3">
+          <h2 class="font-bold text-sm text-discord-textMuted uppercase tracking-wider flex items-center gap-2">
+            <i class="fa-solid fa-sparkles text-discord-blurple" aria-hidden="true"></i> Generated Ideas
+          </h2>
+          <span class="text-xs text-discord-textMuted">Click any card to copy to clipboard</span>
+        </div>
+
+        <div id="names-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+          <!-- Name cards dynamically inserted here -->
+        </div>
+      </div>
+
+      <!-- Favorites Section -->
+      <div id="favorites-section" class="bg-discord-card border border-white/5 rounded-2xl p-6 shadow-xl max-w-5xl mx-auto space-y-4 hidden">
+        <div class="flex items-center justify-between">
+          <h3 class="font-bold text-sm text-discord-textMuted uppercase tracking-wider flex items-center gap-2">
+            <i class="fa-solid fa-heart text-discord-red" aria-hidden="true"></i> Saved Favorites (<span id="fav-count">0</span>)
+          </h3>
+          <button onclick="clearFavorites()" class="text-xs text-discord-red hover:underline flex items-center gap-1 font-semibold">
+            <i class="fa-solid fa-trash" aria-hidden="true"></i> Clear All
+          </button>
+        </div>
+        <div id="favorites-grid" class="flex flex-wrap gap-2">
+          <!-- Favorites tags injected here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- SEO Content & Guide Section -->
+    <section class="bg-discord-card border border-white/5 rounded-2xl p-6 sm:p-8 space-y-4 shadow-xl mt-12 max-w-5xl mx-auto w-full">
+      <h2 class="text-xl font-bold text-white flex items-center gap-2.5">
+        <i class="fa-solid fa-circle-info text-discord-blurple" aria-hidden="true"></i> Choosing the Best Name for Your Discord Community
+      </h2>
+      <div class="text-discord-textMuted text-sm space-y-3 leading-relaxed">
+        <p>
+          Your Discord server name is the first impression members get when joining your community. A great name should reflect the primary vibe of your server—whether it is an active gaming clan, a cozy lofi study lounge, an anime community, or an exclusive tech hub.
+        </p>
+        <p>
+          Using aesthetic symbols, clean formatting, or category-tailored keywords helps your server stand out in member directories and server lists. Use this generator to mix and match styles instantly with one-click copying.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-discord-sidebar border-t border-white/5 py-8 w-full mt-auto">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-discord-textMuted">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-white text-base">DCTools.org</span>
+        <span>• Free Web Utilities</span>
+      </div>
+      <div>
+        © 2026 DCTools.org. Not affiliated with Discord Inc.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div id="toast" role="status" aria-live="polite" class="fixed bottom-6 right-6 bg-discord-green text-white px-4 py-3 rounded-lg shadow-2xl text-sm transition duration-300 transform translate-y-20 opacity-0 pointer-events-none flex items-center gap-2 z-50">
+    <i class="fa-solid fa-check" aria-hidden="true"></i> <span id="toast-message">Copied to clipboard!</span>
+  </div>
+
+  <script src="../assets/js/utils.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script>
+    // Theme Tag Database
+    const THEMES = [
+      { id: 'gaming', label: '🎮 Gaming', color: 'hover:border-purple-500' },
+      { id: 'chill', label: '☕ Chill / Cafe', color: 'hover:border-amber-500' },
+      { id: 'aesthetic', label: '✨ Aesthetic', color: 'hover:border-pink-500' },
+      { id: 'anime', label: '🌸 Anime', color: 'hover:border-rose-500' },
+      { id: 'tech', label: '💻 Tech / Dev', color: 'hover:border-cyan-500' },
+      { id: 'community', label: '🌐 Community', color: 'hover:border-blue-500' },
+      { id: 'esports', label: '🏆 Esports', color: 'hover:border-yellow-500' },
+      { id: 'roleplay', label: '🎭 Roleplay / Fantasy', color: 'hover:border-emerald-500' }
+    ];
+
+    // Expanded Word Dictionary
+    const DICTIONARY = {
+      gaming: {
+        prefixes: [
+          'Pixel', 'Apex', 'Clutch', 'Glitch', 'Nexus', 'Vortex', 'Cyber', 'Spawn', 'Phantom', 
+          'Overclock', 'Mythic', 'Titan', 'Zero', 'Velocity', 'Shadow', 'Rogue', 'Hydra', 
+          'Overwatch', 'Byte', 'Nova', 'Nebula', 'Rift', 'Vector', 'Pulse', 'Aegis', 'Quantum', 
+          'Kinetic', 'Havoc', 'Zenith', 'Matrix', 'Vanguard', 'Horizon', 'Frost', 'Ignite', 
+          'Static', 'Arcade', 'Quest', 'Stealth', 'Hyper', 'Omega', 'Lethal', 'Prism', 'Cobalt',
+          'Obsidian', 'Crucible', 'Spectra', 'Dynamo', 'Catalyst', 'Tempest', 'Nether', 'Overdrive',
+          'Synergy', 'Aether', 'Vesper', 'Sentinel', 'Infinite', 'Astral', 'Eclipse', 'Inferno',
+          'Blitz', 'Flux', 'Rrupture', 'Starlight', 'Hyperion', 'Nemesis', 'Radiant', 'Valiant',
+          'Titanium', 'Brimstone', 'Vivid', 'Turbine', 'Overlord', 'Anarchy', 'Vixen', 'Elysium'
+        ],
+        suffixes: [
+          'Lounge', 'Guild', 'Arcade', 'Arena', 'HQ', 'Sanctuary', 'Squad', 'Realm', 'Den', 
+          'Dominion', 'Sector', 'Vault', 'Hub', 'Network', 'Syndicate', 'Matrix', 'Haven', 
+          'Oasis', 'Citadel', 'Outpost', 'Station', 'Base', 'Union', 'Enclave', 'Order', 
+          'Circle', 'Protocol', 'Assembly', 'Lair', 'Zone', 'District', 'Empire', 'Sanctum',
+          'Domain', 'Bastion', 'Stronghold', 'Core', 'Alliance', 'Network', 'Cluster',
+          'Garrison', 'Armory', 'Fortress', 'Legion', 'Outpost', 'Frontier', 'Sanctuary'
+        ]
+      },
+      chill: {
+        prefixes: [
+          'Cozy', 'Velvet', 'Mellow', 'Sanctuary', 'Lofi', 'Sunset', 'Midnight', 'Golden', 
+          'Haven', 'Quiet', 'Serene', 'Whisper', 'Ember', 'Cloud', 'Solace', 'Dusk', 'Peaceful', 
+          'Aurora', 'Oasis', 'Soft', 'Twilight', 'Breeze', 'Honey', 'Rainy', 'Meadow', 'Drift', 
+          'Willow', 'Echo', 'Maple', 'Slumber', 'Moonlit', 'Gentle', 'Calm', 'Harmony', 'Pastel', 
+          'Warm', 'Satin', 'Lazy', 'Autumn', 'Sylvan', 'Dewdrop', 'Solstice', 'Daydream', 
+          'Nectar', 'Hazel', 'Fern', 'Mallow', 'Lullaby', 'Eucalyptus', 'Petal', 'Mossy', 'Amber',
+          'Siesta', 'Whim', 'Cedar', 'Pebble', 'Blossom', 'Lull', 'Calico', 'Solitude', 'Bramble',
+          'Cinnamon', 'Warmth', 'Chamomile', 'Lull', 'Wisteria', 'Loom', 'Breeze', 'Feather'
+        ],
+        suffixes: [
+          'Corner', 'Cafe', 'Lounge', 'Hideout', 'Nook', 'Oasis', 'Lobby', 'Garden', 'Harbor', 
+          'Station', 'Attic', 'Chamber', 'Retreat', 'Sanctuary', 'Vista', 'Haven', 'Porch', 
+          'Cottage', 'Tearoom', 'Valley', 'Island', 'Hearth', 'Parlor', 'Cabin', 'Arbor', 
+          'Bungalow', 'Veranda', 'Loom', 'Grove', 'Alcove', 'Hammock', 'Bay', 'Balcony', 'Studio',
+          'Terrace', 'Loft', 'Respite', 'Glade', 'Sanctuary', 'Meadow', 'Shelter', 'Haven'
+        ]
+      },
+      aesthetic: {
+        prefixes: [
+          'Lunar', 'Celestial', 'Astral', 'Eclipse', 'Ethereal', 'Vintage', 'Velvet', 'Aura', 
+          'Solar', 'Blossom', 'Pastel', 'Cosmic', 'Nebula', 'Euphoria', 'Elysian', 'Starlight', 
+          'Opal', 'Siren', 'Satin', 'Divine', 'Infinite', 'Radiance', 'Prism', 'Ivory', 'Halo', 
+          'Chroma', 'Mirage', 'Solstice', 'Echo', 'Bloom', 'Essence', 'Bliss', 'Nova', 'Obsidian', 
+          'Silken', 'Luminous', 'Serenade', 'Halcyon', 'Iris', 'Solitude', 'Quartz', 'Amethyst', 
+          'Utopia', 'Velour', 'Radiant', 'Stardust', 'Cascade', 'Glimmer', 'Aether', 'Seraph',
+          'Gossamer', 'Orchid', 'Elegance', 'Beryl', 'Pearl', 'Sovereignty', 'Solder', 'Nectar',
+          'Solace', 'Vapor', 'Lumina', 'Moonstone', 'Rosette', 'Opalescence', 'Sienna'
+        ],
+        suffixes: [
+          'Society', 'Horizon', 'Atelier', 'Studio', 'Archive', 'Domain', 'Sanctuary', 'Paradox', 
+          'Echo', 'Mirage', 'Garden', 'Aura', 'Collective', 'Realm', 'Oasis', 'Dynasty', 
+          'Pavilion', 'Manor', 'Gallery', 'Haven', 'Universe', 'Vista', 'Chamber', 'Solitude', 
+          'Sanctum', 'Vault', 'Museum', 'Emporium', 'Odyssey', 'Elysium', 'Avenue', 'Estate',
+          'Boutique', 'Chateau', 'Symphony', 'Aesthetic', 'Sanctuary', 'Museum', 'Veneer'
+        ]
+      },
+      anime: {
+        prefixes: [
+          'Sakura', 'Akatsuki', 'Shinobi', 'Otaku', 'Kitsune', 'Kawaii', 'Neko', 'Ronin', 
+          'Torii', 'Hikari', 'Kuro', 'Sora', 'Manga', 'Zenith', 'Chibi', 'Yume', 'Senshi', 
+          'Oni', 'Kumo', 'Kami', 'Tsuki', 'Hoshi', 'Shogun', 'Kage', 'Hanabi', 'Tenchi', 
+          'Kaiju', 'Samurai', 'Matsuri', 'Shiro', 'Ryū', 'Origami', 'Ramen', 'Bonsai', 'Mochi',
+          'Kyoto', 'Shibuya', 'Yōkai', 'Senpai', 'Katana', 'Dojo', 'Tengu', 'Amaterasu', 'Sufuri',
+          'Ghibli', 'Akira', 'Boba', 'Matcha', 'Natsukashii', 'Komorebi', 'Komore', 'Tatami',
+          'Izakaya', 'Kitsune', 'Omakase', 'Yukata', 'Shuriken', 'Bonsai', 'Katanas', 'Senpou'
+        ],
+        suffixes: [
+          'District', 'Guild', 'Academy', 'Dojo', 'Cafe', 'Realm', 'Society', 'Lounge', 
+          'Station', 'Hideout', 'Verse', 'Valley', 'Empire', 'Sanctuary', 'Temple', 'Shrine', 
+          'Haven', 'Corner', 'Citadel', 'Enclave', 'Syndicate', 'Order', 'Sect', 'Village',
+          'Pavilion', 'Precinct', 'Dynasty', 'Outpost', 'Garden', 'Dominion', 'Alliance',
+          'Mansion', 'Chamber', 'Asylum', 'Kingdom', 'Sanctuary', 'Dojo', 'Sector'
+        ]
+      },
+      tech: {
+        prefixes: [
+          'Byte', 'Node', 'Binary', 'Cyber', 'Quantum', 'Matrix', 'Terminal', 'Dev', 'Stack', 
+          'Crypto', 'Synthetix', 'Kernel', 'Protocol', 'Code', 'Vector', 'Data', 'Silicon', 
+          'Nexus', 'Array', 'Logic', 'Circuit', 'Neural', 'Algorithm', 'Daemon', 'Cipher', 
+          'Shell', 'Pixel', 'Lambda', 'Syntax', 'Proxy', 'Router', 'Module', 'System', 
+          'Script', 'Buffer', 'Cache', 'Micro', 'Async', 'Socket', 'Compiler', 'Cluster', 'Cloud',
+          'Bit', 'Thread', 'Vertex', 'Packet', 'Tensor', 'Octet', 'Payload', 'Solder',
+          'Signal', 'Subnet', 'Microchip', 'Datacenter', 'Hypervisor', 'Sandbox', 'Operand'
+        ],
+        suffixes: [
+          'Lab', 'Network', 'Cluster', 'Hub', 'Socket', 'Forge', 'Vault', 'Collective', 
+          'Mainframe', 'System', 'Core', 'Logic', 'HQ', 'Station', 'Base', 'Terminal', 
+          'Engine', 'Grid', 'Sector', 'Repository', 'Sandbox', 'Zone', 'Pipeline', 'Array',
+          'Stack', 'Port', 'Subnet', 'Environment', 'Console', 'Instance', 'Gateway',
+          'Server', 'Registry', 'Framework', 'Process', 'Cluster', 'Matrix', 'Pipeline'
+        ]
+      },
+      community: {
+        prefixes: [
+          'Global', 'United', 'Universal', 'Community', 'Central', 'Public', 'Town', 'Social', 
+          'Beacon', 'Nexus', 'Alliance', 'Harmony', 'Metropolis', 'Crossroads', 'Unity', 
+          'Gathering', 'Forum', 'Network', 'Open', 'Common', 'Friendship', 'Vanguard', 
+          'Keystone', 'Circle', 'Union', 'Fellowship', 'Concourse', 'Agora', 'Hearth', 'Meridian',
+          'Commonwealth', 'Paragon', 'Compass', 'Horizon', 'Oasis', 'Concord', 'Tapestry',
+          'Civic', 'Sanctuary', 'Summit', 'Bridge', 'Civitas', 'Mosaic', 'Spectrum',
+          'Gathering', 'Atlas', 'Omni', 'Centric', 'Assembly', 'Fountain', 'Harmony'
+        ],
+        suffixes: [
+          'Square', 'Hub', 'Plaza', 'District', 'Circle', 'Hall', 'Exchange', 'Network', 
+          'Union', 'Assembly', 'Center', 'Forum', 'Commons', 'Oasis', 'Realm', 'Guild', 
+          'Federation', 'League', 'Coalition', 'Haven', 'Station', 'Sanctuary', 'Crossing',
+          'Precinct', 'Junction', 'Boulevard', 'Campus', 'Atrium', 'Pavilion', 'Terrace',
+          'Sanctuary', 'Colony', 'Society', 'Concourse', 'Market', 'Amphitheater'
+        ]
+      },
+      esports: {
+        prefixes: [
+          'Prime', 'Vanguard', 'Infamy', 'Ascendant', 'Vengeance', 'Immortal', 'Valiant', 
+          'Outlaw', 'Renegade', 'Eclipse', 'Dominance', 'Dynasty', 'Apex', 'Rival', 'Sovereign', 
+          'Rampage', 'Paragon', 'Catalyst', 'Fury', 'Reign', 'Nemesis', 'Titan', 'Summit', 
+          'Legacy', 'Strike', 'Predator', 'Surge', 'Conquest', 'Havoc', 'Vortex', 'Lethal',
+          'Supremacy', 'Onslaught', 'Velocity', 'Valor', 'Invictus', 'Mayhem', 'Overlord',
+          'Radiant', 'Anarchy', 'Ascension', 'Titanium', 'Inferno', 'Rupture', 'Colossus'
+        ],
+        suffixes: [
+          'Esports', 'Gaming', 'Athletics', 'Legion', 'Org', 'Clan', 'Roster', 'Syndicate', 
+          'Collective', 'Team', 'Division', 'Squad', 'Nation', 'Vanguard', 'Empire', 
+          'Alliance', 'Coalition', 'Unit', 'Force', 'Flotilla', 'Batallion', 'Corps', 'Crest',
+          'Armada', 'Gladiators', 'Squadron', 'Brigade', 'Phalanx', 'Battalion', 'Division'
+        ]
+      },
+      roleplay: {
+        prefixes: [
+          'Arcane', 'Mythic', 'Elder', 'Obsidian', 'Silver', 'Drakon', 'Valor', 'Sovereign', 
+          'Kingdom', 'Cursed', 'Valhalla', 'Citadel', 'Highland', 'Runed', 'Celestial', 
+          'Shadow', 'Forgotten', 'Crimson', 'Ancient', 'Iron', 'Frost', 'Eldritch', 'Solitary', 
+          'Hollow', 'Wyrm', 'Storm', 'Sylvan', 'Crown', 'Ashen', 'Raven', 'Twilight', 'Wyvern',
+          'Dread', 'Mythos', 'Phoenix', 'Dragon', 'Runegate', 'Valiant', 'Grimoire',
+          'Frostfire', 'Brimstone', 'Starfall', 'Winterhold', 'Sanguine', 'Valkyrie', 'Gargoyle'
+        ],
+        suffixes: [
+          'Realms', 'Chronicles', 'Sanctuary', 'Dominion', 'Citadel', 'Haven', 'Legends', 
+          'Enclave', 'Order', 'Keep', 'Threshold', 'Bastion', 'Spire', 'Hold', 'Vale', 
+          'Dynasty', 'Sanctum', 'Covenant', 'Duchy', 'Throne', 'Fortress', 'Pantheon', 'Archway',
+          'Stronghold', 'Cathedral', 'Garrison', 'Necropolis', 'Sepulcher', 'Dominion'
+        ]
+      }
+    };
+
+    let selectedTags = new Set(['gaming', 'chill']);
+    let favorites = JSON.parse(localStorage.getItem('dctools_fav_names') || '[]');
+
+    // Render Tag Pills
+    function renderTags() {
+      const container = document.getElementById('tag-container');
+      container.innerHTML = THEMES.map(theme => {
+        const isSelected = selectedTags.has(theme.id);
+        return `
+          <button 
+            onclick="toggleTag('${theme.id}')"
+            class="px-3.5 py-2 rounded-xl text-xs font-semibold border transition flex items-center gap-1.5 ${
+              isSelected 
+                ? 'bg-discord-blurple border-discord-blurple text-white shadow-md' 
+                : 'bg-discord-input border-white/10 text-discord-textMuted hover:text-white ' + theme.color
+            }"
+          >
+            ${theme.label}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function toggleTag(id) {
+      if (selectedTags.has(id)) {
+        if (selectedTags.size > 1) selectedTags.delete(id);
+      } else {
+        selectedTags.add(id);
+      }
+      renderTags();
+      generateNames();
+    }
+
+    // Formatting Applicator
+    function formatName(rawName, style) {
+      switch(style) {
+        case 'aesthetic': return `✦ ${rawName} ✦`;
+        case 'stars': return `★彡 ${rawName} 彡★`;
+        case 'sparkles': return `✧･ﾟ ${rawName} ﾟ･✧`;
+        case 'japanese_brackets': return `『 ${rawName} 』`;
+        case 'heart': return `♡ ${rawName} ♡`;
+        case 'spaced': return rawName.toUpperCase().split('').join(' ');
+        case 'bracket': return `[ ${rawName} ]`;
+        case 'minimalist': return rawName.toLowerCase().replace(/\s+/g, '.');
+        case 'japanese': return `┊ ${rawName} 🌸`;
+        case 'cyber': return `// ${rawName.toUpperCase().replace(/\s+/g, '_')}`;
+        case 'pipe': return `│ ${rawName}`;
+        case 'clean':
+        default: return rawName;
+      }
+    }
+
+    // Name Generator Engine
+    function generateNames() {
+      const style = document.getElementById('style-select').value;
+      const count = parseInt(document.getElementById('count-select').value);
+      const grid = document.getElementById('names-grid');
+
+      // Pool prefixes & suffixes from selected tags
+      let prefixes = [];
+      let suffixes = [];
+
+      selectedTags.forEach(tag => {
+        if (DICTIONARY[tag]) {
+          prefixes.push(...DICTIONARY[tag].prefixes);
+          suffixes.push(...DICTIONARY[tag].suffixes);
+        }
+      });
+
+      if (prefixes.length === 0) {
+        prefixes = DICTIONARY.gaming.prefixes;
+        suffixes = DICTIONARY.gaming.suffixes;
+      }
+
+      const generatedSet = new Set();
+      while (generatedSet.size < count) {
+        const p = prefixes[Math.floor(Math.random() * prefixes.length)];
+        const s = suffixes[Math.floor(Math.random() * suffixes.length)];
+        
+        // Ensure prefix and suffix aren't identical
+        if (p !== s) {
+          const raw = `${p} ${s}`;
+          const formatted = formatName(raw, style);
+          generatedSet.add(formatted);
+        }
+      }
+
+      const namesList = Array.from(generatedSet);
+
+      grid.innerHTML = namesList.map(name => {
+        const isFav = favorites.includes(name);
+        return `
+          <div class="bg-discord-input border border-white/5 rounded-xl p-3.5 hover:border-discord-blurple/50 hover:bg-discord-hover transition cursor-pointer group flex items-center justify-between shadow" onclick="copyName('${escapeHtml(name)}')">
+            <span class="font-medium text-sm text-white group-hover:text-discord-blurple transition truncate pr-2">${escapeHtml(name)}</span>
+            <div class="flex items-center gap-2 shrink-0">
+              <button 
+                onclick="event.stopPropagation(); toggleFavorite('${escapeHtml(name)}')" 
+                title="Favorite"
+                class="text-xs p-1.5 rounded-lg transition ${isFav ? 'text-discord-red bg-discord-red/10' : 'text-discord-textMuted hover:text-discord-red hover:bg-white/5'}"
+              >
+                <i class="${isFav ? 'fa-solid' : 'fa-regular'} fa-heart" aria-hidden="true"></i>
+              </button>
+              <i class="fa-regular fa-copy text-xs text-discord-textMuted group-hover:text-white transition" aria-hidden="true"></i>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Favorites Logic
+    function toggleFavorite(name) {
+      if (favorites.includes(name)) {
+        favorites = favorites.filter(n => n !== name);
+        showToast('Removed from favorites');
+      } else {
+        favorites.push(name);
+        showToast('Saved to favorites!');
+      }
+      localStorage.setItem('dctools_fav_names', JSON.stringify(favorites));
+      renderFavorites();
+      generateNames();
+    }
+
+    function renderFavorites() {
+      const section = document.getElementById('favorites-section');
+      const grid = document.getElementById('favorites-grid');
+      const countLabel = document.getElementById('fav-count');
+
+      if (favorites.length === 0) {
+        section.classList.add('hidden');
+        return;
+      }
+
+      section.classList.remove('hidden');
+      countLabel.innerText = favorites.length;
+
+      grid.innerHTML = favorites.map(name => `
+        <div class="bg-discord-input border border-white/10 px-3 py-1.5 rounded-lg text-xs flex items-center gap-2 text-white shadow">
+          <span>${escapeHtml(name)}</span>
+          <button onclick="copyName('${escapeHtml(name)}')" title="Copy" class="text-discord-textMuted hover:text-white transition">
+            <i class="fa-regular fa-copy" aria-hidden="true"></i>
+          </button>
+          <button onclick="toggleFavorite('${escapeHtml(name)}')" title="Remove" class="text-discord-textMuted hover:text-discord-red transition">
+            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+          </button>
+        </div>
+      `).join('');
+    }
+
+    function clearFavorites() {
+      favorites = [];
+      localStorage.removeItem('dctools_fav_names');
+      renderFavorites();
+      generateNames();
+      showToast('Cleared all favorites');
+    }
+
+    // Helpers
+    function copyName(name) {
+      copyToClipboard(name, `Copied "${name}" to clipboard!`);
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-message');
+      if (toastMsg) toastMsg.innerText = message;
+      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+      }, 3000);
+    }
+
+    function copyToClipboard(text, successMsg) {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => showToast(successMsg));
+      } else {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          showToast(successMsg);
+        } catch (err) {
+          console.error(err);
+        }
+        document.body.removeChild(textarea);
+      }
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    }
+
+    // Initialization
+    renderTags();
+    renderFavorites();
+    generateNames();
+  </script>
+</body>
+</html>
