@@ -19,7 +19,7 @@ const TOOLS_REGISTRY = [
   },
   {
     id: 'pfp-downloader',
-    title: 'PFP Downloader',
+    title: 'Profile Avatar Downloader',
     description: 'Download full-resolution Discord user profile avatars instantly in high-definition formats.',
     icon: 'fa-solid fa-user-circle',
     path: './tools/pfp-downloader.html'

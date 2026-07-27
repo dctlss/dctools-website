@@ -139,7 +139,7 @@
   <!-- Header Navigation -->
   <header class="bg-discord-sidebar border-b border-white/5 sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-      <a href="../index.html" class="flex items-center space-x-3.5 group" aria-label="DCTools.org Home">
+      <a href="https://dctools.org/" class="flex items-center space-x-3.5 group" aria-label="DCTools.org Home">
         <div class="w-11 h-11 bg-discord-blurple group-hover:bg-discord-blurpleHover rounded-xl flex items-center justify-center text-white text-xl shadow-lg transition duration-200" aria-hidden="true">
           <i class="fa-solid fa-screwdriver-wrench"></i>
         </div>
@@ -160,7 +160,7 @@
     <!-- Hero Section -->
     <div class="text-center max-w-2xl mx-auto space-y-3">
       <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
-        Server Name Generator For <span class="text-discord-blurple">Discord</span>
+        Server Name Generator <span class="text-discord-blurple">For</span> <span class="text-discord-blurple">Discord</span>
       </h1>
       <p class="text-discord-textMuted text-base sm:text-lg leading-relaxed">
         Select your server themes and aesthetic style to instantly generate unique, catchy names for your community.
@@ -228,7 +228,7 @@
       <div class="space-y-4 max-w-5xl mx-auto">
         <div class="flex items-center justify-between border-b border-white/5 pb-3">
           <h2 class="font-bold text-sm text-discord-textMuted uppercase tracking-wider flex items-center gap-2">
-            <i class="fa-solid fa-sparkles text-discord-blurple" aria-hidden="true"></i> Generated Ideas
+            <i class="fa-solid fa-wand-magic-sparkles text-discord-blurple" aria-hidden="true"></i> Generated Ideas
           </h2>
           <span class="text-xs text-discord-textMuted">Click any card to copy to clipboard</span>
         </div>
@@ -254,21 +254,6 @@
       </div>
     </div>
 
-    <!-- SEO Content & Guide Section -->
-    <section class="bg-discord-card border border-white/5 rounded-2xl p-6 sm:p-8 space-y-4 shadow-xl mt-12 max-w-5xl mx-auto w-full">
-      <h2 class="text-xl font-bold text-white flex items-center gap-2.5">
-        <i class="fa-solid fa-circle-info text-discord-blurple" aria-hidden="true"></i> Choosing the Best Name for Your Discord Community
-      </h2>
-      <div class="text-discord-textMuted text-sm space-y-3 leading-relaxed">
-        <p>
-          Your Discord server name is the first impression members get when joining your community. A great name should reflect the primary vibe of your server—whether it is an active gaming clan, a cozy lofi study lounge, an anime community, or an exclusive tech hub.
-        </p>
-        <p>
-          Using aesthetic symbols, clean formatting, or category-tailored keywords helps your server stand out in member directories and server lists. Use this generator to mix and match styles instantly with one-click copying.
-        </p>
-      </div>
-    </section>
-
   </main>
 
   <!-- Footer -->
@@ -292,6 +277,19 @@
   <script src="../assets/js/utils.js"></script>
   <script src="../assets/js/main.js"></script>
   <script>
+    // Safeguard HTML escape function to prevent missing utility reference errors
+    function escapeHtml(text) {
+      if (!text) return '';
+      const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      };
+      return text.toString().replace(/[&<>"']/g, function(m) { return map[m]; });
+    }
+
     // Theme Tag Database
     const THEMES = [
       { id: 'gaming', label: '🎮 Gaming', color: 'hover:border-purple-500' },
@@ -463,6 +461,7 @@
         const isSelected = selectedTags.has(theme.id);
         return `
           <button 
+            type="button"
             onclick="toggleTag('${theme.id}')"
             class="px-3.5 py-2 rounded-xl text-xs font-semibold border transition flex items-center gap-1.5 ${
               isSelected 
@@ -528,7 +527,9 @@
       }
 
       const generatedSet = new Set();
-      while (generatedSet.size < count) {
+      let safetyCounter = 0;
+      while (generatedSet.size < count && safetyCounter < 500) {
+        safetyCounter++;
         const p = prefixes[Math.floor(Math.random() * prefixes.length)];
         const s = suffixes[Math.floor(Math.random() * suffixes.length)];
         
@@ -544,12 +545,14 @@
 
       grid.innerHTML = namesList.map(name => {
         const isFav = favorites.includes(name);
+        const safeName = escapeHtml(name);
         return `
-          <div class="bg-discord-input border border-white/5 rounded-xl p-3.5 hover:border-discord-blurple/50 hover:bg-discord-hover transition cursor-pointer group flex items-center justify-between shadow" onclick="copyName('${escapeHtml(name)}')">
-            <span class="font-medium text-sm text-white group-hover:text-discord-blurple transition truncate pr-2">${escapeHtml(name)}</span>
+          <div class="bg-discord-input border border-white/5 rounded-xl p-3.5 hover:border-discord-blurple/50 hover:bg-discord-hover transition cursor-pointer group flex items-center justify-between shadow" onclick="copyName('${safeName}')">
+            <span class="font-medium text-sm text-white group-hover:text-discord-blurple transition truncate pr-2">${safeName}</span>
             <div class="flex items-center gap-2 shrink-0">
               <button 
-                onclick="event.stopPropagation(); toggleFavorite('${escapeHtml(name)}')" 
+                type="button"
+                onclick="event.stopPropagation(); toggleFavorite('${safeName}')" 
                 title="Favorite"
                 class="text-xs p-1.5 rounded-lg transition ${isFav ? 'text-discord-red bg-discord-red/10' : 'text-discord-textMuted hover:text-discord-red hover:bg-white/5'}"
               >
@@ -589,17 +592,20 @@
       section.classList.remove('hidden');
       countLabel.innerText = favorites.length;
 
-      grid.innerHTML = favorites.map(name => `
-        <div class="bg-discord-input border border-white/10 px-3 py-1.5 rounded-lg text-xs flex items-center gap-2 text-white shadow">
-          <span>${escapeHtml(name)}</span>
-          <button onclick="copyName('${escapeHtml(name)}')" title="Copy" class="text-discord-textMuted hover:text-white transition">
-            <i class="fa-regular fa-copy" aria-hidden="true"></i>
-          </button>
-          <button onclick="toggleFavorite('${escapeHtml(name)}')" title="Remove" class="text-discord-textMuted hover:text-discord-red transition">
-            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-          </button>
-        </div>
-      `).join('');
+      grid.innerHTML = favorites.map(name => {
+        const safeName = escapeHtml(name);
+        return `
+          <div class="bg-discord-input border border-white/10 px-3 py-1.5 rounded-lg text-xs flex items-center gap-2 text-white shadow">
+            <span>${safeName}</span>
+            <button type="button" onclick="copyName('${safeName}')" title="Copy" class="text-discord-textMuted hover:text-white transition">
+              <i class="fa-regular fa-copy" aria-hidden="true"></i>
+            </button>
+            <button type="button" onclick="toggleFavorite('${safeName}')" title="Remove" class="text-discord-textMuted hover:text-discord-red transition">
+              <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+          </div>
+        `;
+      }).join('');
     }
 
     function clearFavorites() {
